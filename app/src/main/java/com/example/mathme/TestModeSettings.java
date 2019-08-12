@@ -79,12 +79,12 @@ public class TestModeSettings extends AppCompatActivity {
             case R.id.checkBox_minus:
                 subChosen = isChecked;
                 break;
-            case R.id.checkBox_multiply:
-                multChosen = isChecked;
-                break;
-
             case R.id.checkBox_divide:
                 divChosen = isChecked;
+                break;
+
+            case R.id.checkbox_multiply:
+                multChosen = isChecked;
                 break;
 
             default:

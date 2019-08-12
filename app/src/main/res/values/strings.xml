@@ -13,7 +13,8 @@
     <string name="reset_data">Reset Data</string>
     <string name="notification_set_for">Notification set for</string>
     <string name="test_mode_help">In the test mode, you choose the number of questions you want to answer and then proceed to
-    answer these questions. At the end, you will find your result along with the questions you got wrong so you can learn from your mistakes.</string>
+    answer these questions. At the end, you will find your result along with the questions you got wrong so you can learn from your mistakes.
+    Now, you may be wondering about division. Well just try to get close to it, no need for decimals.</string>
     <string name="timed_mode_help">In the timed mode, you keep answering questions until the time runs out, the number of questions you get right
     is your score. Keep trying to beat your high score! The only way to go is up!</string>
     <string name="choose_the_operations">Choose the Operations:</string>

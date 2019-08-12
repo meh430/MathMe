@@ -68,7 +68,6 @@
         <Button
             android:layout_margin="4dp"
             android:id="@+id/back_button"
-            android:onClick="onBack"
             android:background="@drawable/rounded_button2"
             android:fontFamily="@font/google_regular"
             android:text="@string/back_test"
@@ -78,8 +77,8 @@
             tools:ignore="ButtonStyle" />
         <Button
             android:layout_margin="4dp"
-            android:background="@drawable/rounded_button"
             android:onClick="onNext"
+            android:background="@drawable/rounded_button"
             android:id="@+id/next_button"
             android:fontFamily="@font/google_regular"
             android:text="@string/next_test"

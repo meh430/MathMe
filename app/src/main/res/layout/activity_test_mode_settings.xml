@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/choose_the_operations"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_margin="4dp" />
+        android:layout_margin="12dp" />
 
     <LinearLayout
         android:layout_margin="8dp"
@@ -58,7 +58,7 @@
             android:textColor="@color/textColor"
             android:fontFamily="@font/google_regular"
             android:layout_weight="1"
-            android:id="@+id/checkBox_multiply"
+            android:id="@+id/checkBox_divide"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/division" />
@@ -69,7 +69,7 @@
             android:textColor="@color/textColor"
             android:fontFamily="@font/google_regular"
             android:layout_weight="1"
-            android:id="@+id/checkBox_divide"
+            android:id="@+id/checkbox_multiply"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/multiplication" />

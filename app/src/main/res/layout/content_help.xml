@@ -30,7 +30,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/google_regular"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:text="@string/test_mode"
                 android:textColor="@color/textColor"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />
@@ -38,12 +38,12 @@
             <TextView
                 android:id="@+id/test_mode_description"
                 style="@style/TextAppearance.AppCompat.Subhead"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/google_regular"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:text="@string/test_mode_help"
                 android:textColor="@color/textColor"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />
@@ -71,7 +71,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/google_regular"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:text="@string/timed_mode"
                 android:textColor="@color/textColor"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />
@@ -79,12 +79,12 @@
             <TextView
                 android:id="@+id/timed_mode_description"
                 style="@style/TextAppearance.AppCompat.Subhead"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/google_regular"
-                android:padding="10dp"
+                android:padding="15dp"
                 android:text="@string/timed_mode_help"
                 android:textColor="@color/textColor"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />

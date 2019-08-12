@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 
 @SuppressWarnings({"ConstantConditions"})
 public class TestMode extends AppCompatActivity {
+    private boolean end = false;
     //stores inputted num limit, inputted question num, count of correct answers, keep track of current question
     private int intNumLimit, intMaxQuestion, intNumCorrect = 1, intCurrentQuestion = 1, intUserAnswer = 0, intActualAnswer = 0, intNum1, intNum2;
     private String chosenOperation, strQuestion;
@@ -28,6 +30,7 @@ public class TestMode extends AppCompatActivity {
     EditText userAnswerEdit;
 
     public static final String MAXQ = "MAXQ", Q_MAP = "QMAP", A_MAP = "AMAP", UA_MAP = "UAMAP";
+    private boolean firsTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,8 @@ public class TestMode extends AppCompatActivity {
 
         Intent testSettings = getIntent();
         chosenOperation = testSettings.getStringExtra(TestModeSettings.OPERATIONS);
-        intNumLimit = testSettings.getIntExtra(TestModeSettings.MAX_NUM, 0);
-        intMaxQuestion = testSettings.getIntExtra(TestModeSettings.NUM_Q, 0);
+        intNumLimit = testSettings.getIntExtra(TestModeSettings.MAX_NUM, 100);
+        intMaxQuestion = testSettings.getIntExtra(TestModeSettings.NUM_Q, 100);
     }
 
     public void onYes(View view) {
@@ -49,10 +52,85 @@ public class TestMode extends AppCompatActivity {
         LinearLayout buttonBar = findViewById(R.id.test_buttons);
         buttonBar.setVisibility(View.VISIBLE);
         userAnswerEdit.setVisibility(View.VISIBLE);
-        intCurrentQuestion = 1;
-        checkOperationChoicesShow();
+        driver();
+        firsTime = true;
+        //checkOperationChoicesShow();
     }
 
+    public void onNext(View view) {
+        if (firsTime) {
+            String temp = userAnswerEdit.getText().toString();
+            if (temp.equalsIgnoreCase("")) {
+                Toast.makeText(TestMode.this, "Just Try", Toast.LENGTH_SHORT).show();
+            } else {
+                firsTime = false;
+                intUserAnswer = Integer.parseInt(temp);
+                userAnswerMap.put(intCurrentQuestion, intUserAnswer);
+                intCurrentQuestion++;
+                driver();
+            }
+        } else {
+            //if (!nothingEntered) {
+            //  driver();
+            //}
+            String temp = userAnswerEdit.getText().toString();
+            if (temp.equalsIgnoreCase("")) {
+                Toast.makeText(TestMode.this, "Just Try", Toast.LENGTH_SHORT).show();
+            } else {
+                intUserAnswer = Integer.parseInt(temp);
+                userAnswerMap.put(intCurrentQuestion, intUserAnswer);
+                intCurrentQuestion++;
+                driver();
+
+            }
+        }
+    }
+
+    private void driver() {
+        if (intCurrentQuestion == intMaxQuestion + 1) {
+            end = true;
+        }
+        if (!end) {
+            checkOperationChoicesShow();
+        }
+
+        userAnswerEdit.setText("");
+
+        if (intCurrentQuestion > intMaxQuestion) {
+            Intent launchTestEnd = new Intent(this, TestEndActivity.class);
+            launchTestEnd.putExtra(MAXQ, intMaxQuestion)
+                    .putExtra(Q_MAP, questionMap)
+                    .putExtra(A_MAP, answerMap)
+                    .putExtra(UA_MAP, userAnswerMap);
+
+            startActivity(launchTestEnd);
+            userAnswerEdit.setVisibility(View.INVISIBLE);
+        }
+    }//close driver method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     @SuppressLint("SetTextI18n")
     public void onBack(View view) {
 
@@ -76,7 +154,8 @@ public class TestMode extends AppCompatActivity {
             Toast.makeText(this, "OI, there's no more", Toast.LENGTH_SHORT).show();
         }
     }
-
+     */
+/*
     @SuppressLint("SetTextI18n")
     public void onNext(View view) {
 
@@ -137,10 +216,12 @@ public class TestMode extends AppCompatActivity {
         }
     }
 
+
     private void checkOperationChoicesCheck() {
         userAnswerMap.put(intCurrentQuestion, intUserAnswer);
         intCurrentQuestion++;
     }
+    */
 
     private void checkOperationChoicesShow() {
         String strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
@@ -304,11 +385,11 @@ public class TestMode extends AppCompatActivity {
     }
 
     private void divide() {
+        boolean answerIsWhole = true;
+        double dblAnswer = 0;
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
         intNum2 = (int) (Math.random() * intNumLimit) + 1;
-
-        intActualAnswer = intNum1 / intNum2;
-
+        intActualAnswer = Math.round((float) intNum1 / intNum2);
         strQuestion = intNum1 + " / " + intNum2;
 
         questionTv.setText(strQuestion);
@@ -317,5 +398,4 @@ public class TestMode extends AppCompatActivity {
         questionMap.put(intCurrentQuestion, strQuestion);
         answerMap.put(intCurrentQuestion, intActualAnswer);
     }
-
 }
