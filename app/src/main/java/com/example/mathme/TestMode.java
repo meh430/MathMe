@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +16,6 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-@SuppressWarnings({"ConstantConditions"})
 public class TestMode extends AppCompatActivity {
     private boolean end = false;
     //stores inputted num limit, inputted question num, count of correct answers, keep track of current question
@@ -69,6 +70,47 @@ public class TestMode extends AppCompatActivity {
                 intCurrentQuestion++;
                 driver();
             }
+        } else if (intCurrentQuestion < questionMap.size()) {
+            intCurrentQuestion++;
+            if (answerMap.get(intCurrentQuestion) != null) {
+                intActualAnswer = answerMap.get(intCurrentQuestion);
+            }
+            if (userAnswerMap.get(intCurrentQuestion) != null) {
+                intUserAnswer = userAnswerMap.get(intCurrentQuestion);
+                String strCurrentUA = intUserAnswer + "";
+                //userAnswerEdit.setText(strCurrentUA);
+            }
+            if (questionMap.get(intCurrentQuestion) != null) {
+                strQuestion = questionMap.get(intCurrentQuestion);
+            }
+
+            String strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
+            questionNumTv.setText(strCurrentQ);
+            questionTv.setText(strQuestion);
+            userAnswerEdit = findViewById(R.id.answer_edit_text);
+            userAnswerEdit.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    String strChangedAnswer = editable.toString();
+                    if (!strChangedAnswer.equalsIgnoreCase("")) {
+                        int intChangedAnswer = Integer.parseInt(strChangedAnswer);
+                        userAnswerMap.put(intCurrentQuestion, intChangedAnswer);
+                    } else {
+                        //Toast.makeText(TestMode.this, "gay", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            questionNumTv.setText(strCurrentQ);
+            userAnswerEdit.setText("");
         } else {
             //if (!nothingEntered) {
             //  driver();
@@ -81,8 +123,36 @@ public class TestMode extends AppCompatActivity {
                 userAnswerMap.put(intCurrentQuestion, intUserAnswer);
                 intCurrentQuestion++;
                 driver();
-
             }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void onBack(View view) {
+        end = false;
+        String strCurrentQ;
+        if (intCurrentQuestion <= 1) {
+            //intCurrentQuestion++;
+            //strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
+            //questionNumTv.setText(strCurrentQ);
+            Toast.makeText(this, "Oi, you can't go back no mo", Toast.LENGTH_SHORT).show();
+        } else {
+            intCurrentQuestion--;
+            if (answerMap.get(intCurrentQuestion) != null) {
+                intActualAnswer = answerMap.get(intCurrentQuestion);
+            }
+            if (userAnswerMap.get(intCurrentQuestion) != null) {
+                intUserAnswer = userAnswerMap.get(intCurrentQuestion);
+            }
+            if (questionMap.get(intCurrentQuestion) != null) {
+                strQuestion = questionMap.get(intCurrentQuestion);
+            }
+
+            strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
+            questionNumTv.setText(strCurrentQ);
+            questionTv.setText(strQuestion);
+            //String strCurrentUA = intUserAnswer + "";
+            //userAnswerEdit.setText(strCurrentUA);
         }
     }
 
@@ -90,6 +160,7 @@ public class TestMode extends AppCompatActivity {
         if (intCurrentQuestion == intMaxQuestion + 1) {
             end = true;
         }
+
         if (!end) {
             checkOperationChoicesShow();
         }

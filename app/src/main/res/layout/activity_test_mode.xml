@@ -66,6 +66,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:onClick="onBack"
             android:layout_margin="4dp"
             android:id="@+id/back_button"
             android:background="@drawable/rounded_button2"
