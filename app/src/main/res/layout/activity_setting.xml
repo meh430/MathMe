@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    tools:context=".SettingActivity">
+
+    <Switch
+        android:switchPadding="10dp"
+        android:textColor="@color/textColor"
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/turn_on_dark_theme"
+        android:fontFamily="@font/google_regular"
+        android:id="@+id/dark_theme_switch"/>
+
+    <Switch
+        android:switchPadding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/google_regular"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/turn_on_notification_reminder"
+        android:id="@+id/notification_switch"/>
+
+    <!-- will be visible when user chooses a time -->
+    <TextView
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/google_regular"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:id="@+id/notification_status"
+        android:text="@string/notification_set_for"
+        android:layout_margin="10dp" />
+
+    <Button
+        android:textSize="18sp"
+        android:elevation="4dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/google_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reset_data"
+        android:onClick="onReset"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp" />
+
+</LinearLayout>

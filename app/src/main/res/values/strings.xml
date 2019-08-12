@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Math Me!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_contact">Contact</string>
+    <string name="action_help">Help</string>
+    <string name="image_of_a_test">Image of a test</string>
+    <string name="image_of_a_timer">Image of a timer</string>
+    <string name="timed_mode">Timed Mode</string>
+    <string name="high_score_0">High Score: 0</string>
+    <string name="test_mode">Test Mode</string>
+    <string name="turn_on_dark_theme">Turn on dark theme</string>
+    <string name="turn_on_notification_reminder">Turn on notification reminder</string>
+    <string name="reset_data">Reset Data</string>
+    <string name="notification_set_for">Notification set for</string>
+    <string name="test_mode_help">In the test mode, you choose the number of questions you want to answer and then proceed to
+    answer these questions. At the end, you will find your result along with the questions you got wrong so you can learn from your mistakes.</string>
+    <string name="timed_mode_help">In the timed mode, you keep answering questions until the time runs out, the number of questions you get right
+    is your score. Keep trying to beat your high score! The only way to go is up!</string>
+    <string name="choose_the_operations">Choose the Operations:</string>
+    <string name="addition">Addition</string>
+    <string name="subtraction">Subtraction</string>
+    <string name="division">Division</string>
+    <string name="multiplication">Multiplication</string>
+    <string name="choose_number_limit">Choose Number Limit:</string>
+    <string name="num_limit_label">0</string>
+    <string name="choose_number_of_questions">Choose Number of Questions:</string>
+    <string name="q_limit_label">0</string>
+    <string name="take_test_label">Take Test</string>
+    <string name="current_question_label">Question Number </string>
+    <string name="answer_window_content">0</string>
+    <string name="question_content">Are you ready?</string>
+    <string name="back_test"><![CDATA[<- BACK]]></string>
+    <string name="next_test"><![CDATA[NEXT ->]]></string>
+    <string name="test_hint">Enter your answer</string>
+    <string name="start_button_label">YES</string>
+    <string name="test_result_header_label">You got...</string>
+    <string name="fraction_score">19/20</string>
+    <string name="test_percent">95%</string>
+    <string name="view_results">View Results</string>
+    <string name="take_me_home">Take me Home</string>
+    <string name="title_activity_test_results">TestResults</string>
+    <string name="test_mode_result">Test Mode Result</string>
+</resources>
