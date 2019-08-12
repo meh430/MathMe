@@ -45,18 +45,14 @@
         android:id="@+id/answer_edit_text"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/test_buttons"
+        android:layout_above="@+id/save_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
         android:hint="@string/test_hint"
         android:inputType="number|numberSigned"
         android:visibility="invisible"
         tools:ignore="Autofill" />
+
 
     <LinearLayout
         android:visibility="invisible"
@@ -88,5 +84,18 @@
             android:layout_height="wrap_content"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
+
+    <Button
+        android:layout_margin="4dp"
+        android:visibility="invisible"
+        android:background="@drawable/rounded_button3"
+        android:id="@+id/save_button"
+        android:onClick="onSave"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/google_regular"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/test_buttons"
+        android:layout_centerHorizontal="true"
+        android:text="@string/save_answer_label" />
 
 </RelativeLayout>

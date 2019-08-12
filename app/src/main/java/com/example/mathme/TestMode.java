@@ -52,24 +52,31 @@ public class TestMode extends AppCompatActivity {
         view.setVisibility(View.INVISIBLE);
         LinearLayout buttonBar = findViewById(R.id.test_buttons);
         buttonBar.setVisibility(View.VISIBLE);
+        Button saveButton = findViewById(R.id.save_button);
+        saveButton.setVisibility(View.VISIBLE);
         userAnswerEdit.setVisibility(View.VISIBLE);
         driver();
         firsTime = true;
         //checkOperationChoicesShow();
     }
 
+    public void onSave(View view) {
+        String temp = userAnswerEdit.getText().toString();
+        if (temp.equalsIgnoreCase("")) {
+            Toast.makeText(this, "Nothing to save here", Toast.LENGTH_SHORT).show();
+        } else {
+            intUserAnswer = Integer.parseInt(temp);
+            userAnswerMap.put(intCurrentQuestion, intUserAnswer);
+            Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void onNext(View view) {
+        userAnswerEdit.setText("");
         if (firsTime) {
-            String temp = userAnswerEdit.getText().toString();
-            if (temp.equalsIgnoreCase("")) {
-                Toast.makeText(TestMode.this, "Just Try", Toast.LENGTH_SHORT).show();
-            } else {
-                firsTime = false;
-                intUserAnswer = Integer.parseInt(temp);
-                userAnswerMap.put(intCurrentQuestion, intUserAnswer);
-                intCurrentQuestion++;
-                driver();
-            }
+            firsTime = false;
+            intCurrentQuestion++;
+            driver();
         } else if (intCurrentQuestion < questionMap.size()) {
             intCurrentQuestion++;
             if (answerMap.get(intCurrentQuestion) != null) {
@@ -78,7 +85,7 @@ public class TestMode extends AppCompatActivity {
             if (userAnswerMap.get(intCurrentQuestion) != null) {
                 intUserAnswer = userAnswerMap.get(intCurrentQuestion);
                 String strCurrentUA = intUserAnswer + "";
-                //userAnswerEdit.setText(strCurrentUA);
+                userAnswerEdit.setText(strCurrentUA);
             }
             if (questionMap.get(intCurrentQuestion) != null) {
                 strQuestion = questionMap.get(intCurrentQuestion);
@@ -87,43 +94,13 @@ public class TestMode extends AppCompatActivity {
             String strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
             questionNumTv.setText(strCurrentQ);
             questionTv.setText(strQuestion);
-            userAnswerEdit = findViewById(R.id.answer_edit_text);
-            userAnswerEdit.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    String strChangedAnswer = editable.toString();
-                    if (!strChangedAnswer.equalsIgnoreCase("")) {
-                        int intChangedAnswer = Integer.parseInt(strChangedAnswer);
-                        userAnswerMap.put(intCurrentQuestion, intChangedAnswer);
-                    } else {
-                        //Toast.makeText(TestMode.this, "gay", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-            questionNumTv.setText(strCurrentQ);
-            userAnswerEdit.setText("");
+            //questionNumTv.setText(strCurrentQ);
         } else {
             //if (!nothingEntered) {
             //  driver();
             //}
-            String temp = userAnswerEdit.getText().toString();
-            if (temp.equalsIgnoreCase("")) {
-                Toast.makeText(TestMode.this, "Just Try", Toast.LENGTH_SHORT).show();
-            } else {
-                intUserAnswer = Integer.parseInt(temp);
-                userAnswerMap.put(intCurrentQuestion, intUserAnswer);
-                intCurrentQuestion++;
-                driver();
-            }
+            intCurrentQuestion++;
+            driver();
         }
     }
 
@@ -143,6 +120,8 @@ public class TestMode extends AppCompatActivity {
             }
             if (userAnswerMap.get(intCurrentQuestion) != null) {
                 intUserAnswer = userAnswerMap.get(intCurrentQuestion);
+                String strCurrentUA = intUserAnswer + "";
+                userAnswerEdit.setText(strCurrentUA);
             }
             if (questionMap.get(intCurrentQuestion) != null) {
                 strQuestion = questionMap.get(intCurrentQuestion);
