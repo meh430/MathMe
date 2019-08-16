@@ -14,10 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".TimeModeSettings" />
         <activity
             android:name=".TestResults"
-            android:label="@string/title_activity_test_results"
-            android:theme="@style/AppTheme.ActionBar"/>
+            android:label="Test Results"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".TestEndActivity"
             android:configChanges="orientation|keyboardHidden"

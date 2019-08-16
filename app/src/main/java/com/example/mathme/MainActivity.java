@@ -13,28 +13,34 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    //variables to get stored preferences
-    private SharedPreferences mPreferences;
     public static final String SharedPrefFile = "com.example.mathme";
+    //constant values for sharedPref keys
+    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour", MINUTE = "minute", HIGH = "highScore";
+    private static int highScore;
     //force dark mode if set by user on first session
     public static boolean firstDark = false;
-
-    //constant values for sharedPref keys
-    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR= "hour", MINUTE = "minute";
-
+    //textview to store display the higscore
+    TextView highScoreTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
-        boolean isDark = mPreferences.getBoolean(DARK, firstDark);
+        highScoreTv = findViewById(R.id.main_high_score);
 
+        //get any variables from previous sessions
+        SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
+        boolean isDark = mPreferences.getBoolean(DARK, firstDark);
+        highScore = mPreferences.getInt(HIGH, 0);
+
+        //set theme
         if (isDark) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             getDelegate().applyDayNight();
@@ -42,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             getDelegate().applyDayNight();
         }
+
+        String strHighScore = "HighScore: " + getHighScore();
+        highScoreTv.setText(strHighScore);
     }
 
     @Override
@@ -66,8 +75,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             //launch contact implicit intent
             case R.id.action_contact:
-                String url = "http://eelslap.com/";
-                Uri contact = Uri.parse(url);
+                String[] urlArray = {"http://eelslap.com/", "https://en.wikipedia.org/wiki/Donald_Trump",
+                        "https://myanimelist.net/anime/10087/Fate_Zero?q=fate%20z",
+                        "https://en.wikipedia.org/wiki/The_Office_(American_TV_series)",
+                        "https://www.youtube.com/watch?v=3M_5oYU-IsU",
+                        "https://en.wikipedia.org/wiki/Red_Dead_Redemption_2",
+                        "https://en.wikipedia.org/wiki/The_Empire_Strikes_Back",
+                        "https://www.youtube.com/watch?v=cPJUBQd-PNM",
+                        "https://www.youtube.com/watch?v=iw2FAJcQbWM",
+                        "https://www.youtube.com/watch?v=-yvMqox7c6A",
+                        "https://www.youtube.com/watch?v=caM2hEV69ac",
+                        "https://www.youtube.com/watch?v=jsRchR-jrf4"};
+                int randomUrl = (int) (Math.random() * urlArray.length);
+                Uri contact = Uri.parse(urlArray[randomUrl]);
                 Intent launchContact = new Intent(Intent.ACTION_VIEW, contact);
 
                 if (launchContact.resolveActivity(getPackageManager()) != null) {
@@ -87,12 +107,25 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //start the test setting activity
+    //start the test settings activity
     public void onTestModeClicked(View view) {
         Intent launchTest = new Intent(MainActivity.this, TestModeSettings.class);
         startActivity(launchTest);
     }
 
+    //start the time settings activity
     public void onTimedModeClicked(View view) {
+        Intent launchTime = new Intent(MainActivity.this, TimeModeSettings.class);
+        startActivity(launchTime);
+    }
+
+    //setter for private variable highScore
+    public static void setHighScore(int hS) {
+        highScore = hS;
+    }
+
+    //getter for private variable highScore
+    public static int getHighScore() {
+        return highScore;
     }
 }

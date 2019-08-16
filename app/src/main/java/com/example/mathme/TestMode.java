@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +14,12 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+//do not change anything, pls, it works. I don't know why but it works. Pls don't mess it up
+@SuppressWarnings("ConstantConditions")
 public class TestMode extends AppCompatActivity {
-    private boolean end = false;
+    private boolean savedAnswer = false, end = false;
     //stores inputted num limit, inputted question num, count of correct answers, keep track of current question
-    private int intNumLimit, intMaxQuestion, intNumCorrect = 1, intCurrentQuestion = 1, intUserAnswer = 0, intActualAnswer = 0, intNum1, intNum2;
+    private int intNumLimit, intMaxQuestion, intCurrentQuestion = 1, intUserAnswer = 0, intActualAnswer = 0, intNum1, intNum2;
     private String chosenOperation, strQuestion;
     private TextView questionTv, questionNumTv;
     @SuppressLint("UseSparseArrays")
@@ -57,10 +57,10 @@ public class TestMode extends AppCompatActivity {
         userAnswerEdit.setVisibility(View.VISIBLE);
         driver();
         firsTime = true;
-        //checkOperationChoicesShow();
     }
 
     public void onSave(View view) {
+        savedAnswer = true;
         String temp = userAnswerEdit.getText().toString();
         if (temp.equalsIgnoreCase("")) {
             Toast.makeText(this, "Nothing to save here", Toast.LENGTH_SHORT).show();
@@ -72,35 +72,38 @@ public class TestMode extends AppCompatActivity {
     }
 
     public void onNext(View view) {
-        userAnswerEdit.setText("");
-        if (firsTime) {
-            firsTime = false;
-            intCurrentQuestion++;
-            driver();
-        } else if (intCurrentQuestion < questionMap.size()) {
-            intCurrentQuestion++;
-            if (answerMap.get(intCurrentQuestion) != null) {
-                intActualAnswer = answerMap.get(intCurrentQuestion);
-            }
-            if (userAnswerMap.get(intCurrentQuestion) != null) {
-                intUserAnswer = userAnswerMap.get(intCurrentQuestion);
-                String strCurrentUA = intUserAnswer + "";
-                userAnswerEdit.setText(strCurrentUA);
-            }
-            if (questionMap.get(intCurrentQuestion) != null) {
-                strQuestion = questionMap.get(intCurrentQuestion);
-            }
+        if (savedAnswer) {
+            userAnswerEdit.setText("");
+            if (firsTime) {
+                firsTime = false;
+                intCurrentQuestion++;
+                driver();
+                savedAnswer = false;
+            } else if (intCurrentQuestion < questionMap.size()) {
+                intCurrentQuestion++;
+                if (answerMap.get(intCurrentQuestion) != null) {
+                    intActualAnswer = answerMap.get(intCurrentQuestion);
+                }
+                if (userAnswerMap.get(intCurrentQuestion) != null) {
+                    intUserAnswer = userAnswerMap.get(intCurrentQuestion);
+                    String strCurrentUA = intUserAnswer + "";
+                    userAnswerEdit.setText(strCurrentUA);
+                }
+                if (questionMap.get(intCurrentQuestion) != null) {
+                    strQuestion = questionMap.get(intCurrentQuestion);
+                }
 
-            String strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
-            questionNumTv.setText(strCurrentQ);
-            questionTv.setText(strQuestion);
-            //questionNumTv.setText(strCurrentQ);
+                String strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
+                questionNumTv.setText(strCurrentQ);
+                questionTv.setText(strQuestion);
+                //questionNumTv.setText(strCurrentQ);
+            } else {
+                intCurrentQuestion++;
+                driver();
+                savedAnswer = false;
+            }
         } else {
-            //if (!nothingEntered) {
-            //  driver();
-            //}
-            intCurrentQuestion++;
-            driver();
+            Toast.makeText(this, "No harm in guessing!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,9 +112,6 @@ public class TestMode extends AppCompatActivity {
         end = false;
         String strCurrentQ;
         if (intCurrentQuestion <= 1) {
-            //intCurrentQuestion++;
-            //strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
-            //questionNumTv.setText(strCurrentQ);
             Toast.makeText(this, "Oi, you can't go back no mo", Toast.LENGTH_SHORT).show();
         } else {
             intCurrentQuestion--;
@@ -130,23 +130,19 @@ public class TestMode extends AppCompatActivity {
             strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
             questionNumTv.setText(strCurrentQ);
             questionTv.setText(strQuestion);
-            //String strCurrentUA = intUserAnswer + "";
-            //userAnswerEdit.setText(strCurrentUA);
         }
     }
 
     private void driver() {
-        if (intCurrentQuestion == intMaxQuestion + 1) {
+        if (intCurrentQuestion == (intMaxQuestion + 1)) {
             end = true;
         }
-
         if (!end) {
-            checkOperationChoicesShow();
+            showQuestion();
         }
-
         userAnswerEdit.setText("");
-
         if (intCurrentQuestion > intMaxQuestion) {
+            //launch the test end activity
             Intent launchTestEnd = new Intent(this, TestEndActivity.class);
             launchTestEnd.putExtra(MAXQ, intMaxQuestion)
                     .putExtra(Q_MAP, questionMap)
@@ -214,7 +210,7 @@ public class TestMode extends AppCompatActivity {
             if (!temp.equalsIgnoreCase("")) {
                 intUserAnswer = Integer.parseInt(temp);
                 checkOperationChoicesCheck();
-                checkOperationChoicesShow();
+                showQuestion();
             } else {
                 Toast.makeText(this, "Just try it", Toast.LENGTH_SHORT).show();
             }
@@ -273,7 +269,8 @@ public class TestMode extends AppCompatActivity {
     }
     */
 
-    private void checkOperationChoicesShow() {
+
+    private void showQuestion() {
         String strCurrentQ = getString(R.string.current_question_label) + " " + intCurrentQuestion;
         questionNumTv.setText(strCurrentQ);
         int random;
@@ -387,7 +384,7 @@ public class TestMode extends AppCompatActivity {
                 divide();
             }
         }
-    }
+    }//close showQuestion
 
     private void add() {
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
@@ -435,8 +432,6 @@ public class TestMode extends AppCompatActivity {
     }
 
     private void divide() {
-        boolean answerIsWhole = true;
-        double dblAnswer = 0;
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
         intNum2 = (int) (Math.random() * intNumLimit) + 1;
         intActualAnswer = Math.round((float) intNum1 / intNum2);
@@ -448,4 +443,4 @@ public class TestMode extends AppCompatActivity {
         questionMap.put(intCurrentQuestion, strQuestion);
         answerMap.put(intCurrentQuestion, intActualAnswer);
     }
-}
+}//close class

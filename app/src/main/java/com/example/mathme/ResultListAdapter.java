@@ -11,15 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+//adapter class for RecyclerView that binds data to the views being recycled
 public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.ResultViewHolder> {
+
     private final ArrayList<String> testResultList;
     private LayoutInflater inflater;
 
-    public ResultListAdapter (Context context, ArrayList<String> list) {
+    //constructor passes in the list with test results
+    ResultListAdapter(Context context, ArrayList<String> list) {
         inflater = LayoutInflater.from(context);
         this.testResultList = list;
     }
 
+    //method that creates the viewHolder object
+    //the parent is the viewGroup into which the new view is added after being bound to an adapter position
+    //returns the viewHolder
     @NonNull
     @Override
     public ResultListAdapter.ResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,6 +33,9 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Re
         return new ResultViewHolder(itemView, this);
     }
 
+    //binds data to viewHolder
+    //the holder is the viewHolder that holds the data
+    //the position is the current position of the adapter
     @Override
     public void onBindViewHolder(@NonNull ResultListAdapter.ResultViewHolder holder, int position) {
         String current = testResultList.get(position);
@@ -38,12 +47,14 @@ public class ResultListAdapter extends RecyclerView.Adapter<ResultListAdapter.Re
         return testResultList.size();
     }
 
-    //inner class that gets the view holder
+    //inner class that gets the view holder and represents each row of data in the RecyclerView
     class ResultViewHolder extends RecyclerView.ViewHolder {
-        public final TextView resultItemView;
+        //the textView in the cardView
+        final TextView resultItemView;
         final ResultListAdapter adapter;
 
-        public ResultViewHolder(View view, ResultListAdapter adapt) {
+        //constructor for the viewHolder that initializes the textViews
+        ResultViewHolder(View view, ResultListAdapter adapt) {
             super(view);
 
             resultItemView = view.findViewById(R.id.wrong_answer);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class TestModeSettings extends AppCompatActivity {
+    CheckBox addCheck, subCheck, multCheck, divCheck;
+    private SharedPreferences mPreferences;
     private SeekBar seekMaxNumber, seekMaxQuestions;
     private boolean addChosen, subChosen, multChosen, divChosen;
+    private static final String ADD = "add", SUB = "sub", MULT = "mult", DIV = "div";
 
     //key values
     public static final String MAX_NUM = "maxNum", NUM_Q = "numQ", OPERATIONS = "operations";
@@ -23,11 +27,17 @@ public class TestModeSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_mode_settings);
 
+        //initialize seekBar
         seekMaxNumber = findViewById(R.id.seek_max_num);
         seekMaxQuestions = findViewById(R.id.seek_max_questions);
+        addCheck = findViewById(R.id.checkBox_plus);
+        subCheck = findViewById(R.id.checkBox_minus);
+        multCheck = findViewById(R.id.checkbox_multiply);
+        divCheck = findViewById(R.id.checkBox_divide);
 
         final TextView maxNumProgress, maxQuestionProgress;
 
+        //initialize textView
         maxNumProgress = findViewById(R.id.num_limit);
         maxQuestionProgress = findViewById(R.id.q_limit);
 
@@ -66,6 +76,29 @@ public class TestModeSettings extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
+        mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
+        addChosen = mPreferences.getBoolean(ADD, false);
+        subChosen = mPreferences.getBoolean(SUB, false);
+        multChosen = mPreferences.getBoolean(MULT, false);
+        divChosen = mPreferences.getBoolean(DIV, false);
+
+        if (addChosen) {
+            addCheck.setChecked(true);
+        }
+
+        if (subChosen) {
+            subCheck.setChecked(true);
+        }
+
+        if (multChosen) {
+            multCheck.setChecked(true);
+        }
+
+        if (divChosen) {
+            divCheck.setChecked(true);
+        }
+        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM, 0));
+        seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q, 0));
     }
 
     //check to see which checkbox was checked out of all the checkboxes
@@ -170,5 +203,17 @@ public class TestModeSettings extends AppCompatActivity {
 
             startActivity(launchTest);
         }
+    }
+
+    public void onSaveDefaults(View view) {
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putBoolean(ADD, addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB, subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT, multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV, divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM, seekMaxNumber.getProgress());
+        preferenceEditor.putInt(NUM_Q, seekMaxQuestions.getProgress());
+        preferenceEditor.apply();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 }

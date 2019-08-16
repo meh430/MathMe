@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +32,7 @@ public class TestResults extends AppCompatActivity {
         Intent testEnd = getIntent();
         ArrayList<String> resultList = testEnd.getStringArrayListExtra(TestEndActivity.RESULT_LIST);
 
+        //attach adapter to RecyclerView
         RecyclerView recycle = findViewById(R.id.recyclerview);
         ResultListAdapter adapter = new ResultListAdapter(this, resultList);
         recycle.setAdapter(adapter);

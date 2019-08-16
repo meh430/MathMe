@@ -14,6 +14,7 @@ import java.util.Calendar;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
+//resets alarm if device reboots
 public class DeviceBootReceiver extends BroadcastReceiver {
     private AlarmManager alarmManager;
     private static final int NOTIFICATION_ID = 0;
@@ -24,12 +25,12 @@ public class DeviceBootReceiver extends BroadcastReceiver {
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onReceive(Context context, Intent intent) {
+        createNotificationChannel();
         mContext = context;
         SharedPreferences mSharedPreferences = context.getSharedPreferences(MainActivity.SharedPrefFile, Context.MODE_PRIVATE);
         int hour =  mSharedPreferences.getInt(MainActivity.HOUR, 69), minute = mSharedPreferences.getInt(MainActivity.MINUTE, 69);
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+        if (intent.getAction().equalsIgnoreCase("android.intent.action.BOOT_COMPLETED")) {
             if (alarmManager != null && hour == 69 && minute == 69) {
-                createNotificationChannel();
                 alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

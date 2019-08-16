@@ -35,9 +35,13 @@ public class SettingActivity extends AppCompatActivity {
     Switch darkSwitch, notifSwitch;
     //textView to show the time set for notifications
     TextView notificationStatus;
+
     private boolean notificationSet, isDark;
+    //string that stores the time of notification
     private String strNotifTime;
+    //AlarmManager object to set a repeating alarm
     private AlarmManager alarmManager;
+    //pending intent to wrap the notification's intent
     private PendingIntent notifyPendingIntent;
     private int bootHours, bootMin;
 
@@ -56,20 +60,24 @@ public class SettingActivity extends AppCompatActivity {
         isDark = mPreferences.getBoolean(MainActivity.DARK, false);
         notificationSet = mPreferences.getBoolean(MainActivity.NOTIF, false);
 
+        //set switches on dark setting depending on if it is
         if (isDark) {
             darkSwitch.setChecked(true);
         } else {
             darkSwitch.setChecked(false);
         }
 
+        //checks to see if notification is set
         if (notificationSet) {
             notifSwitch.setChecked(true);
             strNotifTime = mPreferences.getString(MainActivity.NOTIF_TIME, "");
+            //sets notification time on screen
             notificationStatus.setVisibility(View.VISIBLE);
             notificationStatus.setText(strNotifTime);
         } else {
             notifSwitch.setChecked(false);
             notificationStatus.setVisibility(View.INVISIBLE);
+            //cancels any notifications and alarms
             if (alarmManager != null) {
                 alarmManager.cancel(notifyPendingIntent);
             }
@@ -119,15 +127,18 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        //assign a notification channel to the notification manager object
         createNotificationChannel();
     }
 
     //reset all preferences and variables
     public void onReset(View view) {
+        //cancel alarms
         if (alarmManager != null) {
             alarmManager.cancel(notifyPendingIntent);
         }
 
+        //cancels any pending notifcations
         if (mNotificationManager != null) {
             mNotificationManager.cancelAll();
         }
@@ -140,8 +151,7 @@ public class SettingActivity extends AppCompatActivity {
         notificationSet = false;
         isDark = false;
         MainActivity.firstDark = false;
-        //change high score later
-
+        MainActivity.setHighScore(0);
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
         preferencesEditor.clear();
         preferencesEditor.apply();
