@@ -16,7 +16,10 @@
     answer these questions. At the end, you will find your result along with the questions you got wrong so you can learn from your mistakes.
     Now, you may be wondering about division. Well just try to get close to it, no need for decimals.</string>
     <string name="timed_mode_help">In the timed mode, you keep answering questions until the time runs out, the number of questions you get right
-    is your score. Keep trying to beat your high score! The only way to go is up!</string>
+    is your score. Keep trying to beat your high score! While playing, getting an answer wrong will result in
+        your device vibrating. Vibration bad, no vibration good.</string>
+    <string name="death_mode_help">In the sudden death mode, you answer questions until you get one wrong. So, one wrong answer and you\'re
+    dead. Think long and hard before pressing the "next" button!</string>
     <string name="choose_the_operations">Choose the Operations:</string>
     <string name="addition">Addition</string>
     <string name="subtraction">Subtraction</string>
@@ -45,4 +48,30 @@
     <string name="save_defaults_label">Save as Defaults</string>
     <string name="turn_off_dark_theme">Turn off dark theme</string>
     <string name="toggle_dark_theme">Toggle dark theme</string>
+    <string name="choose_time">Choose Time:</string>
+    <string name="start_timed_mode">Start Timed Mode</string>
+    <string name="time_120">120s</string>
+    <string name="time_90">90s</string>
+    <string name="time_60">60s</string>
+    <string name="time_30">30s</string>
+    <string name="sudden_death">Sudden Death</string>
+    <string name="next_button_label">Next</string>
+    <string name="zero">0</string>
+    <string name="clear">Clear</string>
+    <string name="three">3</string>
+    <string name="two">2</string>
+    <string name="one">1</string>
+    <string name="six">6</string>
+    <string name="five">5</string>
+    <string name="four">4</string>
+    <string name="nine">9</string>
+    <string name="eight">8</string>
+    <string name="seven">7</string>
+    <string name="score_label">Score: 0</string>
+    <string name="time_label">Time: 30s</string>
+    <string name="question_tv">Question</string>
+    <string name="answer_tv">Answer</string>
+    <string name="accuracy">Accuracy:</string>
+    <string name="score">Score</string>
+    <string name="sudden_death_mode">Sudden Death Mode</string>
 </resources>

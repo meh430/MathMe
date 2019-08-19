@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TimedEndActivity">
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/time_score_header"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/google_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_margin="8dp" />
+
+    <TextView
+        android:textSize="80sp"
+        android:textColor="@color/textColor"
+        android:layout_below="@+id/time_score_header"
+        android:fontFamily="@font/google_regular"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_score"
+        android:text="20" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/accuracy_header"
+        android:layout_below="@id/time_score"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/google_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accuracy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:textSize="80sp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/google_regular"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/accuracy"
+        android:layout_below="@+id/accuracy_header"
+        android:text="@string/test_percent" />
+
+    <Button
+        android:onClick="onViewResults"
+        android:id="@+id/result_button"
+        android:visibility="invisible"
+        android:text="@string/view_results"
+        android:background="@drawable/rounded_button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/country_roads" />
+
+    <Button
+        android:onClick="onTakeMeHome"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_button"
+        android:text="@string/take_me_home"
+        android:id="@+id/country_roads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

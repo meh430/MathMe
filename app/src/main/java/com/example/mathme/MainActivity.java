@@ -18,12 +18,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     public static final String SharedPrefFile = "com.example.mathme";
     //constant values for sharedPref keys
-    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour", MINUTE = "minute", HIGH = "highScore";
-    private static int highScore;
+    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour", MINUTE = "minute", HIGH_TIME = "highScoreTime", HIGH_DEATH = "highScoreDeath";
+    private static int highScoreTime, highScoreDeath;
     //force dark mode if set by user on first session
     public static boolean firstDark = false;
     //textview to store display the higscore
-    TextView highScoreTv;
+    TextView highScoreTimeTv, highScoreDeathTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        highScoreTv = findViewById(R.id.main_high_score);
+        highScoreTimeTv = findViewById(R.id.main_high_score);
+        highScoreDeathTv = findViewById(R.id.death_high_score);
 
         //get any variables from previous sessions
         SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
         boolean isDark = mPreferences.getBoolean(DARK, firstDark);
-        highScore = mPreferences.getInt(HIGH, 0);
+        highScoreTime = mPreferences.getInt(HIGH_TIME, 0);
+        highScoreDeath = mPreferences.getInt(HIGH_DEATH, 0);
 
         //set theme
         if (isDark) {
@@ -49,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
             getDelegate().applyDayNight();
         }
 
-        String strHighScore = "HighScore: " + getHighScore();
-        highScoreTv.setText(strHighScore);
+        String strHighScoreTime = "HighScore: " + getHighScoreTime();
+        highScoreTimeTv.setText(strHighScoreTime);
+
+        String strHighScoreDeath = "HighScore: " + getHighScoreDeath();
+        highScoreDeathTv.setText(strHighScoreDeath);
     }
 
     @Override
@@ -119,13 +124,28 @@ public class MainActivity extends AppCompatActivity {
         startActivity(launchTime);
     }
 
-    //setter for private variable highScore
-    public static void setHighScore(int hS) {
-        highScore = hS;
+    public void onSuddenDeathClicked(View view) {
+        Intent launchDeath = new Intent(MainActivity.this, DeathModeSettings.class);
+        startActivity(launchDeath);
     }
 
-    //getter for private variable highScore
-    public static int getHighScore() {
-        return highScore;
+    //setter for private variable highScoreTime
+    public static void setHighScoreTime(int hs) {
+        highScoreTime = hs;
+    }
+
+    //getter for private variable highScoreTime
+    public static int getHighScoreTime() {
+        return highScoreTime;
+    }
+
+    //setter for private variable highScoreDeath
+    public static void setHighScoreDeath(int hs) {
+        highScoreDeath = hs;
+    }
+
+    //setter for private variable highScoreDeath
+    public static int getHighScoreDeath() {
+        return highScoreDeath;
     }
 }

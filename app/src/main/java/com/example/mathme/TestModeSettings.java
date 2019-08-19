@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class TestModeSettings extends AppCompatActivity {
-    CheckBox addCheck, subCheck, multCheck, divCheck;
+    private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
     private SeekBar seekMaxNumber, seekMaxQuestions;
     private boolean addChosen, subChosen, multChosen, divChosen;

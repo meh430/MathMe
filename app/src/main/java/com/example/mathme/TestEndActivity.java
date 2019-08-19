@@ -22,7 +22,7 @@ public class TestEndActivity extends AppCompatActivity {
     private int intNumOfQ;
     //array list that stores the corrections to wrong answers
     private final ArrayList<String> resultInfoList = new ArrayList<>();
-    TextView fractionResultTv, percentResultTv;
+    private TextView fractionResultTv, percentResultTv;
     public static final String RESULT_LIST = "resultInfoList";
 
 
@@ -88,6 +88,7 @@ public class TestEndActivity extends AppCompatActivity {
     public void onViewResults(View view) {
         Intent testResults = new Intent(this, TestResults.class);
         testResults.putExtra(RESULT_LIST, resultInfoList);
+        testResults.putExtra(TestResults.TEST_TIME, true);
         startActivity(testResults);
     }
 }

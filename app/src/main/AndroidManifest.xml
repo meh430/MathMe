@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mathme">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -14,10 +15,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".TimeModeSettings" />
+        <activity
+            android:name=".TimedEndActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar"
+            android:label="Time Results" />
+        <activity
+            android:name=".DeathModeSettings"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Death Mode Settings"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".TimedMode"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".TimeModeSettings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TimeModeSettings"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Timed Mode Settings"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".TestResults"
-            android:label="Test Results"
+            android:label="Results"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".TestEndActivity"

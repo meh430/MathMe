@@ -14,11 +14,13 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class TestResults extends AppCompatActivity {
-
+    public static final String TEST_TIME = "TestOrTime";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_results);
+
+        ArrayList<String> resultList;
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -28,9 +30,13 @@ public class TestResults extends AppCompatActivity {
                 startActivity(launchMain);
             }
         });
-
-        Intent testEnd = getIntent();
-        ArrayList<String> resultList = testEnd.getStringArrayListExtra(TestEndActivity.RESULT_LIST);
+        Intent modeFin = getIntent();
+        boolean testResults = modeFin.getBooleanExtra(TEST_TIME, true);
+        if (testResults) {
+            resultList = modeFin.getStringArrayListExtra(TestEndActivity.RESULT_LIST);
+        } else {
+            resultList = modeFin.getStringArrayListExtra(TimedEndActivity.TIMED_RESULT_LIST);
+        }
 
         //attach adapter to RecyclerView
         RecyclerView recycle = findViewById(R.id.recyclerview);

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:weightSum="10"
+    tools:context=".TimedMode">
+
+    <RelativeLayout
+        android:id="@+id/info_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/current_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/google_regular"
+            android:text="@string/score_label"
+            android:textColor="@color/textColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:fontFamily="@font/google_regular"
+            android:textColor="@color/textColor"
+            android:textSize="18sp"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:fontFamily="@font/google_regular"
+        android:gravity="center"
+        android:text="@string/question_tv"
+        android:textColor="@color/textColor"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:fontFamily="@font/google_regular"
+        android:gravity="center"
+        android:textColor="@color/textColor"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            tools:ignore="NestedWeights">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button2"
+                android:onClick="onSeven"
+                android:fontFamily="@font/google_regular"
+
+                android:text="@string/seven"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onEight"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/eight"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onNine"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/nine"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onFour"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/four"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="onFive"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/five"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onSix"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/six"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onOne"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/one"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onTwo"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/two"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:onClick="onThree"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/three"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/clear"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:onClick="onClear"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="onZero"
+                android:background="@drawable/rounded_button2"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/zero"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:onClick="onNextTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/next_button_label"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
