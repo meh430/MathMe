@@ -15,16 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".SpeedModeSettings"></activity>
+        <activity
+            android:name=".DeathEndActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Infinite Mode Results"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".DeathMode"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".DeathModeSettings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TimedEndActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:label="Time Results"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar"
-            android:label="Time Results" />
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".DeathModeSettings"
             android:configChanges="orientation|keyboardHidden"
-            android:label="Death Mode Settings"
+            android:label="Infinite Mode Settings"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />

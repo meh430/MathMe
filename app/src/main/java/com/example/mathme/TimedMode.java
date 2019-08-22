@@ -76,6 +76,15 @@ public class TimedMode extends AppCompatActivity {
     private int setInterval() {
         if (intTime == 1) {
             timer.cancel();
+
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                v.vibrate(1000);
+            }
+
             Intent launchTimeEnd = new Intent(TimedMode.this, TimedEndActivity.class);
             launchTimeEnd.putExtra(Q_ANS, intQuestionsAnswered)
                     .putExtra(SCORE, intScore)
@@ -87,6 +96,14 @@ public class TimedMode extends AppCompatActivity {
             //call another method later
         }
         return --intTime;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
     private void showQuestion() {

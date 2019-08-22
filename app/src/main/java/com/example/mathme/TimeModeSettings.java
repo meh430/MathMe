@@ -19,7 +19,7 @@ public class TimeModeSettings extends AppCompatActivity {
     private SeekBar seekMaxNumber;
     RadioGroup timeOptions;
     private boolean addChosen, subChosen, multChosen, divChosen;
-    private static final String ADD = "add", SUB = "sub", MULT = "mult", DIV = "div";
+    private static final String ADD_TIME = "addTime", SUB_TIME = "subTime", MULT_TIME = "multTime", DIV_TIME = "divTime";
     public static final String MAX_NUM_TIME = "maxNumTime", OPERATIONS_TIME = "operationsTime", TIME_TIME = "TimeTime";
 
 
@@ -62,10 +62,10 @@ public class TimeModeSettings extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD, false);
-        subChosen = mPreferences.getBoolean(SUB, false);
-        multChosen = mPreferences.getBoolean(MULT, false);
-        divChosen = mPreferences.getBoolean(DIV, false);
+        addChosen = mPreferences.getBoolean(ADD_TIME, false);
+        subChosen = mPreferences.getBoolean(SUB_TIME, false);
+        multChosen = mPreferences.getBoolean(MULT_TIME, false);
+        divChosen = mPreferences.getBoolean(DIV_TIME, false);
         int timeSelected = mPreferences.getInt(TIME_TIME, R.id.thirty);
 
         switch (timeSelected) {
@@ -104,10 +104,10 @@ public class TimeModeSettings extends AppCompatActivity {
 
     public void onSaveDefaults(View view) {
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV, divCheck.isChecked());
+        preferenceEditor.putBoolean(ADD_TIME, addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_TIME, subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_TIME, multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_TIME, divCheck.isChecked());
         preferenceEditor.putInt(MAX_NUM_TIME, seekMaxNumber.getProgress());
         preferenceEditor.putInt(TIME_TIME, timeOptions.getCheckedRadioButtonId());
         preferenceEditor.apply();

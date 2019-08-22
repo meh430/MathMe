@@ -49,6 +49,7 @@ public class TestMode extends AppCompatActivity {
     }
 
     public void onYes(View view) {
+        questionNumTv.setVisibility(View.VISIBLE);
         view.setVisibility(View.INVISIBLE);
         LinearLayout buttonBar = findViewById(R.id.test_buttons);
         buttonBar.setVisibility(View.VISIBLE);

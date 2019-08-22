@@ -153,6 +153,7 @@ public class SettingActivity extends AppCompatActivity {
         MainActivity.firstDark = false;
         MainActivity.setHighScoreTime(0);
         MainActivity.setHighScoreDeath(0);
+        MainActivity.setBestTime(0);
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
         preferencesEditor.clear();
         preferencesEditor.apply();

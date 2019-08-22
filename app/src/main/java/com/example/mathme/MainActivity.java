@@ -18,12 +18,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     public static final String SharedPrefFile = "com.example.mathme";
     //constant values for sharedPref keys
-    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour", MINUTE = "minute", HIGH_TIME = "highScoreTime", HIGH_DEATH = "highScoreDeath";
-    private static int highScoreTime, highScoreDeath;
+    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour", MINUTE = "minute", HIGH_TIME = "highScoreTime", HIGH_DEATH = "highScoreDeath", BEST_TIME = "bestTime";
+    private static int highScoreTime, highScoreDeath, bestTime;
     //force dark mode if set by user on first session
     public static boolean firstDark = false;
     //textview to store display the higscore
-    TextView highScoreTimeTv, highScoreDeathTv;
+    TextView highScoreTimeTv, highScoreDeathTv, bestTimeTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
         highScoreTimeTv = findViewById(R.id.main_high_score);
         highScoreDeathTv = findViewById(R.id.death_high_score);
+        bestTimeTv = findViewById(R.id.speed_time);
 
         //get any variables from previous sessions
         SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
         boolean isDark = mPreferences.getBoolean(DARK, firstDark);
         highScoreTime = mPreferences.getInt(HIGH_TIME, 0);
         highScoreDeath = mPreferences.getInt(HIGH_DEATH, 0);
+        bestTime = mPreferences.getInt(BEST_TIME, 0);
 
         //set theme
         if (isDark) {
@@ -56,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         String strHighScoreDeath = "HighScore: " + getHighScoreDeath();
         highScoreDeathTv.setText(strHighScoreDeath);
+
+        String strBestTime = "Best Time: " + getBestTime();
+        bestTimeTv.setText(strBestTime);
+
     }
 
     @Override
@@ -106,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent launchHelp = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(launchHelp);
                 return true;
+            case R.id.action_anime:
+                //launch anime WebView
+                return true;
             default:
                 //nothing
         }
@@ -129,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(launchDeath);
     }
 
+    public void onSpeedRun(View view) {
+        Intent launchSpeed = new Intent(MainActivity.this, SpeedModeSettings.class);
+        startActivity(launchSpeed);
+    }
+
     //setter for private variable highScoreTime
     public static void setHighScoreTime(int hs) {
         highScoreTime = hs;
@@ -147,5 +161,13 @@ public class MainActivity extends AppCompatActivity {
     //setter for private variable highScoreDeath
     public static int getHighScoreDeath() {
         return highScoreDeath;
+    }
+
+    public static void setBestTime(int bt) {
+        bestTime = bt;
+    }
+
+    public static int getBestTime() {
+        return bestTime;
     }
 }

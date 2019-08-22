@@ -15,6 +15,12 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/action_anime"
+        android:orderInCategory="60"
+        android:title="@string/math_bad"
+        app:showAsAction="never" />
+
+    <item
         style="@style/HelpIcon"
         android:id="@+id/action_help"
         android:orderInCategory="20"

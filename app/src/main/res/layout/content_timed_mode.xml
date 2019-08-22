@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".TimedEndActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_timed_end"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/time_score_header"
@@ -55,27 +53,4 @@
         android:text="@string/test_percent"
         android:textColor="@color/textColor"
         android:textSize="80sp" />
-
-    <Button
-        android:id="@+id/result_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/country_roads"
-        android:background="@drawable/rounded_button2"
-        android:onClick="onViewResults"
-        android:text="@string/view_results"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/country_roads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="onTakeMeHome"
-        android:text="@string/take_me_home"
-        android:visibility="invisible" />
-
-
 </RelativeLayout>

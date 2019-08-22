@@ -2,16 +2,16 @@ package com.example.mathme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TimedEndActivity extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
@@ -43,9 +43,19 @@ public class TimedEndActivity extends AppCompatActivity {
         answers = timedMode.getIntegerArrayListExtra(TimedMode.A_LIST);
         userAnswers = timedMode.getIntegerArrayListExtra(TimedMode.UA_LIST);
 
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Button home = findViewById(R.id.country_roads);
+                home.setVisibility(View.VISIBLE);
+            }
+        }, 1500);
+
         checkAnswers();
     }
 
+    @SuppressLint("SetTextI18n")
     private void checkAnswers() {
         String resultInfo;
 
@@ -71,16 +81,19 @@ public class TimedEndActivity extends AppCompatActivity {
 
         accuracyTv.setText(resultPercent);
 
+        String endMessage;
         if (score > MainActivity.getHighScoreTime()) {
-            scoreHeaderTv.setText("New High Score!");
+            endMessage = "New High Score!";
+            scoreHeaderTv.setText(endMessage);
             MainActivity.setHighScoreTime(score);
             SharedPreferences.Editor preferenceEditor = mSharedPreferences.edit();
             preferenceEditor.putInt(MainActivity.HIGH_TIME, MainActivity.getHighScoreTime());
             preferenceEditor.apply();
         } else {
-            scoreHeaderTv.setText("Score: ");
+            endMessage = "Score: ";
+            scoreHeaderTv.setText(endMessage);
         }
-        scoreTv.setText(score + "");
+        scoreTv.setText(Integer.toString(score));
     }
 
     public void onViewResults(View view) {

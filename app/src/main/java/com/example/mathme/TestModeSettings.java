@@ -17,7 +17,7 @@ public class TestModeSettings extends AppCompatActivity {
     private SharedPreferences mPreferences;
     private SeekBar seekMaxNumber, seekMaxQuestions;
     private boolean addChosen, subChosen, multChosen, divChosen;
-    private static final String ADD = "add", SUB = "sub", MULT = "mult", DIV = "div";
+    private static final String ADD_TEST = "addTest", SUB_TEST = "subTest", MULT_TEST = "multTest", DIV_TEST = "divTest";
 
     //key values
     public static final String MAX_NUM = "maxNum", NUM_Q = "numQ", OPERATIONS = "operations";
@@ -77,10 +77,10 @@ public class TestModeSettings extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD, false);
-        subChosen = mPreferences.getBoolean(SUB, false);
-        multChosen = mPreferences.getBoolean(MULT, false);
-        divChosen = mPreferences.getBoolean(DIV, false);
+        addChosen = mPreferences.getBoolean(ADD_TEST, false);
+        subChosen = mPreferences.getBoolean(SUB_TEST, false);
+        multChosen = mPreferences.getBoolean(MULT_TEST, false);
+        divChosen = mPreferences.getBoolean(DIV_TEST, false);
 
         if (addChosen) {
             addCheck.setChecked(true);
@@ -207,10 +207,10 @@ public class TestModeSettings extends AppCompatActivity {
 
     public void onSaveDefaults(View view) {
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV, divCheck.isChecked());
+        preferenceEditor.putBoolean(ADD_TEST, addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_TEST, subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_TEST, multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_TEST, divCheck.isChecked());
         preferenceEditor.putInt(MAX_NUM, seekMaxNumber.getProgress());
         preferenceEditor.putInt(NUM_Q, seekMaxQuestions.getProgress());
         preferenceEditor.apply();
