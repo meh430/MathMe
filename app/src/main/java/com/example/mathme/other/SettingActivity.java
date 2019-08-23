@@ -1,8 +1,4 @@
-package com.example.mathme;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.DialogFragment;
+package com.example.mathme.other;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -18,6 +14,13 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.DialogFragment;
+
+import com.example.mathme.R;
+import com.example.mathme.receivers.AlarmReceiver;
 
 import java.util.Calendar;
 

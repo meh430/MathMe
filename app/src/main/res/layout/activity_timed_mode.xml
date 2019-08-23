@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:weightSum="10"
-    tools:context=".TimedMode">
+    tools:context=".mode.TimedMode">
 
     <RelativeLayout
         android:id="@+id/info_bar"

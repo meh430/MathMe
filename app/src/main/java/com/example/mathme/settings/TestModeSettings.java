@@ -1,86 +1,92 @@
-package com.example.mathme;
+package com.example.mathme.settings;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TimeModeSettings extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.mode.TestMode;
+import com.example.mathme.other.MainActivity;
+
+public class TestModeSettings extends AppCompatActivity {
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
-    private SeekBar seekMaxNumber;
-    RadioGroup timeOptions;
+    private SeekBar seekMaxNumber, seekMaxQuestions;
     private boolean addChosen, subChosen, multChosen, divChosen;
-    private static final String ADD_TIME = "addTime", SUB_TIME = "subTime", MULT_TIME = "multTime", DIV_TIME = "divTime";
-    public static final String MAX_NUM_TIME = "maxNumTime", OPERATIONS_TIME = "operationsTime", TIME_TIME = "TimeTime";
+    private static final String ADD_TEST = "addTest", SUB_TEST = "subTest", MULT_TEST = "multTest", DIV_TEST = "divTest";
 
+    //key values
+    public static final String MAX_NUM = "maxNum", NUM_Q = "numQ", OPERATIONS = "operations";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_mode_settings);
-        final TextView maxNumProgress;
+        setContentView(R.layout.activity_test_mode_settings);
 
-        maxNumProgress = findViewById(R.id.num_limit);
+        //initialize seekBar
         seekMaxNumber = findViewById(R.id.seek_max_num);
+        seekMaxQuestions = findViewById(R.id.seek_max_questions);
         addCheck = findViewById(R.id.checkBox_plus);
         subCheck = findViewById(R.id.checkBox_minus);
         multCheck = findViewById(R.id.checkbox_multiply);
         divCheck = findViewById(R.id.checkBox_divide);
-        timeOptions = findViewById(R.id.timeOptions);
-        RadioButton thirty = findViewById(R.id.thirty);
-        RadioButton sixty = findViewById(R.id.sixty);
-        RadioButton ninety = findViewById(R.id.ninety);
-        RadioButton one_twenty = findViewById(R.id.one_twenty);
 
+        final TextView maxNumProgress, maxQuestionProgress;
+
+        //initialize textView
+        maxNumProgress = findViewById(R.id.num_limit);
+        maxQuestionProgress = findViewById(R.id.q_limit);
+
+        //seekbar to choose max number
         seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b){
+                //i comes from seek bar and determines the max number
                 if (i > 0) {
-                    String progress = i * 5 + "";
-                    maxNumProgress.setText(progress);
+                    maxNumProgress.setText((i*5) + "");
                 } else {
                     maxNumProgress.setText("0");
                 }
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        //seekbar to choose question number
+        seekMaxQuestions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if (i > 0) {
+                    maxQuestionProgress.setText((i*5) + "");
+                } else {
+                    maxQuestionProgress.setText("0");
+                }
             }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD_TIME, false);
-        subChosen = mPreferences.getBoolean(SUB_TIME, false);
-        multChosen = mPreferences.getBoolean(MULT_TIME, false);
-        divChosen = mPreferences.getBoolean(DIV_TIME, false);
-        int timeSelected = mPreferences.getInt(TIME_TIME, R.id.thirty);
-
-        switch (timeSelected) {
-            case R.id.thirty:
-                thirty.setChecked(true);
-                break;
-            case R.id.sixty:
-                sixty.setChecked(true);
-                break;
-            case R.id.ninety:
-                ninety.setChecked(true);
-                break;
-            case R.id.one_twenty:
-                one_twenty.setChecked(true);
-        }
+        addChosen = mPreferences.getBoolean(ADD_TEST, false);
+        subChosen = mPreferences.getBoolean(SUB_TEST, false);
+        multChosen = mPreferences.getBoolean(MULT_TEST, false);
+        divChosen = mPreferences.getBoolean(DIV_TEST, false);
 
         if (addChosen) {
             addCheck.setChecked(true);
@@ -97,23 +103,11 @@ public class TimeModeSettings extends AppCompatActivity {
         if (divChosen) {
             divCheck.setChecked(true);
         }
-
-        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_TIME, 0));
-
-    }//close onCreate
-
-    public void onSaveDefaults(View view) {
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD_TIME, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB_TIME, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT_TIME, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV_TIME, divCheck.isChecked());
-        preferenceEditor.putInt(MAX_NUM_TIME, seekMaxNumber.getProgress());
-        preferenceEditor.putInt(TIME_TIME, timeOptions.getCheckedRadioButtonId());
-        preferenceEditor.apply();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM, 0));
+        seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q, 0));
     }
 
+    //check to see which checkbox was checked out of all the checkboxes
     public void onOperationChosen(View view) {
         boolean isChecked = ((CheckBox) view).isChecked();
 
@@ -140,29 +134,15 @@ public class TimeModeSettings extends AppCompatActivity {
         }
     }
 
+
     public void onTestLaunch(View view) {
-        int timeSet = 30;
-        int timeSelected = timeOptions.getCheckedRadioButtonId();
-
-        switch (timeSelected) {
-            case R.id.thirty:
-                timeSet = 30;
-                break;
-            case R.id.sixty:
-                timeSet = 60;
-                break;
-            case R.id.ninety:
-                timeSet = 90;
-                break;
-            case R.id.one_twenty:
-                timeSet = 120;
-        }
-
+        view.startAnimation(buttonClick);
         int intNumLimit = seekMaxNumber.getProgress() * 5;
+        int intMaxQ = seekMaxQuestions.getProgress() * 5;
         String strChosenOperations = "";
         Toast setSetting = Toast.makeText(this, "Please set all values", Toast.LENGTH_SHORT);
 
-        if (intNumLimit == 0) {
+        if (intNumLimit == 0 || intMaxQ == 0) {
             setSetting.show();
         } else if (!addChosen && !subChosen && !multChosen && !divChosen) {
             setSetting.show();
@@ -222,13 +202,26 @@ public class TimeModeSettings extends AppCompatActivity {
                 strChosenOperations = "asmd";
             }
 
-            Intent launchTime = new Intent(TimeModeSettings.this, TimedMode.class);
+            Intent launchTest = new Intent(TestModeSettings.this, TestMode.class);
             //put chosen operator, max num and questions
-            launchTime.putExtra(OPERATIONS_TIME, strChosenOperations);
-            launchTime.putExtra(MAX_NUM_TIME, intNumLimit);
-            launchTime.putExtra(TIME_TIME, timeSet);
+            launchTest.putExtra(OPERATIONS, strChosenOperations);
+            launchTest.putExtra(MAX_NUM, intNumLimit);
+            launchTest.putExtra(NUM_Q, intMaxQ);
 
-            startActivity(launchTime);
+            startActivity(launchTest);
         }
+    }
+
+    public void onSaveDefaults(View view) {
+        view.startAnimation(buttonClick);
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putBoolean(ADD_TEST, addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_TEST, subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_TEST, multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_TEST, divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM, seekMaxNumber.getProgress());
+        preferenceEditor.putInt(NUM_Q, seekMaxQuestions.getProgress());
+        preferenceEditor.apply();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 }

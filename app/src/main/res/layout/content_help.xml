@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="4dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".HelpActivity"
+    tools:context=".other.HelpActivity"
     tools:showIn="@layout/activity_help">
 
     <androidx.cardview.widget.CardView

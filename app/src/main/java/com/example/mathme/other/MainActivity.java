@@ -1,19 +1,26 @@
-package com.example.mathme;
+package com.example.mathme.other;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
+import com.example.mathme.R;
+import com.example.mathme.settings.DeathModeSettings;
+import com.example.mathme.settings.SpeedModeSettings;
+import com.example.mathme.settings.TestModeSettings;
+import com.example.mathme.settings.TimeModeSettings;
+import com.example.mathme.web.Relax;
 
 public class MainActivity extends AppCompatActivity {
     public static final String SharedPrefFile = "com.example.mathme";
@@ -75,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.xml-v25.
         int id = item.getItemId();
 
         switch (id) {
@@ -114,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_anime:
                 //launch anime WebView
+                Intent launchAnime = new Intent(MainActivity.this, Relax.class);
+                startActivity(launchAnime);
                 return true;
             default:
                 //nothing

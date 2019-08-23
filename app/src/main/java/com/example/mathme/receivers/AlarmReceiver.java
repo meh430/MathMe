@@ -1,4 +1,4 @@
-package com.example.mathme;
+package com.example.mathme.receivers;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
+
+import com.example.mathme.R;
+import com.example.mathme.other.MainActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
     private NotificationManager mNotificationManager;

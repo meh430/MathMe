@@ -1,6 +1,4 @@
-package com.example.mathme;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mathme.ends;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,12 +6,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.mode.TimedMode;
+import com.example.mathme.other.MainActivity;
+import com.example.mathme.result.TestResults;
 
 import java.util.ArrayList;
 
 public class TimedEndActivity extends AppCompatActivity {
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     SharedPreferences mSharedPreferences;
     //map to hold all the questions
     private ArrayList<String> questions;
@@ -97,6 +104,7 @@ public class TimedEndActivity extends AppCompatActivity {
     }
 
     public void onViewResults(View view) {
+        view.startAnimation(buttonClick);
         Intent timeResults = new Intent(this, TestResults.class);
         timeResults.putExtra(TIMED_RESULT_LIST, resultInfoList);
         timeResults.putExtra(TestResults.TEST_TIME, false);
@@ -104,6 +112,7 @@ public class TimedEndActivity extends AppCompatActivity {
     }
 
     public void onTakeMeHome(View view) {
+        view.startAnimation(buttonClick);
         Intent takeMeHome = new Intent(this, MainActivity.class);
         startActivity(takeMeHome);
     }

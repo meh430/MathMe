@@ -81,4 +81,10 @@
     <string name="best_time">Best Time: 0s</string>
     <string name="speed_mode">Speed Mode</string>
     <string name="math_bad">Math Bad</string>
+    <string name="anime_flix">Anime Flix</string>
+    <string name="anime_vibe">Anime Vibe</string>
+    <string name="anime_twist">Anime Twist</string>
+    <string name="loading">loading</string>
+    <string name="wonderful_subs">Wonderful Subs</string>
+    <string name="placeholder_score">20</string>
 </resources>

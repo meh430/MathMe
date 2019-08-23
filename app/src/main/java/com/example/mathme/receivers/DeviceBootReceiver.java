@@ -1,4 +1,4 @@
-package com.example.mathme;
+package com.example.mathme.receivers;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+
+import com.example.mathme.other.MainActivity;
 
 import java.util.Calendar;
 

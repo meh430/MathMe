@@ -1,7 +1,5 @@
 //TODO: Make a superclass with all the commonly used methods and variables, one called Mode, one called Settings, one called End
-package com.example.mathme;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mathme.mode;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +8,17 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.ends.DeathEndActivity;
+import com.example.mathme.settings.DeathModeSettings;
 
 
 public class DeathMode extends AppCompatActivity {
@@ -26,6 +31,8 @@ public class DeathMode extends AppCompatActivity {
     public static final String SCORE = "Score";
     private TextView scoreTv, questionTv;
     private EditText userAnswerEditText;
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class DeathMode extends AppCompatActivity {
     }
 
     public void onYes(View view) {
+        view.startAnimation(buttonClick);
         scoreTv.setVisibility(View.VISIBLE);
         view.setVisibility(View.INVISIBLE);
         Button next = findViewById(R.id.next_button);
@@ -51,6 +59,7 @@ public class DeathMode extends AppCompatActivity {
     }
 
     public void onNext(View view) {
+        view.startAnimation(buttonClick);
         String temp = userAnswerEditText.getText().toString();
         if (temp.equalsIgnoreCase("")) {
             Toast.makeText(this, "No harm in guessing!", Toast.LENGTH_SHORT).show();
@@ -62,9 +71,11 @@ public class DeathMode extends AppCompatActivity {
             } else {
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    assert v != null;
                     v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
                 } else {
                     //deprecated in API 26
+                    assert v != null;
                     v.vibrate(1000);
                 }
                 //launch end activity

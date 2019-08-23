@@ -1,6 +1,4 @@
-package com.example.mathme;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mathme.mode;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +11,12 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.ends.TimedEndActivity;
+import com.example.mathme.settings.TimeModeSettings;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +24,7 @@ import java.util.TimerTask;
 public class TimedMode extends AppCompatActivity {
     private int intNumLimit, intQuestionsAnswered = 0, intActualAnswer = 0, intNum1, intNum2,
             intTime, intScore = 0;
-    private StringBuilder sbAnswer = new StringBuilder("");
+    private StringBuilder sbAnswer = new StringBuilder();
     private ArrayList<String> questionList;
     private ArrayList<Integer> answerList;
     private ArrayList<Integer> userAnswerList;
@@ -79,9 +83,11 @@ public class TimedMode extends AppCompatActivity {
 
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                assert v != null;
                 v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
                 //deprecated in API 26
+                assert v != null;
                 v.vibrate(1000);
             }
 
@@ -288,9 +294,11 @@ public class TimedMode extends AppCompatActivity {
             intQuestionsAnswered++;
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                assert v != null;
                 v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
                 //deprecated in API 26
+                assert v != null;
                 v.vibrate(100);
             }
         }
@@ -300,7 +308,7 @@ public class TimedMode extends AppCompatActivity {
         userAnswerList.add(Integer.parseInt(sbAnswer.toString()));
 
         answerTv.setText("");
-        sbAnswer = new StringBuilder("");
+        sbAnswer = new StringBuilder();
         showQuestion();
     }
 

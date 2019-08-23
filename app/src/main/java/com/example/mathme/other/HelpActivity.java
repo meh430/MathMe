@@ -1,8 +1,10 @@
-package com.example.mathme;
+package com.example.mathme.other;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.mathme.R;
 
 public class HelpActivity extends AppCompatActivity {
 

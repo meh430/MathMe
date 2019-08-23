@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,71 +16,93 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".SpeedModeSettings"></activity>
         <activity
-            android:name=".DeathEndActivity"
+            android:name=".web.Relax"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar"
+            android:parentActivityName=".other.MainActivity" />
+        <activity
+            android:name=".web.Anime"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="Anime"
+            android:parentActivityName=".web.Relax"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".settings.SpeedModeSettings"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:label="Speed Mode Settings"
+            android:parentActivityName=".other.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".ends.DeathEndActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="Infinite Mode Results"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".DeathMode"
+            android:name=".mode.DeathMode"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName=".DeathModeSettings"
+            android:parentActivityName=".settings.DeathModeSettings"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TimedEndActivity"
+            android:name=".ends.TimedEndActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="Time Results"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".DeathModeSettings"
+            android:name=".settings.DeathModeSettings"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
             android:label="Infinite Mode Settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".TimedMode"
+            android:name=".mode.TimedMode"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName=".TimeModeSettings"
+            android:parentActivityName=".settings.TimeModeSettings"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TimeModeSettings"
+            android:name=".settings.TimeModeSettings"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
             android:label="Timed Mode Settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".TestResults"
+            android:name=".result.TestResults"
             android:label="Results"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".TestEndActivity"
+            android:name=".ends.TestEndActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="Test Results"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".TestMode"
+            android:name=".mode.TestMode"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName=".TestModeSettings"
+            android:parentActivityName=".settings.TestModeSettings"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TestModeSettings"
+            android:name=".settings.TestModeSettings"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
             android:label="Test Mode Settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
 
         <receiver
-            android:name=".DeviceBootReceiver"
+            android:name=".receivers.DeviceBootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -87,27 +110,28 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".receivers.AlarmReceiver"
             android:enabled="true"
             android:exported="false" />
 
         <activity
-            android:name=".HelpActivity"
+            android:name=".other.HelpActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="Help"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".other.SettingActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="Settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".other.MainActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
@@ -116,6 +140,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts                                                                                                 "
+                android:resource="@xml/shortcuts" />
         </activity>
     </application>
 

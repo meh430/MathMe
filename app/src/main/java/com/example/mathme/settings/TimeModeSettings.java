@@ -1,36 +1,51 @@
-package com.example.mathme;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mathme.settings;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DeathModeSettings extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.mode.TimedMode;
+import com.example.mathme.other.MainActivity;
+
+public class TimeModeSettings extends AppCompatActivity {
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
     private SeekBar seekMaxNumber;
+    RadioGroup timeOptions;
     private boolean addChosen, subChosen, multChosen, divChosen;
-    private static final String ADD_DEATH = "addDeath", SUB_DEATH = "subDeath", MULT_DEATH = "multDeath", DIV_DEATH = "divDeath";
-    public static final String MAX_NUM_DEATH = "maxNumDeath", OPERATIONS_DEATH = "operationsDeath";
+    private static final String ADD_TIME = "addTime", SUB_TIME = "subTime", MULT_TIME = "multTime", DIV_TIME = "divTime";
+    public static final String MAX_NUM_TIME = "maxNumTime", OPERATIONS_TIME = "operationsTime", TIME_TIME = "TimeTime";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_death_mode_settings);
+        setContentView(R.layout.activity_time_mode_settings);
+        final TextView maxNumProgress;
 
-        final TextView maxNumProgress = findViewById(R.id.num_limit);
+        maxNumProgress = findViewById(R.id.num_limit);
         seekMaxNumber = findViewById(R.id.seek_max_num);
         addCheck = findViewById(R.id.checkBox_plus);
         subCheck = findViewById(R.id.checkBox_minus);
         multCheck = findViewById(R.id.checkbox_multiply);
         divCheck = findViewById(R.id.checkBox_divide);
+        timeOptions = findViewById(R.id.timeOptions);
+        RadioButton thirty = findViewById(R.id.thirty);
+        RadioButton sixty = findViewById(R.id.sixty);
+        RadioButton ninety = findViewById(R.id.ninety);
+        RadioButton one_twenty = findViewById(R.id.one_twenty);
 
         seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -53,10 +68,25 @@ public class DeathModeSettings extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD_DEATH, false);
-        subChosen = mPreferences.getBoolean(SUB_DEATH, false);
-        multChosen = mPreferences.getBoolean(MULT_DEATH, false);
-        divChosen = mPreferences.getBoolean(DIV_DEATH, false);
+        addChosen = mPreferences.getBoolean(ADD_TIME, false);
+        subChosen = mPreferences.getBoolean(SUB_TIME, false);
+        multChosen = mPreferences.getBoolean(MULT_TIME, false);
+        divChosen = mPreferences.getBoolean(DIV_TIME, false);
+        int timeSelected = mPreferences.getInt(TIME_TIME, R.id.thirty);
+
+        switch (timeSelected) {
+            case R.id.thirty:
+                thirty.setChecked(true);
+                break;
+            case R.id.sixty:
+                sixty.setChecked(true);
+                break;
+            case R.id.ninety:
+                ninety.setChecked(true);
+                break;
+            case R.id.one_twenty:
+                one_twenty.setChecked(true);
+        }
 
         if (addChosen) {
             addCheck.setChecked(true);
@@ -74,7 +104,21 @@ public class DeathModeSettings extends AppCompatActivity {
             divCheck.setChecked(true);
         }
 
-        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_DEATH, 0));
+        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_TIME, 0));
+
+    }//close onCreate
+
+    public void onSaveDefaults(View view) {
+        view.startAnimation(buttonClick);
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putBoolean(ADD_TIME, addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_TIME, subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_TIME, multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_TIME, divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM_TIME, seekMaxNumber.getProgress());
+        preferenceEditor.putInt(TIME_TIME, timeOptions.getCheckedRadioButtonId());
+        preferenceEditor.apply();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     public void onOperationChosen(View view) {
@@ -103,18 +147,25 @@ public class DeathModeSettings extends AppCompatActivity {
         }
     }
 
-    public void onSaveDefaults(View view) {
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD_DEATH, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB_DEATH, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT_DEATH, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV_DEATH, divCheck.isChecked());
-        preferenceEditor.putInt(MAX_NUM_DEATH, seekMaxNumber.getProgress());
-        preferenceEditor.apply();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-    }
+    public void onTestLaunch(View view) {
+        view.startAnimation(buttonClick);
+        int timeSet = 30;
+        int timeSelected = timeOptions.getCheckedRadioButtonId();
 
-    public void onStartDeath(View view) {
+        switch (timeSelected) {
+            case R.id.thirty:
+                timeSet = 30;
+                break;
+            case R.id.sixty:
+                timeSet = 60;
+                break;
+            case R.id.ninety:
+                timeSet = 90;
+                break;
+            case R.id.one_twenty:
+                timeSet = 120;
+        }
+
         int intNumLimit = seekMaxNumber.getProgress() * 5;
         String strChosenOperations = "";
         Toast setSetting = Toast.makeText(this, "Please set all values", Toast.LENGTH_SHORT);
@@ -179,12 +230,13 @@ public class DeathModeSettings extends AppCompatActivity {
                 strChosenOperations = "asmd";
             }
 
-            Intent launchDeath = new Intent(DeathModeSettings.this, DeathMode.class);
+            Intent launchTime = new Intent(TimeModeSettings.this, TimedMode.class);
             //put chosen operator, max num and questions
-            launchDeath.putExtra(OPERATIONS_DEATH, strChosenOperations);
-            launchDeath.putExtra(MAX_NUM_DEATH, intNumLimit);
+            launchTime.putExtra(OPERATIONS_TIME, strChosenOperations);
+            launchTime.putExtra(MAX_NUM_TIME, intNumLimit);
+            launchTime.putExtra(TIME_TIME, timeSet);
 
-            startActivity(launchDeath);
+            startActivity(launchTime);
         }
     }
 }

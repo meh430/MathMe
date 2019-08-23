@@ -1,15 +1,22 @@
-package com.example.mathme;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mathme.ends;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.mode.DeathMode;
+import com.example.mathme.other.MainActivity;
 
 public class DeathEndActivity extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class DeathEndActivity extends AppCompatActivity {
     }
 
     public void onTakeMeHome(View view) {
+        view.startAnimation(buttonClick);
         Intent takeMeHome = new Intent(this, MainActivity.class);
         startActivity(takeMeHome);
     }

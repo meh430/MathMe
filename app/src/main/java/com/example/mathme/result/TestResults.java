@@ -1,15 +1,18 @@
-package com.example.mathme;
+package com.example.mathme.result;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
+import com.example.mathme.R;
+import com.example.mathme.ends.TestEndActivity;
+import com.example.mathme.ends.TimedEndActivity;
+import com.example.mathme.other.MainActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 

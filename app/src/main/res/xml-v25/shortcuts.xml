@@ -1,0 +1,83 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="25">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut"
+        android:shortcutId="Test"
+        android:shortcutLongLabel="@string/test_mode"
+        android:shortcutShortLabel="@string/test_mode">
+        <intent
+            applicationId="com.example.mathme"
+
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.mathme.settings.TestModeSettings"
+            android:targetPackage="com.example.mathme" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut"
+        android:shortcutId="Time"
+        android:shortcutLongLabel="@string/timed_mode"
+        android:shortcutShortLabel="@string/timed_mode">
+        <intent
+            applicationId="com.example.mathme"
+
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.mathme.settings.TimeModeSettings"
+            android:targetPackage="com.example.mathme" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut"
+        android:shortcutId="Infinite"
+        android:shortcutLongLabel="@string/sudden_death"
+        android:shortcutShortLabel="@string/sudden_death">
+        <intent
+            applicationId="com.example.mathme"
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.mathme.settings.DeathModeSettings"
+            android:targetPackage="com.example.mathme" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut"
+        android:shortcutId="Speed"
+        android:shortcutLongLabel="@string/speed_mode"
+        android:shortcutShortLabel="@string/speed_mode">
+        <intent
+            applicationId="com.example.mathme"
+
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.mathme.settings.SpeedModeSettings"
+            android:targetPackage="com.example.mathme" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+</shortcuts>

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="4dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".TestResults"
+    tools:context=".result.TestResults"
     tools:showIn="@layout/activity_test_results">
 
     <androidx.recyclerview.widget.RecyclerView

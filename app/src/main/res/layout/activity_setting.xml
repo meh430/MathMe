@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="16dp"
-    tools:context=".SettingActivity">
+    tools:context=".other.SettingActivity">
 
     <Switch
         android:switchPadding="10dp"

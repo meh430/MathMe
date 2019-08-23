@@ -1,86 +1,68 @@
-package com.example.mathme;
+package com.example.mathme.settings;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TestModeSettings extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mathme.R;
+import com.example.mathme.mode.DeathMode;
+import com.example.mathme.other.MainActivity;
+
+public class DeathModeSettings extends AppCompatActivity {
     private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
-    private SeekBar seekMaxNumber, seekMaxQuestions;
+    private SeekBar seekMaxNumber;
     private boolean addChosen, subChosen, multChosen, divChosen;
-    private static final String ADD_TEST = "addTest", SUB_TEST = "subTest", MULT_TEST = "multTest", DIV_TEST = "divTest";
+    private static final String ADD_DEATH = "addDeath", SUB_DEATH = "subDeath", MULT_DEATH = "multDeath", DIV_DEATH = "divDeath";
+    public static final String MAX_NUM_DEATH = "maxNumDeath", OPERATIONS_DEATH = "operationsDeath";
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
 
-    //key values
-    public static final String MAX_NUM = "maxNum", NUM_Q = "numQ", OPERATIONS = "operations";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_mode_settings);
+        setContentView(R.layout.activity_death_mode_settings);
 
-        //initialize seekBar
+        final TextView maxNumProgress = findViewById(R.id.num_limit);
         seekMaxNumber = findViewById(R.id.seek_max_num);
-        seekMaxQuestions = findViewById(R.id.seek_max_questions);
         addCheck = findViewById(R.id.checkBox_plus);
         subCheck = findViewById(R.id.checkBox_minus);
         multCheck = findViewById(R.id.checkbox_multiply);
         divCheck = findViewById(R.id.checkBox_divide);
 
-        final TextView maxNumProgress, maxQuestionProgress;
-
-        //initialize textView
-        maxNumProgress = findViewById(R.id.num_limit);
-        maxQuestionProgress = findViewById(R.id.q_limit);
-
-        //seekbar to choose max number
         seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @SuppressLint("SetTextI18n")
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b){
-                //i comes from seek bar and determines the max number
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (i > 0) {
-                    maxNumProgress.setText((i*5) + "");
+                    String progress = i * 5 + "";
+                    maxNumProgress.setText(progress);
                 } else {
                     maxNumProgress.setText("0");
                 }
             }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
 
-        //seekbar to choose question number
-        seekMaxQuestions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @SuppressLint("SetTextI18n")
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if (i > 0) {
-                    maxQuestionProgress.setText((i*5) + "");
-                } else {
-                    maxQuestionProgress.setText("0");
-                }
+            public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD_TEST, false);
-        subChosen = mPreferences.getBoolean(SUB_TEST, false);
-        multChosen = mPreferences.getBoolean(MULT_TEST, false);
-        divChosen = mPreferences.getBoolean(DIV_TEST, false);
+        addChosen = mPreferences.getBoolean(ADD_DEATH, false);
+        subChosen = mPreferences.getBoolean(SUB_DEATH, false);
+        multChosen = mPreferences.getBoolean(MULT_DEATH, false);
+        divChosen = mPreferences.getBoolean(DIV_DEATH, false);
 
         if (addChosen) {
             addCheck.setChecked(true);
@@ -97,11 +79,10 @@ public class TestModeSettings extends AppCompatActivity {
         if (divChosen) {
             divCheck.setChecked(true);
         }
-        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM, 0));
-        seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q, 0));
+
+        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_DEATH, 0));
     }
 
-    //check to see which checkbox was checked out of all the checkboxes
     public void onOperationChosen(View view) {
         boolean isChecked = ((CheckBox) view).isChecked();
 
@@ -128,14 +109,25 @@ public class TestModeSettings extends AppCompatActivity {
         }
     }
 
+    public void onSaveDefaults(View view) {
+        view.startAnimation(buttonClick);
+        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
+        preferenceEditor.putBoolean(ADD_DEATH, addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_DEATH, subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_DEATH, multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_DEATH, divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM_DEATH, seekMaxNumber.getProgress());
+        preferenceEditor.apply();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+    }
 
-    public void onTestLaunch(View view) {
+    public void onStartDeath(View view) {
+        view.startAnimation(buttonClick);
         int intNumLimit = seekMaxNumber.getProgress() * 5;
-        int intMaxQ = seekMaxQuestions.getProgress() * 5;
         String strChosenOperations = "";
         Toast setSetting = Toast.makeText(this, "Please set all values", Toast.LENGTH_SHORT);
 
-        if (intNumLimit == 0 || intMaxQ == 0) {
+        if (intNumLimit == 0) {
             setSetting.show();
         } else if (!addChosen && !subChosen && !multChosen && !divChosen) {
             setSetting.show();
@@ -195,25 +187,12 @@ public class TestModeSettings extends AppCompatActivity {
                 strChosenOperations = "asmd";
             }
 
-            Intent launchTest = new Intent(TestModeSettings.this, TestMode.class);
+            Intent launchDeath = new Intent(DeathModeSettings.this, DeathMode.class);
             //put chosen operator, max num and questions
-            launchTest.putExtra(OPERATIONS, strChosenOperations);
-            launchTest.putExtra(MAX_NUM, intNumLimit);
-            launchTest.putExtra(NUM_Q, intMaxQ);
+            launchDeath.putExtra(OPERATIONS_DEATH, strChosenOperations);
+            launchDeath.putExtra(MAX_NUM_DEATH, intNumLimit);
 
-            startActivity(launchTest);
+            startActivity(launchDeath);
         }
-    }
-
-    public void onSaveDefaults(View view) {
-        SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD_TEST, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB_TEST, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT_TEST, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV_TEST, divCheck.isChecked());
-        preferenceEditor.putInt(MAX_NUM, seekMaxNumber.getProgress());
-        preferenceEditor.putInt(NUM_Q, seekMaxQuestions.getProgress());
-        preferenceEditor.apply();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 }
