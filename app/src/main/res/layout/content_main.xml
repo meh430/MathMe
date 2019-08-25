@@ -11,10 +11,14 @@
     tools:showIn="@layout/activity_main">
 
     <androidx.cardview.widget.CardView
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:onClick="onTestModeClicked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="?android:attr/selectableItemBackground"
         app:cardCornerRadius="15dp"
         app:cardElevation="6dp">
 
@@ -29,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:alpha="0.69"
+                android:alpha="0.67"
                 android:contentDescription="@string/image_of_a_test"
                 android:src="@drawable/test" />
 
@@ -53,61 +57,9 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:onClick="onTimedModeClicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="6dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/timed_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:alpha="0.69"
-                android:contentDescription="@string/image_of_a_timer"
-                android:src="@drawable/time"
-                android:textColor="@color/textColor" />
-
-            <TextView
-                android:id="@+id/timed_mode"
-                style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/main_high_score"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="@font/google_regular"
-                android:padding="10dp"
-                android:text="@string/timed_mode"
-                android:textColor="@color/textColor"
-                android:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <TextView
-                android:id="@+id/main_high_score"
-                style="@style/TextAppearance.AppCompat.Subhead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/timed_image"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/google_regular"
-                android:padding="10dp"
-                android:text="@string/high_score_0"
-                android:textColor="@color/textColor"
-                android:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:onClick="onSuddenDeathClicked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:alpha="0.69"
+                android:alpha="0.67"
                 android:contentDescription="@string/image_of_a_timer"
                 android:src="@drawable/infinite"
                 android:textColor="@color/textColor" />
@@ -163,6 +115,67 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onTimedModeClicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/timed_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:alpha="0.67"
+                android:contentDescription="@string/image_of_a_timer"
+                android:src="@drawable/time"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:id="@+id/timed_mode"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/main_high_score"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/google_regular"
+                android:padding="10dp"
+                android:text="@string/timed_mode"
+                android:textColor="@color/textColor"
+                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <TextView
+                android:id="@+id/main_high_score"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/timed_image"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/google_regular"
+                android:padding="10dp"
+                android:text="@string/high_score_0"
+                android:textColor="@color/textColor"
+                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:onClick="onSpeedRun"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -179,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:alpha="0.69"
+                android:alpha="0.67"
                 android:contentDescription="@string/image_of_a_timer"
                 android:src="@drawable/ex"
                 android:textColor="@color/textColor" />

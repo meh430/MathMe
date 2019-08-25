@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mathme.R;
+import com.example.mathme.ends.SpeedEndActivity;
 import com.example.mathme.ends.TestEndActivity;
 import com.example.mathme.ends.TimedEndActivity;
 import com.example.mathme.other.MainActivity;
@@ -23,7 +24,7 @@ public class TestResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_results);
 
-        ArrayList<String> resultList;
+        ArrayList<String> resultList = new ArrayList<>();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,11 +35,13 @@ public class TestResults extends AppCompatActivity {
             }
         });
         Intent modeFin = getIntent();
-        boolean testResults = modeFin.getBooleanExtra(TEST_TIME, true);
-        if (testResults) {
+        String testResults = modeFin.getStringExtra(TEST_TIME);
+        if (testResults.equalsIgnoreCase("test")) {
             resultList = modeFin.getStringArrayListExtra(TestEndActivity.RESULT_LIST);
-        } else {
+        } else if (testResults.equalsIgnoreCase("time")) {
             resultList = modeFin.getStringArrayListExtra(TimedEndActivity.TIMED_RESULT_LIST);
+        } else if (testResults.equalsIgnoreCase("speed")) {
+            resultList = modeFin.getStringArrayListExtra(SpeedEndActivity.SPEED_RESULT_LIST);
         }
 
         //attach adapter to RecyclerView

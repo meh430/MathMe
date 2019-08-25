@@ -4,6 +4,7 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:showIn="@layout/activity_test_end"
     tools:context=".ends.TestEndActivity">
 
     <TextView
@@ -38,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test_result_percent"
+        android:id="@+id/speed_accuracy"
         android:layout_below="@+id/test_result_fraction"
         android:text="@string/test_percent" />
 

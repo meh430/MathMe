@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
     tools:showIn="@layout/activity_timed_end"
-    android:layout_height="match_parent">
+    tools:context=".ends.TimedEndActivity">
 
     <TextView
         android:id="@+id/time_score_header"
@@ -25,7 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/google_regular"
-        android:text="20"
+        android:text="@string/placeholder_score"
         android:textColor="@color/textColor"
         android:textSize="80sp" />
 
@@ -53,4 +55,31 @@
         android:text="@string/test_percent"
         android:textColor="@color/textColor"
         android:textSize="80sp" />
+
+    <Button
+        android:foreground="@drawable/ripple"
+        tools:ignore="UnusedAttribute"
+        android:id="@+id/result_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/country_roads"
+        android:background="@drawable/rounded_button2"
+        android:onClick="onViewResults"
+        android:text="@string/view_results"
+        android:visibility="invisible" />
+
+    <Button
+        android:foreground="@drawable/ripple"
+        tools:ignore="UnusedAttribute"
+        android:id="@+id/country_roads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="onTakeMeHome"
+        android:text="@string/take_me_home"
+        android:visibility="invisible" />
+
+
 </RelativeLayout>

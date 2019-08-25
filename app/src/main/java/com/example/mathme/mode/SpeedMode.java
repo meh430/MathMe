@@ -1,113 +1,134 @@
 package com.example.mathme.mode;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mathme.R;
-import com.example.mathme.ends.TimedEndActivity;
-import com.example.mathme.settings.TimeModeSettings;
+import com.example.mathme.ends.SpeedEndActivity;
+import com.example.mathme.settings.SpeedModeSettings;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimedMode extends AppCompatActivity {
-    private int intNumLimit, intQuestionsAnswered = 0, intActualAnswer = 0, intNum1, intNum2,
-            intTime, intScore = 0;
-    private StringBuilder sbAnswer = new StringBuilder();
+public class SpeedMode extends AppCompatActivity {
+    private int intMaxQuestions, intNumLimit, intNum1, intNum2, intStopWatch = 0, intCorrectAnswers, intQuestionNum = 1,
+            intActualAnswer;
     private ArrayList<String> questionList;
     private ArrayList<Integer> answerList;
     private ArrayList<Integer> userAnswerList;
-    private String strQuestion, strChosenOperations;
-    public static final String SCORE = "Score", Q_ANS = "QuestionsAns", Q_LIST = "QuestionList", A_LIST = "AnswerList",
-            UA_LIST = "UserAnswerList";
+    private String strQuestion, strChosenOperations, strCurrentQuestionNum;
 
-    private TextView scoreTv, questionTv, answerTv, timeTv;
+    public static final String Q_LIST = "QuestionList", A_LIST = "AnswerList",
+            UA_LIST = "UserAnswerList", BT = "BestTimes", CORRECT_ANSWERS = "CorrectAnswers";
+
+    private TextView questionNumTv, stopWatchTv, questionTv;
+    private EditText userAnswerEdit;
     private Timer timer;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timed_mode);
+        setContentView(R.layout.activity_speed_mode);
 
-        scoreTv = findViewById(R.id.current_score);
-        timeTv = findViewById(R.id.time_left);
-        questionTv = findViewById(R.id.question);
-        answerTv = findViewById(R.id.answer);
+        questionNumTv = findViewById(R.id.current_question_num);
+        stopWatchTv = findViewById(R.id.stop_watch);
+        questionTv = findViewById(R.id.question_window);
+        userAnswerEdit = findViewById(R.id.answer_edit_text);
 
         questionList = new ArrayList<>();
         answerList = new ArrayList<>();
         userAnswerList = new ArrayList<>();
 
-        Intent timeSettings = getIntent();
-        intNumLimit = timeSettings.getIntExtra(TimeModeSettings.MAX_NUM_TIME, 100);
-        intTime = timeSettings.getIntExtra(TimeModeSettings.TIME_TIME, 30);
-        strChosenOperations = timeSettings.getStringExtra(TimeModeSettings.OPERATIONS_TIME);
-        timer = new Timer();
-        final String strTime = "Time: ";
-        timeTv.setText(strTime + intTime);
+        Intent speedSettings = getIntent();
+        strChosenOperations = speedSettings.getStringExtra(SpeedModeSettings.OPERATIONS_SPEED);
+        intMaxQuestions = speedSettings.getIntExtra(SpeedModeSettings.NUM_Q_SPEED, 10);
+        intNumLimit = speedSettings.getIntExtra(SpeedModeSettings.MAX_NUM_SPEED, 10);
+
+        strCurrentQuestionNum = "Question Number " + intQuestionNum;
+        questionNumTv.setText(strCurrentQuestionNum);
 
         final int delay = 1000;
         final int period = 1000;
         timer = new Timer();
-        timeTv.setText("Time: " + intTime + "s");
+        stopWatchTv.setText("Time: " + intStopWatch + "s");
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        timeTv.setText("Time: " + setInterval() + "s");
+                        stopWatchTv.setText("Time: " + setInterval() + "s");
                     }
                 });
             }
         }, delay, period);
-        showQuestion();
-    }
-
-    private int setInterval() {
-        if (intTime == 1) {
-            timer.cancel();
-
-            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                assert v != null;
-                v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                //deprecated in API 26
-                assert v != null;
-                v.vibrate(1000);
-            }
-
-            Intent launchTimeEnd = new Intent(TimedMode.this, TimedEndActivity.class);
-            launchTimeEnd.putExtra(Q_ANS, intQuestionsAnswered)
-                    .putExtra(SCORE, intScore)
-                    .putExtra(A_LIST, answerList)
-                    .putExtra(UA_LIST, userAnswerList)
-                    .putExtra(Q_LIST, questionList);
-
-            startActivity(launchTimeEnd);
-            //call another method later
-        }
-        return --intTime;
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        if (timer != null) {
-            timer.cancel();
+
+        timer.cancel();
+    }
+
+    private int setInterval() {
+        return ++intStopWatch;
+    }
+
+    public void onYes(View view) {
+        stopWatchTv.setVisibility(View.VISIBLE);
+        questionNumTv.setVisibility(View.VISIBLE);
+        view.setVisibility(View.INVISIBLE);
+        Button next = findViewById(R.id.next_button);
+        next.setVisibility(View.VISIBLE);
+        userAnswerEdit.setVisibility(View.VISIBLE);
+        showQuestion();
+    }
+
+    public void onNext(View view) {
+        String temp = userAnswerEdit.getText().toString();
+        if (temp.equalsIgnoreCase("")) {
+            Toast.makeText(this, "No harm in guessing!", Toast.LENGTH_SHORT).show();
+        } else {
+            int intUserAnswer = Integer.parseInt(temp);
+            userAnswerList.add(intUserAnswer);
+            intQuestionNum++;
+
+            if (intQuestionNum > intMaxQuestions) {
+                //launch end
+                timer.cancel();
+                Intent launchSpeedEnd = new Intent(this, SpeedEndActivity.class);
+                launchSpeedEnd.putExtra(SpeedModeSettings.NUM_Q_SPEED, intMaxQuestions);
+                launchSpeedEnd.putExtra(CORRECT_ANSWERS, intCorrectAnswers);
+                launchSpeedEnd.putExtra(Q_LIST, questionList);
+                launchSpeedEnd.putExtra(A_LIST, answerList);
+                launchSpeedEnd.putExtra(UA_LIST, userAnswerList);
+                launchSpeedEnd.putExtra(BT, intStopWatch);
+
+                startActivity(launchSpeedEnd);
+            } else {
+                if (intUserAnswer == intActualAnswer) {
+                    intCorrectAnswers++;
+                    showQuestion();
+                } else {
+                    showQuestion();
+                }
+            }
         }
+
+        strCurrentQuestionNum = "Question Number " + intQuestionNum;
+        questionNumTv.setText(strCurrentQuestionNum);
+        userAnswerEdit.setText("");
     }
 
     private void showQuestion() {
@@ -276,91 +297,5 @@ public class TimedMode extends AppCompatActivity {
 
         questionList.add(strQuestion);
         answerList.add(intActualAnswer);
-    }
-
-    public void onNextTime(View view) {
-
-        if (sbAnswer == null || sbAnswer.toString().equalsIgnoreCase("")) {
-            sbAnswer = new StringBuilder("0");
-        }
-
-        if (intActualAnswer == Integer.parseInt(sbAnswer.toString())) {
-            intScore++;
-            intQuestionsAnswered++;
-        } else {
-            intQuestionsAnswered++;
-            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                assert v != null;
-                v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                //deprecated in API 26
-                assert v != null;
-                v.vibrate(100);
-            }
-        }
-        String strScore = "Score: " + intScore;
-        scoreTv.setText(strScore);
-
-        userAnswerList.add(Integer.parseInt(sbAnswer.toString()));
-
-        answerTv.setText("");
-        sbAnswer = new StringBuilder();
-        showQuestion();
-    }
-
-    public void onZero(View view) {
-        sbAnswer.append("0");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onClear(View view) {
-        sbAnswer = new StringBuilder();
-        answerTv.setText("");
-    }
-
-    public void onThree(View view) {
-        sbAnswer.append("3");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onTwo(View view) {
-        sbAnswer.append("2");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onOne(View view) {
-        sbAnswer.append("1");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onSix(View view) {
-        sbAnswer.append("6");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onFive(View view) {
-        sbAnswer.append("5");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onFour(View view) {
-        sbAnswer.append("4");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onNine(View view) {
-        sbAnswer.append("9");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onEight(View view) {
-        sbAnswer.append("8");
-        answerTv.setText(sbAnswer);
-    }
-
-    public void onSeven(View view) {
-        sbAnswer.append("7");
-        answerTv.setText(sbAnswer);
     }
 }

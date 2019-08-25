@@ -87,4 +87,7 @@
     <string name="loading">loading</string>
     <string name="wonderful_subs">Wonderful Subs</string>
     <string name="placeholder_score">20</string>
+    <string name="i_am_speed">I am Speed!</string>
+    <string name="time">Time:</string>
+    <string name="time_placeholder">30s</string>
 </resources>

@@ -122,6 +122,8 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:foreground="@drawable/ripple"
+            tools:ignore="UnusedAttribute"
             android:fontFamily="@font/google_regular"
             android:onClick="onSaveDefaults"
             android:textSize="18sp"
@@ -131,9 +133,11 @@
             android:layout_height="wrap_content"
             android:text="@string/save_defaults_label"
             android:layout_above="@id/take_test_button"
-            android:background="#FBC02D" />
+            android:background="@drawable/rounded_button4" />
 
         <Button
+            android:foreground="@drawable/ripple"
+            tools:ignore="UnusedAttribute"
             android:fontFamily="@font/google_regular"
             android:onClick="onStartDeath"
             android:textSize="18sp"
@@ -142,7 +146,7 @@
             android:layout_height="wrap_content"
             android:text="@string/start"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorAccent" />
+            android:background="@drawable/rounded_button" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -22,7 +21,6 @@ import java.util.HashMap;
 //do not change anything, pls, it works. I don't know why but it works. Pls don't mess it up
 @SuppressWarnings("ConstantConditions")
 public class TestMode extends AppCompatActivity {
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     private boolean savedAnswer = false, end = false;
     //stores inputted num limit, inputted question num, count of correct answers, keep track of current question
     private int intNumLimit, intMaxQuestion, intCurrentQuestion = 1, intUserAnswer = 0, intActualAnswer = 0, intNum1, intNum2;
@@ -55,7 +53,6 @@ public class TestMode extends AppCompatActivity {
     }
 
     public void onYes(View view) {
-        view.startAnimation(buttonClick);
         questionNumTv.setVisibility(View.VISIBLE);
         view.setVisibility(View.INVISIBLE);
         LinearLayout buttonBar = findViewById(R.id.test_buttons);
@@ -68,7 +65,6 @@ public class TestMode extends AppCompatActivity {
     }
 
     public void onSave(View view) {
-        view.startAnimation(buttonClick);
         savedAnswer = true;
         String temp = userAnswerEdit.getText().toString();
         if (temp.equalsIgnoreCase("")) {
@@ -81,7 +77,6 @@ public class TestMode extends AppCompatActivity {
     }
 
     public void onNext(View view) {
-        view.startAnimation(buttonClick);
         if (savedAnswer) {
             userAnswerEdit.setText("");
             if (firsTime) {
@@ -119,7 +114,6 @@ public class TestMode extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void onBack(View view) {
-        view.startAnimation(buttonClick);
         end = false;
         String strCurrentQ;
         if (intCurrentQuestion <= 1) {

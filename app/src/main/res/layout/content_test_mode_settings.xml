@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:showIn="@layout/activity_test_mode_settings"
     android:padding="16dp"
     tools:context=".settings.TestModeSettings">
 
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <CheckBox
             android:onClick="onOperationChosen"
             android:textSize="18sp"
@@ -52,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <CheckBox
             android:onClick="onOperationChosen"
             android:textSize="18sp"
@@ -81,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:textSize="18sp"
             android:textColor="@color/textColor"
@@ -119,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:textSize="18sp"
             android:textColor="@color/textColor"

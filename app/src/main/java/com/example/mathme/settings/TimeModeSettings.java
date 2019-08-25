@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,7 +18,6 @@ import com.example.mathme.mode.TimedMode;
 import com.example.mathme.other.MainActivity;
 
 public class TimeModeSettings extends AppCompatActivity {
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
     private SeekBar seekMaxNumber;
@@ -109,7 +107,6 @@ public class TimeModeSettings extends AppCompatActivity {
     }//close onCreate
 
     public void onSaveDefaults(View view) {
-        view.startAnimation(buttonClick);
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
         preferenceEditor.putBoolean(ADD_TIME, addCheck.isChecked());
         preferenceEditor.putBoolean(SUB_TIME, subCheck.isChecked());
@@ -148,7 +145,6 @@ public class TimeModeSettings extends AppCompatActivity {
     }
 
     public void onTestLaunch(View view) {
-        view.startAnimation(buttonClick);
         int timeSet = 30;
         int timeSelected = timeOptions.getCheckedRadioButtonId();
 

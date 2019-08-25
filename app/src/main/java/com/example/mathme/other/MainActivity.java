@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         String strHighScoreDeath = "HighScore: " + getHighScoreDeath();
         highScoreDeathTv.setText(strHighScoreDeath);
 
-        String strBestTime = "Best Time: " + getBestTime();
+        String strBestTime = "Best Time: " + getBestTime() + "s";
         bestTimeTv.setText(strBestTime);
 
     }

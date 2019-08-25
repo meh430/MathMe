@@ -83,27 +83,28 @@
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button2"
-                android:onClick="onSeven"
                 android:fontFamily="@font/google_regular"
-
+                android:foreground="@drawable/ripple"
+                android:onClick="onSeven"
                 android:text="@string/seven"
+
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onEight"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onEight"
                 android:text="@string/eight"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -111,13 +112,14 @@
 
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onNine"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onNine"
                 android:text="@string/nine"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
         </LinearLayout>
 
@@ -133,27 +135,29 @@
 
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onFour"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onFour"
                 android:text="@string/four"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="onFive"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-
                 android:background="@drawable/rounded_button2"
+
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onFive"
                 android:text="@string/five"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -161,13 +165,14 @@
 
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onSix"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onSix"
                 android:text="@string/six"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
         </LinearLayout>
 
@@ -183,39 +188,42 @@
 
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onOne"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onOne"
                 android:text="@string/one"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onTwo"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onTwo"
                 android:text="@string/two"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
-                android:onClick="onThree"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onThree"
                 android:text="@string/three"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
         </LinearLayout>
 
@@ -232,37 +240,40 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onClear"
                 android:text="@string/clear"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                android:onClick="onClear"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:onClick="onZero"
                 android:background="@drawable/rounded_button2"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onZero"
                 android:text="@string/zero"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
-                android:onClick="onNextTime"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
                 android:fontFamily="@font/google_regular"
+                android:foreground="@drawable/ripple"
+                android:onClick="onNextTime"
                 android:text="@string/next_button_label"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
         </LinearLayout>
     </LinearLayout>
 

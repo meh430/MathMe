@@ -1,15 +1,16 @@
 package com.example.mathme.other;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,8 +31,6 @@ public class SettingActivity extends AppCompatActivity {
     private static final int NOTIFICATION_ID = 0;
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 
-    //handle button click animations
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     //member variable to get stored preferences
     private SharedPreferences mPreferences;
     //switch objects
@@ -136,32 +135,49 @@ public class SettingActivity extends AppCompatActivity {
 
     //reset all preferences and variables
     public void onReset(View view) {
-        //cancel alarms
-        if (alarmManager != null) {
-            alarmManager.cancel(notifyPendingIntent);
-        }
 
-        //cancels any pending notifcations
-        if (mNotificationManager != null) {
-            mNotificationManager.cancelAll();
-        }
+        AlertDialog.Builder confDialog = new AlertDialog.Builder(this);
+        confDialog.setTitle("Are You Sure?");
+        confDialog.setMessage("This will delete everything! EVERYTHING! Well, actually just info in this app.");
+        confDialog.setPositiveButton("I Know", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //cancel alarms
+                if (alarmManager != null) {
+                    alarmManager.cancel(notifyPendingIntent);
+                }
 
-        view.startAnimation(buttonClick);
-        darkSwitch.setChecked(false);
-        notifSwitch.setChecked(false);
-        notificationStatus.setText("");
-        strNotifTime = "";
-        notificationSet = false;
-        isDark = false;
-        MainActivity.firstDark = false;
-        MainActivity.setHighScoreTime(0);
-        MainActivity.setHighScoreDeath(0);
-        MainActivity.setBestTime(0);
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.clear();
-        preferencesEditor.apply();
+                //cancels any pending notifications
+                if (mNotificationManager != null) {
+                    mNotificationManager.cancelAll();
+                }
 
-        Toast.makeText(this, "Reset preferences", Toast.LENGTH_SHORT).show();
+                darkSwitch.setChecked(false);
+                notifSwitch.setChecked(false);
+                notificationStatus.setText("");
+                strNotifTime = "";
+                notificationSet = false;
+                isDark = false;
+                MainActivity.firstDark = false;
+                MainActivity.setHighScoreTime(0);
+                MainActivity.setHighScoreDeath(0);
+                MainActivity.setBestTime(0);
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                preferencesEditor.clear();
+                preferencesEditor.apply();
+
+                Toast.makeText(SettingActivity.this, "Reset preferences", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        confDialog.setNegativeButton("NVM", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(SettingActivity.this, "Phew, dodged a bullet there", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        confDialog.show();
     }
 
     //save all of the preferences

@@ -1,54 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
     tools:context=".web.Relax">
 
-    <Button
-        android:text="@string/anime_twist"
-        android:id="@+id/anime_twist"
-        android:onClick="animeTwist"
-        android:textSize="30sp"
-        android:background="@drawable/rounded_button"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/google_regular"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:text="@string/anime_vibe"
-        android:id="@+id/anime_vibe"
-        android:onClick="animeVibe"
-        android:textSize="30sp"
-        android:background="@drawable/rounded_button"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/google_regular"
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        <include layout="@layout/content_relax" />
+    </ScrollView>
 
-    <Button
-        android:text="@string/anime_flix"
-        android:onClick="animeFlix"
-        android:id="@+id/anime_af"
-        android:textSize="30sp"
-        android:background="@drawable/rounded_button"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/google_regular"
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
-
-    <Button
-        android:text="@string/wonderful_subs"
-        android:onClick="animeWs"
-        android:id="@+id/anime_ws"
-        android:textSize="30sp"
-        android:background="@drawable/rounded_button"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/google_regular"
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

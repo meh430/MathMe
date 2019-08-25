@@ -4,7 +4,9 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:showIn="@layout/activity_test_mode"
     tools:context=".mode.TestMode">
+
     <TextView
         android:visibility="invisible"
         android:layout_margin="12dp"
@@ -41,7 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:layout_below="@id/question_window"
-        android:text="@string/start_button_label"/>
+        android:text="@string/start_button_label" />
 
     <EditText
         android:id="@+id/answer_edit_text"
@@ -63,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:foreground="@drawable/ripple"
             tools:ignore="ButtonStyle,UnusedAttribute"
@@ -75,6 +78,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Button
             android:foreground="@drawable/ripple"
             tools:ignore="ButtonStyle,UnusedAttribute"

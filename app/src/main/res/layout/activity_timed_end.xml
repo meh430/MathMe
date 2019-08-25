@@ -56,6 +56,8 @@
         android:textSize="80sp" />
 
     <Button
+        android:foreground="@drawable/ripple"
+        tools:ignore="UnusedAttribute"
         android:id="@+id/result_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,6 +68,8 @@
         android:visibility="invisible" />
 
     <Button
+        android:foreground="@drawable/ripple"
+        tools:ignore="UnusedAttribute"
         android:id="@+id/country_roads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import com.example.mathme.mode.TestMode;
 import com.example.mathme.other.MainActivity;
 
 public class TestModeSettings extends AppCompatActivity {
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
     private SeekBar seekMaxNumber, seekMaxQuestions;
@@ -136,7 +134,6 @@ public class TestModeSettings extends AppCompatActivity {
 
 
     public void onTestLaunch(View view) {
-        view.startAnimation(buttonClick);
         int intNumLimit = seekMaxNumber.getProgress() * 5;
         int intMaxQ = seekMaxQuestions.getProgress() * 5;
         String strChosenOperations = "";
@@ -213,7 +210,6 @@ public class TestModeSettings extends AppCompatActivity {
     }
 
     public void onSaveDefaults(View view) {
-        view.startAnimation(buttonClick);
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
         preferenceEditor.putBoolean(ADD_TEST, addCheck.isChecked());
         preferenceEditor.putBoolean(SUB_TEST, subCheck.isChecked());

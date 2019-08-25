@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ public class DeathMode extends AppCompatActivity {
     public static final String SCORE = "Score";
     private TextView scoreTv, questionTv;
     private EditText userAnswerEditText;
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
 
 
     @Override
@@ -49,7 +47,6 @@ public class DeathMode extends AppCompatActivity {
     }
 
     public void onYes(View view) {
-        view.startAnimation(buttonClick);
         scoreTv.setVisibility(View.VISIBLE);
         view.setVisibility(View.INVISIBLE);
         Button next = findViewById(R.id.next_button);
@@ -59,7 +56,6 @@ public class DeathMode extends AppCompatActivity {
     }
 
     public void onNext(View view) {
-        view.startAnimation(buttonClick);
         String temp = userAnswerEditText.getText().toString();
         if (temp.equalsIgnoreCase("")) {
             Toast.makeText(this, "No harm in guessing!", Toast.LENGTH_SHORT).show();

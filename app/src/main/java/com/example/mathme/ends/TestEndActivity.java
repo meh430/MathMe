@@ -3,7 +3,6 @@ package com.example.mathme.ends;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,7 +19,6 @@ import java.util.HashMap;
 
 @SuppressWarnings({"ConstantConditions", "unchecked"})
 public class TestEndActivity extends AppCompatActivity {
-    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.4F);
     //map to hold all the questions
     private HashMap <Integer, String> questionMap;
     //map to hold all the answers, and the user answers
@@ -87,17 +85,15 @@ public class TestEndActivity extends AppCompatActivity {
 
     //go back to mainActivity
     public void onTakeMeHome(View view) {
-        view.startAnimation(buttonClick);
         Intent takeMeHome = new Intent(this, MainActivity.class);
         startActivity(takeMeHome);
     }
 
     //go to the testResultsActivity
     public void onViewResults(View view) {
-        view.startAnimation(buttonClick);
         Intent testResults = new Intent(this, TestResults.class);
         testResults.putExtra(RESULT_LIST, resultInfoList);
-        testResults.putExtra(TestResults.TEST_TIME, true);
+        testResults.putExtra(TestResults.TEST_TIME, "test");
         startActivity(testResults);
     }
 }

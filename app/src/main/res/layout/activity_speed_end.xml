@@ -4,42 +4,56 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ends.TestEndActivity">
+    tools:context=".ends.SpeedEndActivity">
 
     <TextView
         android:layout_centerHorizontal="true"
-        android:id="@+id/test_result_header"
+        android:id="@+id/speed_result_header"
         android:textSize="24sp"
         android:textColor="@color/textColor"
         android:fontFamily="@font/google_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test_result_header_label"
+        android:text="@string/time"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:layout_margin="8dp" />
 
     <TextView
         android:textSize="80sp"
         android:textColor="@color/textColor"
-        android:layout_below="@+id/test_result_header"
+        android:layout_below="@+id/speed_result_header"
         android:fontFamily="@font/google_regular"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test_result_fraction"
-        android:text="@string/fraction_score" />
+        android:id="@+id/speed_result_time"
+        android:text="@string/time_placeholder" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/speed_result_time"
+        android:id="@+id/speed_accuracy_header"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/google_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accuracy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_margin="24dp" />
+
 
     <TextView
         android:textSize="80sp"
         android:textColor="@color/textColor"
         android:fontFamily="@font/google_regular"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test_result_percent"
-        android:layout_below="@+id/test_result_fraction"
+        android:id="@+id/speed_accuracy"
+        android:layout_below="@+id/speed_accuracy_header"
         android:text="@string/test_percent" />
 
     <Button
