@@ -35,9 +35,17 @@ public class Relax extends AppCompatActivity {
         startActivity(flix);
     }
 
+    //does not work on ishitas stupid phone
     public void animeWs(View view) {
         Intent ws = new Intent(this, Anime.class);
         ws.putExtra(SELECTION, "https://www.wonderfulsubs.com/");
         startActivity(ws);
+    }
+
+
+    public void animeUltima(View view) {
+        Intent au = new Intent(this, Anime.class);
+        au.putExtra(SELECTION, "https://www12.animeultima.eu");
+        startActivity(au);
     }
 }

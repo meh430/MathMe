@@ -6,7 +6,6 @@
     android:orientation="vertical"
     tools:context=".web.Anime">
 
-
     <WebView
         android:fontFamily="@font/google_regular"
         android:id="@+id/anime_view"

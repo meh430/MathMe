@@ -16,8 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ends.SpeedEndActivity"></activity>
-        <activity android:name=".mode.SpeedMode" />
+        <activity
+            android:name=".ends.SpeedEndActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Infinite Mode Results"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".mode.SpeedMode"
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".settings.SpeedModeSettings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".web.Relax"
             android:configChanges="keyboardHidden|orientation"
@@ -27,7 +37,7 @@
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".web.Anime"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
             android:label="Anime"
             android:parentActivityName=".web.Relax"
             android:theme="@style/AppTheme.ActionBar" />

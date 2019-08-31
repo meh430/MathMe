@@ -80,7 +80,7 @@ public class SpeedEndActivity extends AppCompatActivity {
         accuracyTv.setText(resultPercent);
 
         String endMessage;
-        if (intTimeResult < MainActivity.getBestTime()) {
+        if (intTimeResult < MainActivity.getBestTime() || MainActivity.getBestTime() == 0) {
             endMessage = "New Best Time!";
             timeResultHeadTv.setText(endMessage);
             MainActivity.setBestTime(intTimeResult);

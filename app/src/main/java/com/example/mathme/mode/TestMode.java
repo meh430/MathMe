@@ -77,7 +77,7 @@ public class TestMode extends AppCompatActivity {
     }
 
     public void onNext(View view) {
-        if (savedAnswer) {
+        if (savedAnswer && userAnswerMap.get(intCurrentQuestion) != null) {
             userAnswerEdit.setText("");
             if (firsTime) {
                 firsTime = false;

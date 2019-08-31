@@ -62,5 +62,18 @@
         android:layout_height="100dp"
         tools:ignore="UnusedAttribute" />
 
+    <Button
+        android:foreground="@drawable/ripple"
+        android:text="@string/anime_ultima"
+        android:onClick="animeUltima"
+        android:id="@+id/anime_au"
+        android:textSize="30sp"
+        android:background="@drawable/rounded_button"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/google_regular"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        tools:ignore="UnusedAttribute" />
+
 
 </LinearLayout>
