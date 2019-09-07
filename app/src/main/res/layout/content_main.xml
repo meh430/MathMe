@@ -39,7 +39,21 @@
 
             <TextView
                 android:id="@+id/test_mode"
+                android:layout_above="@id/test_mark"
                 style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/google_regular"
+                android:padding="10dp"
+                android:text="@string/test_mode"
+                android:textColor="@color/textColor"
+                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <TextView
+                android:id="@+id/test_mark"
+                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/test_image"
@@ -48,7 +62,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/google_regular"
                 android:padding="10dp"
-                android:text="@string/test_mode"
+                android:text="@string/last_mark"
                 android:textColor="@color/textColor"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />
 

@@ -1,6 +1,7 @@
 package com.example.mathme.ends;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.example.mathme.R;
 import com.example.mathme.mode.TestMode;
 import com.example.mathme.other.MainActivity;
 import com.example.mathme.result.TestResults;
+import com.example.mathme.settings.TestModeSettings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class TestEndActivity extends AppCompatActivity {
     private final ArrayList<String> resultInfoList = new ArrayList<>();
     private TextView fractionResultTv, percentResultTv;
     public static final String RESULT_LIST = "resultInfoList";
+    SharedPreferences mSharedPref;
 
 
     @Override
@@ -40,12 +43,14 @@ public class TestEndActivity extends AppCompatActivity {
         fractionResultTv = findViewById(R.id.test_result_fraction);
         percentResultTv = findViewById(R.id.test_result_percent);
 
+        mSharedPref = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
+
         //get all extras from intent sent by the testModeActivity
         Intent testMode = getIntent();
         questionMap = (HashMap<Integer, String>) testMode.getSerializableExtra(TestMode.Q_MAP);
         answerMap = (HashMap<Integer, Integer>) testMode.getSerializableExtra(TestMode.A_MAP);
         userAnswerMap = (HashMap<Integer, Integer>) testMode.getSerializableExtra(TestMode.UA_MAP);
-        intNumOfQ = testMode.getIntExtra(TestMode.MAXQ, 0);
+        intNumOfQ = testMode.getIntExtra(TestModeSettings.NUM_Q, 0);
 
         checkAnswers();
     }
@@ -69,6 +74,10 @@ public class TestEndActivity extends AppCompatActivity {
         String resultFraction = intNumCorrect + " / " + intNumOfQ;
         double dblPercent = (double) intNumCorrect / intNumOfQ;
         String resultPercent = (dblPercent*100) + "%";
+
+        SharedPreferences.Editor preferencesEditor = mSharedPref.edit();
+        preferencesEditor.putString(MainActivity.LAST_MARK, resultPercent);
+        preferencesEditor.apply();
 
         Button viewResButt = findViewById(R.id.result_button);
 

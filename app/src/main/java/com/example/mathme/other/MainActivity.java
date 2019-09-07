@@ -25,12 +25,14 @@ import com.example.mathme.web.Relax;
 public class MainActivity extends AppCompatActivity {
     public static final String SharedPrefFile = "com.example.mathme";
     //constant values for sharedPref keys
-    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour", MINUTE = "minute", HIGH_TIME = "highScoreTime", HIGH_DEATH = "highScoreDeath", BEST_TIME = "bestTime";
+    public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour",
+            MINUTE = "minute", HIGH_TIME = "highScoreTime",
+            HIGH_DEATH = "highScoreDeath", BEST_TIME = "bestTime", LAST_MARK = "lastMark";
     private static int highScoreTime, highScoreDeath, bestTime;
     //force dark mode if set by user on first session
     public static boolean firstDark = false;
     //textview to store display the higscore
-    TextView highScoreTimeTv, highScoreDeathTv, bestTimeTv;
+    TextView highScoreTimeTv, highScoreDeathTv, bestTimeTv, lastMarkTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         highScoreTimeTv = findViewById(R.id.main_high_score);
         highScoreDeathTv = findViewById(R.id.death_high_score);
         bestTimeTv = findViewById(R.id.speed_time);
+        lastMarkTv = findViewById(R.id.test_mark);
 
         //get any variables from previous sessions
         SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
@@ -69,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         String strBestTime = "Best Time: " + getBestTime() + "s";
         bestTimeTv.setText(strBestTime);
 
+        String strLastMark = "Last Mark: " + mPreferences.getString(LAST_MARK, "0%");
+        lastMarkTv.setText(strLastMark);
     }
 
     @Override
@@ -152,22 +157,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(launchSpeed);
     }
 
-    //setter for private variable highScoreTime
     public static void setHighScoreTime(int hs) {
         highScoreTime = hs;
     }
 
-    //getter for private variable highScoreTime
     public static int getHighScoreTime() {
         return highScoreTime;
     }
 
-    //setter for private variable highScoreDeath
     public static void setHighScoreDeath(int hs) {
         highScoreDeath = hs;
     }
 
-    //setter for private variable highScoreDeath
     public static int getHighScoreDeath() {
         return highScoreDeath;
     }
