@@ -27,6 +27,14 @@
         <item name="android:icon">@drawable/ic_help_night</item>
     </style>
 
+    <style name="RefreshIcon">
+        <item name="android:icon">@drawable/ic_refresh_night</item>
+    </style>
+
+    <style name="HomeIcon">
+        <item name="android:icon">@drawable/ic_home_night</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />

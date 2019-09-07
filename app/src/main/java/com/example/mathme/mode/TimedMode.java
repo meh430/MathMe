@@ -103,8 +103,8 @@ public class TimedMode extends AppCompatActivity {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
         if (timer != null) {
             timer.cancel();
         }

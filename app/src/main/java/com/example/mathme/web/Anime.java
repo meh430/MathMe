@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
@@ -14,10 +16,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.mathme.R;
 
+//use View.GONE for hiding toolbar
 @SuppressWarnings("ALL")
 public class Anime extends AppCompatActivity {
     private WebView mAnimeBrowser;
@@ -25,6 +30,7 @@ public class Anime extends AppCompatActivity {
     private WebChromeClient.CustomViewCallback customViewCallback;
     private View mCustomView;
     private myWebChromeClient mWebChromeClient;
+    private String url;
 
     /**
      * Called when the activity is first created.
@@ -35,9 +41,14 @@ public class Anime extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anime);
 
+        Toolbar toolbar = findViewById(R.id.web_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Intent selection = getIntent();
 
-        String url = selection.getStringExtra(Relax.SELECTION);
+        url = selection.getStringExtra(Relax.SELECTION);
         customViewContainer = findViewById(R.id.customViewContainer);
         mAnimeBrowser = findViewById(R.id.anime_view);
 
@@ -64,6 +75,32 @@ public class Anime extends AppCompatActivity {
         });*/
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.anime_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml-v25.
+        int id = item.getItemId();
+
+        switch (id) {
+            //launch settings
+            case R.id.action_home_page:
+                mAnimeBrowser.loadUrl(url);
+                return true;
+            case R.id.action_refresh:
+                mAnimeBrowser.loadUrl("javascript:window.location.reload( true )");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public boolean inCustomView() {
         return (mCustomView != null);
     }
@@ -78,20 +115,8 @@ public class Anime extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
-        mAnimeBrowser.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();    //To change body of overridden methods use File | Settings | File Templates.
-        mAnimeBrowser.onResume();
-    }
-
-    @Override
     protected void onStop() {
-        super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
+        super.onStop();
         if (inCustomView()) {
             hideCustomView();
         }
@@ -125,7 +150,7 @@ public class Anime extends AppCompatActivity {
 
         @Override
         public void onShowCustomView(View view, int requestedOrientation, CustomViewCallback callback) {
-            onShowCustomView(view, callback);    //To change body of overridden methods use File | Settings | File Templates.
+            onShowCustomView(view, callback);
         }
 
         @Override
@@ -157,7 +182,7 @@ public class Anime extends AppCompatActivity {
 
         @Override
         public void onHideCustomView() {
-            super.onHideCustomView();    //To change body of overridden methods use File | Settings | File Templates.
+            super.onHideCustomView();
             if (mCustomView == null)
                 return;
 
@@ -180,7 +205,7 @@ public class Anime extends AppCompatActivity {
     class myWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return super.shouldOverrideUrlLoading(view, url);    //To change body of overridden methods use File | Settings | File Templates.
+            return super.shouldOverrideUrlLoading(view, url);
         }
     }
 
