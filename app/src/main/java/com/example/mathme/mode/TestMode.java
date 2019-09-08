@@ -150,6 +150,7 @@ public class TestMode extends AppCompatActivity {
 
             startActivity(launchTestEnd);
             testUtility.mUserAnswerEdit.setVisibility(View.INVISIBLE);
+            finish();
         }
     }//close driver met
 }//close class

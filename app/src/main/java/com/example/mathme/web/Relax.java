@@ -48,4 +48,11 @@ public class Relax extends AppCompatActivity {
         au.putExtra(SELECTION, "https://www12.animeultima.eu");
         startActivity(au);
     }
+
+
+    public void animeFate(View view) {
+        Intent fa = new Intent(this, Anime.class);
+        fa.putExtra(SELECTION, "https://typemoon.fandom.com/wiki/TYPE-MOON_Wiki");
+        startActivity(fa);
+    }
 }

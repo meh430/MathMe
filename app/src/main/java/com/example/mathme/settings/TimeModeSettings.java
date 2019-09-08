@@ -18,41 +18,35 @@ import com.example.mathme.mode.TimedMode;
 import com.example.mathme.other.MainActivity;
 
 public class TimeModeSettings extends AppCompatActivity {
-    private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
-    private SeekBar seekMaxNumber;
     RadioGroup timeOptions;
-    private boolean addChosen, subChosen, multChosen, divChosen;
     private static final String ADD_TIME = "addTime", SUB_TIME = "subTime", MULT_TIME = "multTime", DIV_TIME = "divTime";
     public static final String MAX_NUM_TIME = "maxNumTime", OPERATIONS_TIME = "operationsTime", TIME_TIME = "TimeTime";
-
+    private SettingsUtility timeSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_mode_settings);
-        final TextView maxNumProgress;
 
-        maxNumProgress = findViewById(R.id.num_limit);
-        seekMaxNumber = findViewById(R.id.seek_max_num);
-        addCheck = findViewById(R.id.checkBox_plus);
-        subCheck = findViewById(R.id.checkBox_minus);
-        multCheck = findViewById(R.id.checkbox_multiply);
-        divCheck = findViewById(R.id.checkBox_divide);
         timeOptions = findViewById(R.id.timeOptions);
         RadioButton thirty = findViewById(R.id.thirty);
         RadioButton sixty = findViewById(R.id.sixty);
         RadioButton ninety = findViewById(R.id.ninety);
         RadioButton one_twenty = findViewById(R.id.one_twenty);
 
-        seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        timeSetting = new SettingsUtility((CheckBox) findViewById(R.id.checkBox_plus), (CheckBox) findViewById(R.id.checkBox_minus),
+                (CheckBox) findViewById(R.id.checkbox_multiply), (CheckBox) findViewById(R.id.checkBox_divide),
+                (SeekBar) findViewById(R.id.seek_max_num), (TextView) findViewById(R.id.num_limit));
+
+        timeSetting.seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (i > 0) {
                     String progress = i * 5 + "";
-                    maxNumProgress.setText(progress);
+                    timeSetting.maxNumProgress.setText(progress);
                 } else {
-                    maxNumProgress.setText("0");
+                    timeSetting.maxNumProgress.setText("0");
                 }
             }
 
@@ -66,10 +60,10 @@ public class TimeModeSettings extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD_TIME, false);
-        subChosen = mPreferences.getBoolean(SUB_TIME, false);
-        multChosen = mPreferences.getBoolean(MULT_TIME, false);
-        divChosen = mPreferences.getBoolean(DIV_TIME, false);
+        timeSetting.addChosen = mPreferences.getBoolean(ADD_TIME, false);
+        timeSetting.subChosen = mPreferences.getBoolean(SUB_TIME, false);
+        timeSetting.multChosen = mPreferences.getBoolean(MULT_TIME, false);
+        timeSetting.divChosen = mPreferences.getBoolean(DIV_TIME, false);
         int timeSelected = mPreferences.getInt(TIME_TIME, R.id.thirty);
 
         switch (timeSelected) {
@@ -86,33 +80,33 @@ public class TimeModeSettings extends AppCompatActivity {
                 one_twenty.setChecked(true);
         }
 
-        if (addChosen) {
-            addCheck.setChecked(true);
+        if (timeSetting.addChosen) {
+            timeSetting.addCheck.setChecked(true);
         }
 
-        if (subChosen) {
-            subCheck.setChecked(true);
+        if (timeSetting.subChosen) {
+            timeSetting.subCheck.setChecked(true);
         }
 
-        if (multChosen) {
-            multCheck.setChecked(true);
+        if (timeSetting.multChosen) {
+            timeSetting.multCheck.setChecked(true);
         }
 
-        if (divChosen) {
-            divCheck.setChecked(true);
+        if (timeSetting.divChosen) {
+            timeSetting.divCheck.setChecked(true);
         }
 
-        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_TIME, 0));
+        timeSetting.seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_TIME, 0));
 
     }//close onCreate
 
     public void onSaveDefaults(View view) {
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD_TIME, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB_TIME, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT_TIME, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV_TIME, divCheck.isChecked());
-        preferenceEditor.putInt(MAX_NUM_TIME, seekMaxNumber.getProgress());
+        preferenceEditor.putBoolean(ADD_TIME, timeSetting.addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_TIME, timeSetting.subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_TIME, timeSetting.multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_TIME, timeSetting.divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM_TIME, timeSetting.seekMaxNumber.getProgress());
         preferenceEditor.putInt(TIME_TIME, timeOptions.getCheckedRadioButtonId());
         preferenceEditor.apply();
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
@@ -123,24 +117,24 @@ public class TimeModeSettings extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.checkBox_plus:
-                addChosen = isChecked;
+                timeSetting.addChosen = isChecked;
                 break;
             case R.id.checkBox_minus:
-                subChosen = isChecked;
+                timeSetting.subChosen = isChecked;
                 break;
             case R.id.checkBox_divide:
-                divChosen = isChecked;
+                timeSetting.divChosen = isChecked;
                 break;
 
             case R.id.checkbox_multiply:
-                multChosen = isChecked;
+                timeSetting.multChosen = isChecked;
                 break;
 
             default:
-                addChosen = false;
-                subChosen = false;
-                multChosen = false;
-                divChosen = false;
+                timeSetting.addChosen = false;
+                timeSetting.subChosen = false;
+                timeSetting.multChosen = false;
+                timeSetting.divChosen = false;
         }
     }
 
@@ -162,73 +156,20 @@ public class TimeModeSettings extends AppCompatActivity {
                 timeSet = 120;
         }
 
-        int intNumLimit = seekMaxNumber.getProgress() * 5;
-        String strChosenOperations = "";
+        int intNumLimit = timeSetting.seekMaxNumber.getProgress() * 5;
         Toast setSetting = Toast.makeText(this, "Please set all values", Toast.LENGTH_SHORT);
 
         if (intNumLimit == 0) {
             setSetting.show();
-        } else if (!addChosen && !subChosen && !multChosen && !divChosen) {
+        } else if (!timeSetting.addChosen && !timeSetting.subChosen && !timeSetting.multChosen && !timeSetting.divChosen) {
             setSetting.show();
         } else {
-            //Addition: a, Subtraction: s, Multiplication: m, Division: d
-            //one checked
-            if (addChosen) {
-                strChosenOperations = "a";
-            }
-            if (subChosen) {
-                strChosenOperations = "s";
-            }
-            if (multChosen) {
-                strChosenOperations = "m";
-            }
-            if (divChosen) {
-                strChosenOperations = "d";
-            }
-            //two checked
-            if (addChosen && subChosen) {
-                strChosenOperations = "as";
-            }
-            if (addChosen && multChosen) {
-                strChosenOperations = "am";
-            }
-            if (addChosen && divChosen) {
-                strChosenOperations = "ad";
-            }
-            if (subChosen && multChosen) {
-                strChosenOperations = "sm";
-            }
-            if (subChosen && divChosen) {
-                strChosenOperations = "sd";
-            }
-            if (multChosen && divChosen) {
-                strChosenOperations = "md";
-            }
-            //three checked
-            if (addChosen && subChosen && multChosen) {
-                //div left out
-                strChosenOperations = "asm";
-            }
-            if (addChosen && multChosen && divChosen) {
-                //sub left out
-                strChosenOperations = "amd";
-            }
-            if (addChosen && subChosen && divChosen) {
-                //mult left out
-                strChosenOperations = "asd";
-            }
-            if (subChosen && multChosen && divChosen) {
-                //add left out
-                strChosenOperations = "smd;";
-            }
-            //four checked
-            if (addChosen && subChosen && multChosen && divChosen) {
-                strChosenOperations = "asmd";
-            }
+
+            timeSetting.setOperations();
 
             Intent launchTime = new Intent(TimeModeSettings.this, TimedMode.class);
             //put chosen operator, max num and questions
-            launchTime.putExtra(OPERATIONS_TIME, strChosenOperations);
+            launchTime.putExtra(OPERATIONS_TIME, timeSetting.strChosenOperations);
             launchTime.putExtra(MAX_NUM_TIME, intNumLimit);
             launchTime.putExtra(TIME_TIME, timeSet);
 

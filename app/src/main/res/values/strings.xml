@@ -92,4 +92,5 @@
     <string name="time_placeholder">30s</string>
     <string name="anime_ultima">Anime Ultima</string>
     <string name="last_mark">Last Mark: 0%</string>
+    <string name="fate">Fate</string>
 </resources>

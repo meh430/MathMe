@@ -17,42 +17,31 @@ import com.example.mathme.mode.SpeedMode;
 import com.example.mathme.other.MainActivity;
 
 public class SpeedModeSettings extends AppCompatActivity {
-    private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
-    private SeekBar seekMaxNumber, seekMaxQuestions;
-    private boolean addChosen, subChosen, multChosen, divChosen;
     private static final String ADD_SPEED = "addSpeed", SUB_SPEED = "subSpeed", MULT_SPEED = "multSpeed", DIV_SPEED = "divSpeed";
-    //key values
     public static final String MAX_NUM_SPEED = "maxNumSpeed", NUM_Q_SPEED = "numQSpeed", OPERATIONS_SPEED = "operationsSpeed";
+    private SettingsUtility speedSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speed_mode_settings);
 
-        seekMaxNumber = findViewById(R.id.seek_max_num);
-        seekMaxQuestions = findViewById(R.id.seek_max_questions);
-        addCheck = findViewById(R.id.checkBox_plus);
-        subCheck = findViewById(R.id.checkBox_minus);
-        multCheck = findViewById(R.id.checkbox_multiply);
-        divCheck = findViewById(R.id.checkBox_divide);
-
-        final TextView maxNumProgress, maxQuestionProgress;
-
-        //initialize textView
-        maxNumProgress = findViewById(R.id.num_limit);
-        maxQuestionProgress = findViewById(R.id.q_limit);
+        speedSettings = new SettingsUtility((CheckBox) findViewById(R.id.checkBox_plus), (CheckBox) findViewById(R.id.checkBox_minus),
+                (CheckBox) findViewById(R.id.checkbox_multiply), (CheckBox) findViewById(R.id.checkBox_divide),
+                (SeekBar) findViewById(R.id.seek_max_num), (SeekBar) findViewById(R.id.seek_max_questions),
+                (TextView) findViewById(R.id.num_limit), (TextView) findViewById(R.id.q_limit));
 
         //seekbar to choose max number
-        seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        speedSettings.seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 //i comes from seek bar and determines the max number
                 if (i > 0) {
-                    maxNumProgress.setText((i * 5) + "");
+                    speedSettings.maxNumProgress.setText((i * 5) + "");
                 } else {
-                    maxNumProgress.setText("0");
+                    speedSettings.maxNumProgress.setText("0");
                 }
             }
 
@@ -66,14 +55,14 @@ public class SpeedModeSettings extends AppCompatActivity {
         });
 
         //seekbar to choose question number
-        seekMaxQuestions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        speedSettings.seekMaxQuestions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (i > 0) {
-                    maxQuestionProgress.setText((i * 5) + "");
+                    speedSettings.maxQuestionProgress.setText((i * 5) + "");
                 } else {
-                    maxQuestionProgress.setText("0");
+                    speedSettings.maxQuestionProgress.setText("0");
                 }
             }
 
@@ -87,28 +76,28 @@ public class SpeedModeSettings extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD_SPEED, false);
-        subChosen = mPreferences.getBoolean(SUB_SPEED, false);
-        multChosen = mPreferences.getBoolean(MULT_SPEED, false);
-        divChosen = mPreferences.getBoolean(DIV_SPEED, false);
+        speedSettings.addChosen = mPreferences.getBoolean(ADD_SPEED, false);
+        speedSettings.subChosen = mPreferences.getBoolean(SUB_SPEED, false);
+        speedSettings.multChosen = mPreferences.getBoolean(MULT_SPEED, false);
+        speedSettings.divChosen = mPreferences.getBoolean(DIV_SPEED, false);
 
-        if (addChosen) {
-            addCheck.setChecked(true);
+        if (speedSettings.addChosen) {
+            speedSettings.addCheck.setChecked(true);
         }
 
-        if (subChosen) {
-            subCheck.setChecked(true);
+        if (speedSettings.subChosen) {
+            speedSettings.subCheck.setChecked(true);
         }
 
-        if (multChosen) {
-            multCheck.setChecked(true);
+        if (speedSettings.multChosen) {
+            speedSettings.multCheck.setChecked(true);
         }
 
-        if (divChosen) {
-            divCheck.setChecked(true);
+        if (speedSettings.divChosen) {
+            speedSettings.divCheck.setChecked(true);
         }
-        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_SPEED, 0));
-        seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q_SPEED, 0));
+        speedSettings.seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM_SPEED, 0));
+        speedSettings.seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q_SPEED, 0));
     }
 
     public void onOperationChosen(View view) {
@@ -116,108 +105,55 @@ public class SpeedModeSettings extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.checkBox_plus:
-                addChosen = isChecked;
+                speedSettings.addChosen = isChecked;
                 break;
             case R.id.checkBox_minus:
-                subChosen = isChecked;
+                speedSettings.subChosen = isChecked;
                 break;
             case R.id.checkBox_divide:
-                divChosen = isChecked;
+                speedSettings.divChosen = isChecked;
                 break;
 
             case R.id.checkbox_multiply:
-                multChosen = isChecked;
+                speedSettings.multChosen = isChecked;
                 break;
 
             default:
-                addChosen = false;
-                subChosen = false;
-                multChosen = false;
-                divChosen = false;
+                speedSettings.addChosen = false;
+                speedSettings.subChosen = false;
+                speedSettings.multChosen = false;
+                speedSettings.divChosen = false;
         }
     }
 
     public void onSaveDefaults(View view) {
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD_SPEED, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB_SPEED, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT_SPEED, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV_SPEED, divCheck.isChecked());
-        preferenceEditor.putInt(MAX_NUM_SPEED, seekMaxNumber.getProgress());
-        preferenceEditor.putInt(NUM_Q_SPEED, seekMaxQuestions.getProgress());
+        preferenceEditor.putBoolean(ADD_SPEED, speedSettings.addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_SPEED, speedSettings.subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_SPEED, speedSettings.multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_SPEED, speedSettings.divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM_SPEED, speedSettings.seekMaxNumber.getProgress());
+        preferenceEditor.putInt(NUM_Q_SPEED, speedSettings.seekMaxQuestions.getProgress());
         preferenceEditor.apply();
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     public void onSpeedLaunch(View view) {
-        int intNumLimit = seekMaxNumber.getProgress() * 5;
-        int intMaxQ = seekMaxQuestions.getProgress() * 5;
-        String strChosenOperations = "";
+        int intNumLimit = speedSettings.seekMaxNumber.getProgress() * 5;
+        int intMaxQ = speedSettings.seekMaxQuestions.getProgress() * 5;
         Toast setSetting = Toast.makeText(this, "Please set all values", Toast.LENGTH_SHORT);
 
         if (intNumLimit == 0 || intMaxQ == 0) {
             setSetting.show();
-        } else if (!addChosen && !subChosen && !multChosen && !divChosen) {
+        } else if (!speedSettings.addChosen && !speedSettings.subChosen && !speedSettings.multChosen && !speedSettings.divChosen) {
             setSetting.show();
         } else {
-            //Addition: a, Subtraction: s, Multiplication: m, Division: d
-            //one checked
-            if (addChosen) {
-                strChosenOperations = "a";
-            }
-            if (subChosen) {
-                strChosenOperations = "s";
-            }
-            if (multChosen) {
-                strChosenOperations = "m";
-            }
-            if (divChosen) {
-                strChosenOperations = "d";
-            }
-            //two checked
-            if (addChosen && subChosen) {
-                strChosenOperations = "as";
-            }
-            if (addChosen && multChosen) {
-                strChosenOperations = "am";
-            }
-            if (addChosen && divChosen) {
-                strChosenOperations = "ad";
-            }
-            if (subChosen && multChosen) {
-                strChosenOperations = "sm";
-            }
-            if (subChosen && divChosen) {
-                strChosenOperations = "sd";
-            }
-            if (multChosen && divChosen) {
-                strChosenOperations = "md";
-            }
-            //three checked
-            if (addChosen && subChosen && multChosen) {
-                //div left out
-                strChosenOperations = "asm";
-            }
-            if (addChosen && multChosen && divChosen) {
-                //sub left out
-                strChosenOperations = "amd";
-            }
-            if (addChosen && subChosen && divChosen) {
-                //mult left out
-                strChosenOperations = "asd";
-            }
-            if (subChosen && multChosen && divChosen) {
-                //add left out
-                strChosenOperations = "smd;";
-            }
-            //four checked
-            if (addChosen && subChosen && multChosen && divChosen) {
-                strChosenOperations = "asmd";
-            }
+
+            speedSettings.setOperations();
 
             Intent launchSpeed = new Intent(SpeedModeSettings.this, SpeedMode.class);
             //put chosen operator, max num and questions
-            launchSpeed.putExtra(OPERATIONS_SPEED, strChosenOperations);
+            launchSpeed.putExtra(OPERATIONS_SPEED, speedSettings.strChosenOperations);
             launchSpeed.putExtra(MAX_NUM_SPEED, intNumLimit);
             launchSpeed.putExtra(NUM_Q_SPEED, intMaxQ);
 

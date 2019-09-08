@@ -68,6 +68,7 @@ public class DeathMode extends AppCompatActivity {
                 Intent launchDeathEnd = new Intent(this, DeathEndActivity.class);
                 launchDeathEnd.putExtra(SCORE, deathUtility.intScore);
                 startActivity(launchDeathEnd);
+                finish();
             }
         }
 

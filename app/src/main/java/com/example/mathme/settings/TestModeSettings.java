@@ -17,44 +17,31 @@ import com.example.mathme.mode.TestMode;
 import com.example.mathme.other.MainActivity;
 
 public class TestModeSettings extends AppCompatActivity {
-    private CheckBox addCheck, subCheck, multCheck, divCheck;
     private SharedPreferences mPreferences;
-    private SeekBar seekMaxNumber, seekMaxQuestions;
-    private boolean addChosen, subChosen, multChosen, divChosen;
     private static final String ADD_TEST = "addTest", SUB_TEST = "subTest", MULT_TEST = "multTest", DIV_TEST = "divTest";
-
-    //key values
     public static final String MAX_NUM = "maxNum", NUM_Q = "numQ", OPERATIONS = "operations";
+    private SettingsUtility testSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_mode_settings);
 
-        //initialize seekBar
-        seekMaxNumber = findViewById(R.id.seek_max_num);
-        seekMaxQuestions = findViewById(R.id.seek_max_questions);
-        addCheck = findViewById(R.id.checkBox_plus);
-        subCheck = findViewById(R.id.checkBox_minus);
-        multCheck = findViewById(R.id.checkbox_multiply);
-        divCheck = findViewById(R.id.checkBox_divide);
-
-        final TextView maxNumProgress, maxQuestionProgress;
-
-        //initialize textView
-        maxNumProgress = findViewById(R.id.num_limit);
-        maxQuestionProgress = findViewById(R.id.q_limit);
+        testSettings = new SettingsUtility((CheckBox) findViewById(R.id.checkBox_plus), (CheckBox) findViewById(R.id.checkBox_minus),
+                (CheckBox) findViewById(R.id.checkbox_multiply), (CheckBox) findViewById(R.id.checkBox_divide),
+                (SeekBar) findViewById(R.id.seek_max_num), (SeekBar) findViewById(R.id.seek_max_questions),
+                (TextView) findViewById(R.id.num_limit), (TextView) findViewById(R.id.q_limit));
 
         //seekbar to choose max number
-        seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        testSettings.seekMaxNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b){
                 //i comes from seek bar and determines the max number
                 if (i > 0) {
-                    maxNumProgress.setText((i*5) + "");
+                    testSettings.maxNumProgress.setText((i * 5) + "");
                 } else {
-                    maxNumProgress.setText("0");
+                    testSettings.maxNumProgress.setText("0");
                 }
             }
             @Override
@@ -64,14 +51,14 @@ public class TestModeSettings extends AppCompatActivity {
         });
 
         //seekbar to choose question number
-        seekMaxQuestions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        testSettings.seekMaxQuestions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (i > 0) {
-                    maxQuestionProgress.setText((i*5) + "");
+                    testSettings.maxQuestionProgress.setText((i * 5) + "");
                 } else {
-                    maxQuestionProgress.setText("0");
+                    testSettings.maxQuestionProgress.setText("0");
                 }
             }
             @Override
@@ -81,28 +68,28 @@ public class TestModeSettings extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(MainActivity.SharedPrefFile, MODE_PRIVATE);
-        addChosen = mPreferences.getBoolean(ADD_TEST, false);
-        subChosen = mPreferences.getBoolean(SUB_TEST, false);
-        multChosen = mPreferences.getBoolean(MULT_TEST, false);
-        divChosen = mPreferences.getBoolean(DIV_TEST, false);
+        testSettings.addChosen = mPreferences.getBoolean(ADD_TEST, false);
+        testSettings.subChosen = mPreferences.getBoolean(SUB_TEST, false);
+        testSettings.multChosen = mPreferences.getBoolean(MULT_TEST, false);
+        testSettings.divChosen = mPreferences.getBoolean(DIV_TEST, false);
 
-        if (addChosen) {
-            addCheck.setChecked(true);
+        if (testSettings.addChosen) {
+            testSettings.addCheck.setChecked(true);
         }
 
-        if (subChosen) {
-            subCheck.setChecked(true);
+        if (testSettings.subChosen) {
+            testSettings.subCheck.setChecked(true);
         }
 
-        if (multChosen) {
-            multCheck.setChecked(true);
+        if (testSettings.multChosen) {
+            testSettings.multCheck.setChecked(true);
         }
 
-        if (divChosen) {
-            divCheck.setChecked(true);
+        if (testSettings.divChosen) {
+            testSettings.divCheck.setChecked(true);
         }
-        seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM, 0));
-        seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q, 0));
+        testSettings.seekMaxNumber.setProgress(mPreferences.getInt(MAX_NUM, 0));
+        testSettings.seekMaxQuestions.setProgress(mPreferences.getInt(NUM_Q, 0));
     }
 
     //check to see which checkbox was checked out of all the checkboxes
@@ -111,97 +98,42 @@ public class TestModeSettings extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.checkBox_plus:
-                addChosen = isChecked;
+                testSettings.addChosen = isChecked;
                 break;
             case R.id.checkBox_minus:
-                subChosen = isChecked;
+                testSettings.subChosen = isChecked;
                 break;
             case R.id.checkBox_divide:
-                divChosen = isChecked;
+                testSettings.divChosen = isChecked;
                 break;
 
             case R.id.checkbox_multiply:
-                multChosen = isChecked;
+                testSettings.multChosen = isChecked;
                 break;
 
             default:
-                addChosen = false;
-                subChosen = false;
-                multChosen = false;
-                divChosen = false;
+                testSettings.addChosen = false;
+                testSettings.subChosen = false;
+                testSettings.multChosen = false;
+                testSettings.divChosen = false;
         }
     }
 
 
     public void onTestLaunch(View view) {
-        int intNumLimit = seekMaxNumber.getProgress() * 5;
-        int intMaxQ = seekMaxQuestions.getProgress() * 5;
-        String strChosenOperations = "";
+        int intNumLimit = testSettings.seekMaxNumber.getProgress() * 5;
+        int intMaxQ = testSettings.seekMaxQuestions.getProgress() * 5;
         Toast setSetting = Toast.makeText(this, "Please set all values", Toast.LENGTH_SHORT);
 
         if (intNumLimit == 0 || intMaxQ == 0) {
             setSetting.show();
-        } else if (!addChosen && !subChosen && !multChosen && !divChosen) {
+        } else if (!testSettings.addChosen && !testSettings.subChosen && !testSettings.multChosen && !testSettings.divChosen) {
             setSetting.show();
         } else {
-            //Addition: a, Subtraction: s, Multiplication: m, Division: d
-            //one checked
-            if (addChosen) {
-                strChosenOperations = "a";
-            }
-            if (subChosen) {
-                strChosenOperations = "s";
-            }
-            if (multChosen) {
-                strChosenOperations = "m";
-            }
-            if (divChosen) {
-                strChosenOperations = "d";
-            }
-            //two checked
-            if (addChosen && subChosen) {
-                strChosenOperations = "as";
-            }
-            if (addChosen && multChosen) {
-                strChosenOperations = "am";
-            }
-            if (addChosen && divChosen) {
-                strChosenOperations = "ad";
-            }
-            if (subChosen && multChosen) {
-                strChosenOperations = "sm";
-            }
-            if (subChosen && divChosen) {
-                strChosenOperations = "sd";
-            }
-            if (multChosen && divChosen) {
-                strChosenOperations = "md";
-            }
-            //three checked
-            if (addChosen && subChosen && multChosen) {
-                //div left out
-                strChosenOperations = "asm";
-            }
-            if (addChosen && multChosen && divChosen) {
-                //sub left out
-                strChosenOperations = "amd";
-            }
-            if (addChosen && subChosen && divChosen) {
-                //mult left out
-                strChosenOperations = "asd";
-            }
-            if (subChosen && multChosen && divChosen) {
-                //add left out
-                strChosenOperations = "smd;";
-            }
-            //four checked
-            if (addChosen && subChosen && multChosen && divChosen) {
-                strChosenOperations = "asmd";
-            }
-
+            testSettings.setOperations();
             Intent launchTest = new Intent(TestModeSettings.this, TestMode.class);
             //put chosen operator, max num and questions
-            launchTest.putExtra(OPERATIONS, strChosenOperations);
+            launchTest.putExtra(OPERATIONS, testSettings.strChosenOperations);
             launchTest.putExtra(MAX_NUM, intNumLimit);
             launchTest.putExtra(NUM_Q, intMaxQ);
 
@@ -211,12 +143,12 @@ public class TestModeSettings extends AppCompatActivity {
 
     public void onSaveDefaults(View view) {
         SharedPreferences.Editor preferenceEditor = mPreferences.edit();
-        preferenceEditor.putBoolean(ADD_TEST, addCheck.isChecked());
-        preferenceEditor.putBoolean(SUB_TEST, subCheck.isChecked());
-        preferenceEditor.putBoolean(MULT_TEST, multCheck.isChecked());
-        preferenceEditor.putBoolean(DIV_TEST, divCheck.isChecked());
-        preferenceEditor.putInt(MAX_NUM, seekMaxNumber.getProgress());
-        preferenceEditor.putInt(NUM_Q, seekMaxQuestions.getProgress());
+        preferenceEditor.putBoolean(ADD_TEST, testSettings.addCheck.isChecked());
+        preferenceEditor.putBoolean(SUB_TEST, testSettings.subCheck.isChecked());
+        preferenceEditor.putBoolean(MULT_TEST, testSettings.multCheck.isChecked());
+        preferenceEditor.putBoolean(DIV_TEST, testSettings.divCheck.isChecked());
+        preferenceEditor.putInt(MAX_NUM, testSettings.seekMaxNumber.getProgress());
+        preferenceEditor.putInt(NUM_Q, testSettings.seekMaxQuestions.getProgress());
         preferenceEditor.apply();
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }

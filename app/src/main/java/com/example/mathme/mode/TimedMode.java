@@ -82,7 +82,7 @@ public class TimedMode extends AppCompatActivity {
                     .putExtra(Q_LIST, timeUtility.mQuestionList);
 
             startActivity(launchTimeEnd);
-            //call another method later
+            finish();
         }
         return --((TimeUtility) timeUtility).intTime;
     }

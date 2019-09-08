@@ -75,5 +75,18 @@
         android:layout_height="100dp"
         tools:ignore="UnusedAttribute" />
 
+    <Button
+        android:foreground="@drawable/ripple"
+        android:text="@string/fate"
+        android:onClick="animeFate"
+        android:id="@+id/anime_fate"
+        android:textSize="30sp"
+        android:background="@drawable/rounded_button"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/google_regular"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        tools:ignore="UnusedAttribute" />
+
 
 </LinearLayout>

@@ -32,6 +32,7 @@ public class TestResults extends AppCompatActivity {
             public void onClick(View view) {
                 Intent launchMain = new Intent(TestResults.this, MainActivity.class);
                 startActivity(launchMain);
+                finish();
             }
         });
         Intent modeFin = getIntent();

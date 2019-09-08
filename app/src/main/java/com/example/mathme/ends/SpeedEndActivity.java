@@ -104,5 +104,6 @@ public class SpeedEndActivity extends AppCompatActivity {
     public void onTakeMeHome(View view) {
         Intent takeMeHome = new Intent(this, MainActivity.class);
         startActivity(takeMeHome);
+        finish();
     }
 }

@@ -10,7 +10,7 @@ import java.util.Timer;
 
 public class ModeUtility {
     int intNumLimit, intNum1, intNum2;
-    public int intUserAnswer = 0, intCurrentQuestion, intActualAnswer = 0, intMaxQuestion, intScore = 0;
+    public int intUserAnswer = 0, intCurrentQuestion = 1, intActualAnswer = 0, intMaxQuestion, intScore = 0;
     String strChosenOperation;
     public String strQuestion;
     public TextView mQuestionTv, scoreTv, mQuestionNumTv;

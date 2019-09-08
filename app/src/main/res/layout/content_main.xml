@@ -74,64 +74,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="onSuddenDeathClicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="6dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/death_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:alpha="0.67"
-                android:contentDescription="@string/image_of_a_timer"
-                android:src="@drawable/infinite"
-                android:textColor="@color/textColor" />
-
-            <TextView
-                android:id="@+id/death_mode"
-                style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/death_high_score"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="@font/google_regular"
-                android:padding="10dp"
-                android:text="@string/sudden_death"
-                android:textColor="@color/textColor"
-                android:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <TextView
-                android:id="@+id/death_high_score"
-                style="@style/TextAppearance.AppCompat.Subhead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/death_image"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/google_regular"
-                android:padding="10dp"
-                android:text="@string/high_score_0"
-                android:textColor="@color/textColor"
-                android:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
         android:onClick="onTimedModeClicked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -237,6 +179,64 @@
                 android:fontFamily="@font/google_regular"
                 android:padding="10dp"
                 android:text="@string/best_time"
+                android:textColor="@color/textColor"
+                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onSuddenDeathClicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/death_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:alpha="0.67"
+                android:contentDescription="@string/image_of_a_timer"
+                android:src="@drawable/infinite"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:id="@+id/death_mode"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/death_high_score"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/google_regular"
+                android:padding="10dp"
+                android:text="@string/sudden_death"
+                android:textColor="@color/textColor"
+                android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <TextView
+                android:id="@+id/death_high_score"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/death_image"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/google_regular"
+                android:padding="10dp"
+                android:text="@string/high_score_0"
                 android:textColor="@color/textColor"
                 android:theme="@style/ThemeOverlay.AppCompat.Light" />
 

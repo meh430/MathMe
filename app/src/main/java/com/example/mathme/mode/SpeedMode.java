@@ -104,6 +104,7 @@ public class SpeedMode extends AppCompatActivity {
                 launchSpeedEnd.putExtra(BT, ((SpeedUtility) speedUtility).intStopWatch);
 
                 startActivity(launchSpeedEnd);
+                finish();
             } else {
                 if (intUserAnswer == speedUtility.intActualAnswer) {
                     speedUtility.increaseScore();
