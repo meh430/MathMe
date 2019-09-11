@@ -193,7 +193,12 @@ public class TestUtility extends ModeUtility {
     private void divide() {
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
         intNum2 = (int) (Math.random() * intNumLimit) + 1;
-        intActualAnswer = Math.round((float) intNum1 / intNum2);
+
+        while (intNum1 % intNum2 != 0) {
+            intNum1 = (int) (Math.random() * intNumLimit) + 1;
+            intNum2 = (int) (Math.random() * intNumLimit) + 1;
+        }
+        //this.intActualAnswer = Math.round((float) intNum1 / intNum2);
         this.intActualAnswer = intNum1 / intNum2;
 
         this.strQuestion = (intNum1) + " / " + (intNum2);

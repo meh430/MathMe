@@ -17,6 +17,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
+            android:name=".lists.TestScoreList"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:label="Test Scores"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ends.SpeedEndActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="Infinite Mode Results"

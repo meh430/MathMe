@@ -93,4 +93,9 @@
     <string name="anime_ultima">Anime Ultima</string>
     <string name="last_mark">Last Mark: 0%</string>
     <string name="fate">Fate</string>
+    <string name="operators">Operators:</string>
+    <string name="number_of_questions">Number of Questions:</string>
+    <string name="number_limit">Number Limit:</string>
+    <string name="test_score">Test Score:</string>
+    <string name="title_activity_test_score_list">TestScoreList</string>
 </resources>

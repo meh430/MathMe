@@ -14,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mathme.R;
+import com.example.mathme.lists.TestScoreList;
+import com.example.mathme.scores.databases.test.TestViewModel;
 import com.example.mathme.settings.DeathModeSettings;
 import com.example.mathme.settings.SpeedModeSettings;
 import com.example.mathme.settings.TestModeSettings;
@@ -23,6 +26,7 @@ import com.example.mathme.settings.TimeModeSettings;
 import com.example.mathme.web.Relax;
 
 public class MainActivity extends AppCompatActivity {
+    public static TestViewModel mTestViewModel;
     public static final String SharedPrefFile = "com.example.mathme";
     //constant values for sharedPref keys
     public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour",
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         bestTimeTv = findViewById(R.id.speed_time);
         lastMarkTv = findViewById(R.id.test_mark);
 
+        mTestViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+
         //get any variables from previous sessions
         SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
         boolean isDark = mPreferences.getBoolean(DARK, firstDark);
@@ -63,13 +69,13 @@ public class MainActivity extends AppCompatActivity {
             getDelegate().applyDayNight();
         }
 
-        String strHighScoreTime = "HighScore: " + getHighScoreTime();
+        String strHighScoreTime = "Last Score: " + getHighScoreTime();
         highScoreTimeTv.setText(strHighScoreTime);
 
-        String strHighScoreDeath = "HighScore: " + getHighScoreDeath();
+        String strHighScoreDeath = "Last Score: " + getHighScoreDeath();
         highScoreDeathTv.setText(strHighScoreDeath);
 
-        String strBestTime = "Best Time: " + getBestTime() + "s";
+        String strBestTime = "Last Time: " + getBestTime() + "s";
         bestTimeTv.setText(strBestTime);
 
         String strLastMark = "Last Mark: " + mPreferences.getString(LAST_MARK, "0%");
@@ -97,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(launchSettings);
                 return true;
             //launch contact implicit intent
+            case R.id.action_scores:
+                Intent launchScores = new Intent(MainActivity.this, TestScoreList.class);
+                startActivity(launchScores);
+                return true;
             case R.id.action_contact:
                 String[] urlArray = {"http://eelslap.com/", "https://en.wikipedia.org/wiki/Donald_Trump",
                         "https://myanimelist.net/anime/10087/Fate_Zero?q=fate%20z",

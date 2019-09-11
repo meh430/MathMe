@@ -1,3 +1,4 @@
+//TODO: Add items to object arraylist from the repository class instead of view model
 package com.example.mathme.ends;
 
 import android.content.Intent;
@@ -13,6 +14,8 @@ import com.example.mathme.R;
 import com.example.mathme.mode.TestMode;
 import com.example.mathme.other.MainActivity;
 import com.example.mathme.result.TestResults;
+import com.example.mathme.scores.TestScore;
+import com.example.mathme.scores.databases.test.TestRepository;
 import com.example.mathme.settings.TestModeSettings;
 
 import java.util.ArrayList;
@@ -22,14 +25,15 @@ import java.util.HashMap;
 @SuppressWarnings({"ConstantConditions", "unchecked"})
 public class TestEndActivity extends AppCompatActivity {
     //map to hold all the questions
-    private HashMap <Integer, String> questionMap;
+    private HashMap<Integer, String> questionMap;
     //map to hold all the answers, and the user answers
-    private HashMap <Integer, Integer> answerMap, userAnswerMap;
+    private HashMap<Integer, Integer> answerMap, userAnswerMap;
     //maximum number of questions
-    private int intNumOfQ;
+    private int intNumOfQ, intNumLim;
     //array list that stores the corrections to wrong answers
     private final ArrayList<String> resultInfoList = new ArrayList<>();
     private TextView fractionResultTv, percentResultTv;
+    private String mStrOperators;
     public static final String RESULT_LIST = "resultInfoList";
     SharedPreferences mSharedPref;
 
@@ -51,11 +55,13 @@ public class TestEndActivity extends AppCompatActivity {
         answerMap = (HashMap<Integer, Integer>) testMode.getSerializableExtra(TestMode.A_MAP);
         userAnswerMap = (HashMap<Integer, Integer>) testMode.getSerializableExtra(TestMode.UA_MAP);
         intNumOfQ = testMode.getIntExtra(TestModeSettings.NUM_Q, 0);
-
+        mStrOperators = testMode.getStringExtra(TestModeSettings.OPERATIONS);
+        intNumLim = testMode.getIntExtra(TestModeSettings.MAX_NUM, 100);
         checkAnswers();
     }
 
     private void checkAnswers() {
+        TestRepository testRep = new TestRepository(getApplication());
         String resultInfo;
         int intNumCorrect = 1;
         //iterate through the maps and store wrong answers in arrayList
@@ -73,7 +79,10 @@ public class TestEndActivity extends AppCompatActivity {
 
         String resultFraction = intNumCorrect + " / " + intNumOfQ;
         double dblPercent = (double) intNumCorrect / intNumOfQ;
-        String resultPercent = (dblPercent*100) + "%";
+        String resultPercent = (dblPercent * 100) + "%";
+
+        MainActivity.mTestViewModel.insert(new TestScore(intNumLim, intNumOfQ, (dblPercent * 100),
+                new EndUtility().chosenOperators(mStrOperators), (int) (Math.random() * 10000) + 1));
 
         SharedPreferences.Editor preferencesEditor = mSharedPref.edit();
         preferencesEditor.putString(MainActivity.LAST_MARK, resultPercent);
@@ -107,3 +116,7 @@ public class TestEndActivity extends AppCompatActivity {
         startActivity(testResults);
     }
 }
+
+
+
+

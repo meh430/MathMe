@@ -31,7 +31,7 @@ public class DeathEndActivity extends AppCompatActivity {
         scoreResultTv.setText(strScore);
 
         String strResultMessage;
-
+        /*
         if (intScore > MainActivity.getHighScoreDeath()) {
             strResultMessage = "New High Score!";
             scoreHeaderTv.setText(strResultMessage);
@@ -42,7 +42,14 @@ public class DeathEndActivity extends AppCompatActivity {
         } else {
             strResultMessage = "Score";
             scoreHeaderTv.setText(strResultMessage);
-        }
+        }*/
+
+        strResultMessage = "Score";
+        scoreHeaderTv.setText(strResultMessage);
+        MainActivity.setHighScoreDeath(intScore);
+        SharedPreferences.Editor preferenceEditor = mSharedPreferences.edit();
+        preferenceEditor.putInt(MainActivity.HIGH_DEATH, MainActivity.getHighScoreDeath());
+        preferenceEditor.apply();
     }
 
     public void onTakeMeHome(View view) {

@@ -22,6 +22,8 @@ import com.example.mathme.settings.TestModeSettings;
 @SuppressWarnings("ConstantConditions")
 public class TestMode extends AppCompatActivity {
     private ModeUtility testUtility;
+    private int mIntNumLimit;
+    private String mStrOperators;
     private boolean savedAnswer = false, end = false;
     public static final String Q_MAP = "QMAP", A_MAP = "AMAP", UA_MAP = "UAMAP";
     private boolean firsTime;
@@ -32,11 +34,14 @@ public class TestMode extends AppCompatActivity {
         setContentView(R.layout.activity_test_mode);
         Intent testSettings = getIntent();
 
+        mStrOperators = testSettings.getStringExtra(TestModeSettings.OPERATIONS);
+        mIntNumLimit = testSettings.getIntExtra(TestModeSettings.MAX_NUM, 100);
+
         testUtility = new TestUtility((TextView) findViewById(R.id.question_window),
                 (TextView) findViewById(R.id.current_question_num),
                 (EditText) findViewById(R.id.answer_edit_text),
-                testSettings.getStringExtra(TestModeSettings.OPERATIONS),
-                testSettings.getIntExtra(TestModeSettings.MAX_NUM, 100),
+                mStrOperators,
+                mIntNumLimit,
                 testSettings.getIntExtra(TestModeSettings.NUM_Q, 100));
     }
 
@@ -146,7 +151,9 @@ public class TestMode extends AppCompatActivity {
             launchTestEnd.putExtra(TestModeSettings.NUM_Q, testUtility.intMaxQuestion)
                     .putExtra(Q_MAP, ((TestUtility) testUtility).mQuestionMap)
                     .putExtra(A_MAP, ((TestUtility) testUtility).mAnswerMap)
-                    .putExtra(UA_MAP, ((TestUtility) testUtility).mUserAnswerMap);
+                    .putExtra(UA_MAP, ((TestUtility) testUtility).mUserAnswerMap)
+                    .putExtra(TestModeSettings.OPERATIONS, mStrOperators)
+                    .putExtra(TestModeSettings.MAX_NUM, mIntNumLimit);
 
             startActivity(launchTestEnd);
             testUtility.mUserAnswerEdit.setVisibility(View.INVISIBLE);

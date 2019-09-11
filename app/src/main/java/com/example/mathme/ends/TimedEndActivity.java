@@ -87,6 +87,8 @@ public class TimedEndActivity extends AppCompatActivity {
         accuracyTv.setText(resultPercent);
 
         String endMessage;
+
+        /*
         if (score > MainActivity.getHighScoreTime()) {
             endMessage = "New High Score!";
             scoreHeaderTv.setText(endMessage);
@@ -97,8 +99,14 @@ public class TimedEndActivity extends AppCompatActivity {
         } else {
             endMessage = "Score: ";
             scoreHeaderTv.setText(endMessage);
-        }
+        }*/
+        endMessage = "Score: ";
+        scoreHeaderTv.setText(endMessage);
         scoreTv.setText(Integer.toString(score));
+        MainActivity.setHighScoreTime(score);
+        SharedPreferences.Editor preferenceEditor = mSharedPreferences.edit();
+        preferenceEditor.putInt(MainActivity.HIGH_TIME, MainActivity.getHighScoreTime());
+        preferenceEditor.apply();
     }
 
     public void onViewResults(View view) {

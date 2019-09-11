@@ -80,6 +80,7 @@ public class SpeedEndActivity extends AppCompatActivity {
         accuracyTv.setText(resultPercent);
 
         String endMessage;
+        /*
         if (intTimeResult < MainActivity.getBestTime() || MainActivity.getBestTime() == 0) {
             endMessage = "New Best Time!";
             timeResultHeadTv.setText(endMessage);
@@ -90,8 +91,14 @@ public class SpeedEndActivity extends AppCompatActivity {
         } else {
             endMessage = "Time: ";
             timeResultHeadTv.setText(endMessage);
-        }
+        }*/
+        endMessage = "Time: ";
+        timeResultHeadTv.setText(endMessage);
         timeResultTv.setText(intTimeResult + "s");
+        MainActivity.setBestTime(intTimeResult);
+        SharedPreferences.Editor preferenceEditor = mSharedPreferences.edit();
+        preferenceEditor.putInt(MainActivity.BEST_TIME, MainActivity.getBestTime());
+        preferenceEditor.apply();
     }
 
     public void onViewResults(View view) {

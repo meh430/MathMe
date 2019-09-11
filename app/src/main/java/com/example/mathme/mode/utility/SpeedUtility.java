@@ -181,10 +181,16 @@ public class SpeedUtility extends ModeUtility {
         this.mAnswerList.add(intActualAnswer);
     }
 
+    //add decimals by making a boolean variable for choice
     private void divide() {
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
         intNum2 = (int) (Math.random() * intNumLimit) + 1;
-        intActualAnswer = Math.round((float) intNum1 / intNum2);
+        while (intNum1 % intNum2 != 0) {
+            intNum1 = (int) (Math.random() * intNumLimit) + 1;
+            intNum2 = (int) (Math.random() * intNumLimit) + 1;
+        }
+        //this.intActualAnswer = Math.round((float) intNum1 / intNum2);
+        this.intActualAnswer = intNum1 / intNum2;
         strQuestion = intNum1 + " / " + intNum2;
 
         mQuestionTv.setText(strQuestion);
