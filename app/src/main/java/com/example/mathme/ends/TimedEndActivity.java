@@ -15,6 +15,8 @@ import com.example.mathme.R;
 import com.example.mathme.mode.TimedMode;
 import com.example.mathme.other.MainActivity;
 import com.example.mathme.result.TestResults;
+import com.example.mathme.scores.TimeScore;
+import com.example.mathme.settings.TimeModeSettings;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,8 @@ public class TimedEndActivity extends AppCompatActivity {
     //array list that stores the corrections to wrong answers
     private final ArrayList<String> resultInfoList = new ArrayList<>();
     private TextView scoreTv, accuracyTv, scoreHeaderTv;
+    private String mStrOperators;
+    private int intNumLim, intTime;
     public static final String TIMED_RESULT_LIST = "TimedResultInfo";
 
     @Override
@@ -47,6 +51,9 @@ public class TimedEndActivity extends AppCompatActivity {
         questions = timedMode.getStringArrayListExtra(TimedMode.Q_LIST);
         answers = timedMode.getIntegerArrayListExtra(TimedMode.A_LIST);
         userAnswers = timedMode.getIntegerArrayListExtra(TimedMode.UA_LIST);
+        intTime = timedMode.getIntExtra(TimeModeSettings.TIME_TIME, 30);
+        intNumLim = timedMode.getIntExtra(TimeModeSettings.MAX_NUM_TIME, 10);
+        mStrOperators = timedMode.getStringExtra(TimeModeSettings.OPERATIONS_TIME);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -88,18 +95,6 @@ public class TimedEndActivity extends AppCompatActivity {
 
         String endMessage;
 
-        /*
-        if (score > MainActivity.getHighScoreTime()) {
-            endMessage = "New High Score!";
-            scoreHeaderTv.setText(endMessage);
-            MainActivity.setHighScoreTime(score);
-            SharedPreferences.Editor preferenceEditor = mSharedPreferences.edit();
-            preferenceEditor.putInt(MainActivity.HIGH_TIME, MainActivity.getHighScoreTime());
-            preferenceEditor.apply();
-        } else {
-            endMessage = "Score: ";
-            scoreHeaderTv.setText(endMessage);
-        }*/
         endMessage = "Score: ";
         scoreHeaderTv.setText(endMessage);
         scoreTv.setText(Integer.toString(score));
@@ -107,6 +102,8 @@ public class TimedEndActivity extends AppCompatActivity {
         SharedPreferences.Editor preferenceEditor = mSharedPreferences.edit();
         preferenceEditor.putInt(MainActivity.HIGH_TIME, MainActivity.getHighScoreTime());
         preferenceEditor.apply();
+        MainActivity.mTimeViewModel.insert(new TimeScore(intNumLim, score, intTime, new EndUtility().chosenOperators(mStrOperators),
+                (int) (Math.random() * 10000) + 1));
     }
 
     public void onViewResults(View view) {

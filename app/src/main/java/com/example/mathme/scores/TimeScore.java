@@ -6,31 +6,66 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "time_table")
 public class TimeScore {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "time")
-    private int intNumLim, intScore, intTime;
+    public int getIntNumLim() {
+        return intNumLim;
+    }
+
+    public void setIntNumLim(int intNumLim) {
+        this.intNumLim = intNumLim;
+    }
+
+    @ColumnInfo(name = "time_num_lim")
+    private int intNumLim;
+
+    public int getIntScore() {
+        return intScore;
+    }
+
+    public void setIntScore(int intScore) {
+        this.intScore = intScore;
+    }
+
+    @ColumnInfo(name = "time_score")
+    private int intScore;
+
+    public int getIntTime() {
+        return intTime;
+    }
+
+    public void setIntTime(int intTime) {
+        this.intTime = intTime;
+    }
+
+    @ColumnInfo(name = "time_time")
+    private int intTime;
+
+    public String getStrOperators() {
+        return strOperators;
+    }
+
+    public void setStrOperators(String strOperators) {
+        this.strOperators = strOperators;
+    }
+
+    @ColumnInfo(name = "time_operators")
     private String strOperators;
 
-    public TimeScore(int numLim, int accuracy, int timeChosen, String operators) {
-        this.intNumLim = numLim;
-        this.intScore = accuracy;
-        this.intTime = timeChosen;
-        this.strOperators = operators;
+    public int getTestId() {
+        return testId;
     }
 
-    public int getNumberLimit() {
-        return this.intNumLim;
+    public void setTestId(int testId) {
+        this.testId = testId;
     }
 
-    public int getTime() {
-        return this.intTime;
-    }
+    @PrimaryKey(autoGenerate = true)
+    private int testId;
 
-    public int getScore() {
-        return this.intScore;
-    }
-
-    public String getOperations() {
-        return this.strOperators;
+    public TimeScore(int intNumLim, int intScore, int intTime, String strOperators, int testId) {
+        this.intNumLim = intNumLim;
+        this.intScore = intScore;
+        this.intTime = intTime;
+        this.strOperators = strOperators;
+        this.testId = testId;
     }
 }

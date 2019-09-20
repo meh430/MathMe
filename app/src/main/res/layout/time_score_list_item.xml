@@ -30,7 +30,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
         <TextView
-            android:id="@+id/num_questions"
+            android:id="@+id/time"
             style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
         <TextView
-            android:id="@+id/test_score"
+            android:id="@+id/time_score"
             style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -26,6 +26,9 @@ public class TimedMode extends AppCompatActivity {
 
     private ModeUtility timeUtility;
 
+    private String mStrOperators;
+    private int intNumLim, intTime;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +37,13 @@ public class TimedMode extends AppCompatActivity {
 
         Intent timeSettings = getIntent();
 
+        mStrOperators = timeSettings.getStringExtra(TimeModeSettings.OPERATIONS_TIME);
+        intNumLim = timeSettings.getIntExtra(TimeModeSettings.MAX_NUM_TIME, 100);
+        intTime = timeSettings.getIntExtra(TimeModeSettings.TIME_TIME, 30);
+
         timeUtility = new TimeUtility((TextView) findViewById(R.id.current_score), (TextView) findViewById(R.id.time_left),
                 (TextView) findViewById(R.id.question), (TextView) findViewById(R.id.answer),
-                timeSettings.getIntExtra(TimeModeSettings.MAX_NUM_TIME, 100),
-                timeSettings.getIntExtra(TimeModeSettings.TIME_TIME, 30),
-                timeSettings.getStringExtra(TimeModeSettings.OPERATIONS_TIME));
+                intNumLim, intTime, mStrOperators);
 
         final String strTime = "Time: ";
         ((TimeUtility) timeUtility).timeTv.setText(strTime + ((TimeUtility) timeUtility).intTime);
@@ -79,7 +84,10 @@ public class TimedMode extends AppCompatActivity {
                     .putExtra(SCORE, ((TimeUtility) timeUtility).intScore)
                     .putExtra(A_LIST, timeUtility.mAnswerList)
                     .putExtra(UA_LIST, timeUtility.mUserAnswerList)
-                    .putExtra(Q_LIST, timeUtility.mQuestionList);
+                    .putExtra(Q_LIST, timeUtility.mQuestionList)
+                    .putExtra(TimeModeSettings.OPERATIONS_TIME, mStrOperators)
+                    .putExtra(TimeModeSettings.TIME_TIME, intTime)
+                    .putExtra(TimeModeSettings.MAX_NUM_TIME, intNumLim);
 
             startActivity(launchTimeEnd);
             finish();

@@ -69,20 +69,4 @@ public class TestScore {
         this.strOperators = strOperators;
         this.testId = testId;
     }
-
-    public int getNumberLimit() {
-        return this.intNumLim;
-    }
-
-    public int getNumberQuestions() {
-        return this.intNumOfQ;
-    }
-
-    public double getScore() {
-        return this.dblTestScore;
-    }
-
-    public String getOperations() {
-        return this.strOperators;
-    }
 }

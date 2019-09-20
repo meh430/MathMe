@@ -17,10 +17,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".lists.TestScoreList"
+            android:name=".lists.TimeScoreList"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
+            android:label="Time Scores"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".lists.TestScoreList"
+            android:configChanges="orientation|keyboardHidden"
             android:label="Test Scores"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ends.SpeedEndActivity"

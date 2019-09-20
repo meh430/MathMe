@@ -17,8 +17,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mathme.R;
-import com.example.mathme.lists.TestScoreList;
+import com.example.mathme.lists.TimeScoreList;
 import com.example.mathme.scores.databases.test.TestViewModel;
+import com.example.mathme.scores.databases.time.TimeViewModel;
 import com.example.mathme.settings.DeathModeSettings;
 import com.example.mathme.settings.SpeedModeSettings;
 import com.example.mathme.settings.TestModeSettings;
@@ -27,6 +28,7 @@ import com.example.mathme.web.Relax;
 
 public class MainActivity extends AppCompatActivity {
     public static TestViewModel mTestViewModel;
+    public static TimeViewModel mTimeViewModel;
     public static final String SharedPrefFile = "com.example.mathme";
     //constant values for sharedPref keys
     public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour",
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         lastMarkTv = findViewById(R.id.test_mark);
 
         mTestViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+        mTimeViewModel = ViewModelProviders.of(this).get(TimeViewModel.class);
 
         //get any variables from previous sessions
         SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
@@ -102,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent launchSettings = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(launchSettings);
                 return true;
-            //launch contact implicit intent
+            //TODO:add picker for result lists
             case R.id.action_scores:
-                Intent launchScores = new Intent(MainActivity.this, TestScoreList.class);
+                Intent launchScores = new Intent(MainActivity.this, TimeScoreList.class);
                 startActivity(launchScores);
                 return true;
             case R.id.action_contact:

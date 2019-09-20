@@ -66,10 +66,10 @@ public class TestScoreAdapter extends RecyclerView.Adapter<TestScoreAdapter.Test
         }
 
         void bindTo(TestScore testScore) {
-            String operators = "Operators: " + testScore.getOperations();
-            String numQ = "Number of Questions: " + testScore.getNumberQuestions();
-            String numLim = "Number Limit: " + testScore.getNumberLimit();
-            String score = "Test Score: " + testScore.getScore();
+            String operators = "Operators: " + testScore.getStrOperators();
+            String numQ = "Number of Questions: " + testScore.getIntNumOfQ();
+            String numLim = "Number Limit: " + testScore.getIntNumLim();
+            String score = "Test Score: " + testScore.getDblTestScore();
 
             operatorTv.setText(operators);
             numQTv.setText(numQ);
