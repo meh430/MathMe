@@ -28,11 +28,11 @@ public class TestRepository {
     }
 
     void deleteAll() {
-        new deleteAllWordsAsyncTask(mTestDao).execute();
+        new deleteAllTestScoresAsyncTask(mTestDao).execute();
     }
 
     void deleteTestScore(TestScore tScore) {
-        new deleteWordAsyncTask(mTestDao).execute(tScore);
+        new deleteTestScoreAsyncTask(mTestDao).execute(tScore);
     }
 
     private static class insertAsyncTask extends AsyncTask<TestScore, Void, Void> {
@@ -50,10 +50,10 @@ public class TestRepository {
         }
     }
 
-    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class deleteAllTestScoresAsyncTask extends AsyncTask<Void, Void, Void> {
         private TestDao mAsyncTaskDao;
 
-        deleteAllWordsAsyncTask(TestDao dao) {
+        deleteAllTestScoresAsyncTask(TestDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -64,10 +64,10 @@ public class TestRepository {
         }
     }
 
-    private static class deleteWordAsyncTask extends AsyncTask<TestScore, Void, Void> {
+    private static class deleteTestScoreAsyncTask extends AsyncTask<TestScore, Void, Void> {
         private TestDao mAsyncTaskDao;
 
-        deleteWordAsyncTask(TestDao dao) {
+        deleteTestScoreAsyncTask(TestDao dao) {
             mAsyncTaskDao = dao;
         }
 
