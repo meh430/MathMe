@@ -69,7 +69,7 @@ public class TimeScoreAdapter extends RecyclerView.Adapter<TimeScoreAdapter.Time
             String operators = "Operators: " + timeScore.getStrOperators();
             String time = "Time: " + timeScore.getIntTime();
             String numLim = "Number Limit: " + timeScore.getIntNumLim();
-            String score = "Time Score: " + timeScore.getIntTime();
+            String score = "Time Score: " + timeScore.getIntScore();
 
             operatorTv.setText(operators);
             timeTv.setText(time);
