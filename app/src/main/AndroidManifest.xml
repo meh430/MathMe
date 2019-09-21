@@ -18,17 +18,20 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".lists.Scores"
+            android:parentActivityName=".other.MainActivity"
             android:label="View Scores"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".lists.TimeScoreList"
+            android:parentActivityName=".lists.Scores"
             android:configChanges="orientation|keyboardHidden"
             android:label="Time Scores"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:parentActivityName=".lists.Scores"
             android:name=".lists.TestScoreList"
             android:configChanges="orientation|keyboardHidden"
             android:label="Test Scores"
