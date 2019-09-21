@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".lists.Scores">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/test_scores"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/google_regular"
+            android:foreground="@drawable/ripple"
+            android:onClick="testScores"
+            android:text="@string/test_scores"
+            android:textSize="30sp"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/time_scores"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/google_regular"
+            android:foreground="@drawable/ripple"
+            android:onClick="TimeScores"
+            android:text="@string/time_scores"
+            android:textSize="30sp"
+            tools:ignore="OnClick,UnusedAttribute" />
+
+        <Button
+            android:id="@+id/speed_scores"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/google_regular"
+            android:foreground="@drawable/ripple"
+            android:text="@string/speed_scores"
+            android:textSize="30sp"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/death_scores"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/google_regular"
+            android:foreground="@drawable/ripple"
+            android:text="@string/infinity_scores"
+            android:textSize="30sp"
+            tools:ignore="UnusedAttribute" />
+
+    </LinearLayout>
+
+</ScrollView>

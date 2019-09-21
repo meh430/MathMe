@@ -1,70 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ends.TestEndActivity">
 
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:id="@+id/test_result_header"
-        android:textSize="24sp"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/google_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test_result_header_label"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:layout_margin="8dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonBar">
 
-    <TextView
-        android:textSize="80sp"
-        android:textColor="@color/textColor"
-        android:layout_below="@+id/test_result_header"
-        android:fontFamily="@font/google_regular"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/test_result_fraction"
-        android:text="@string/fraction_score" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:textSize="80sp"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/google_regular"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/test_result_percent"
-        android:layout_below="@+id/test_result_fraction"
-        android:text="@string/test_percent" />
+            <TextView
+                android:id="@+id/test_result_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/test_result_header_label"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/textColor"
+                android:textSize="24sp" />
 
-    <Button
-        android:foreground="@drawable/ripple"
-        tools:ignore="UnusedAttribute"
-        android:onClick="onViewResults"
-        android:id="@+id/result_button"
-        android:visibility="invisible"
-        android:text="@string/view_results"
-        android:background="@drawable/rounded_button2"
+            <TextView
+                android:id="@+id/test_result_fraction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/test_result_header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/fraction_score"
+                android:textColor="@color/textColor"
+                android:textSize="80sp" />
+
+            <TextView
+                android:id="@+id/test_result_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/test_result_fraction"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/test_percent"
+                android:textColor="@color/textColor"
+                android:textSize="80sp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/country_roads" />
-
-    <Button
-        android:foreground="@drawable/ripple"
-        tools:ignore="UnusedAttribute"
-        android:onClick="onTakeMeHome"
-        android:layout_marginTop="18dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/rounded_button"
-        android:text="@string/take_me_home"
-        android:id="@+id/country_roads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/result_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button2"
+            android:foreground="@drawable/ripple"
+            android:onClick="onViewResults"
+            android:text="@string/view_results"
+            android:visibility="invisible"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/country_roads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_button"
+            android:foreground="@drawable/ripple"
+            android:onClick="onTakeMeHome"
+            android:text="@string/take_me_home"
+            tools:ignore="UnusedAttribute" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

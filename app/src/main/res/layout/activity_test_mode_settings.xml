@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,152 +7,173 @@
     android:padding="16dp"
     tools:context=".settings.TestModeSettings">
 
-    <TextView
-        android:id="@+id/choose_operation"
-        android:textSize="18sp"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/google_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choose_the_operations"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_margin="12dp" />
-
-    <LinearLayout
-        android:layout_margin="8dp"
+    <ScrollView
+        android:layout_above="@+id/buttonBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <CheckBox
-            android:onClick="onOperationChosen"
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/google_regular"
-            android:layout_weight="1"
-            android:id="@+id/checkBox_plus"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/addition" />
+            android:orientation="vertical">
 
-        <CheckBox
-            android:onClick="onOperationChosen"
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/google_regular"
-            android:layout_weight="1"
-            android:id="@+id/checkBox_minus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/subtraction" />
+            <TextView
+                android:id="@+id/choose_operation"
+                android:textSize="18sp"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/google_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_the_operations"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_margin="12dp" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:onClick="onOperationChosen"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_weight="1"
+                    android:id="@+id/checkBox_plus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addition" />
+
+                <CheckBox
+                    android:onClick="onOperationChosen"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_weight="1"
+                    android:id="@+id/checkBox_minus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subtraction" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:onClick="onOperationChosen"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_weight="1"
+                    android:id="@+id/checkBox_divide"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/division" />
+
+                <CheckBox
+                    android:onClick="onOperationChosen"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_weight="1"
+                    android:id="@+id/checkbox_multiply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multiplication" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:id="@+id/choose_num_limit"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_number_limit"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_margin="4dp" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:id="@+id/num_limit"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/num_limit_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_margin="4dp" />
+
+
+            </LinearLayout>
+
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_max_num"
+                android:max="50"
+                android:layout_margin="12dp" />
+
+            <LinearLayout
+                android:layout_margin="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:id="@+id/choose_q_limit"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_number_of_questions"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_margin="4dp" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:id="@+id/q_limit"
+                    android:fontFamily="@font/google_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/q_limit_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_margin="4dp" />
+
+
+            </LinearLayout>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_max_questions"
+                android:max="20"
+                android:layout_margin="12dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
-        android:layout_margin="8dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/buttonBar"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <CheckBox
-            android:onClick="onOperationChosen"
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/google_regular"
-            android:layout_weight="1"
-            android:id="@+id/checkBox_divide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/division" />
-
-        <CheckBox
-            android:onClick="onOperationChosen"
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/google_regular"
-            android:layout_weight="1"
-            android:id="@+id/checkbox_multiply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/multiplication" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:id="@+id/choose_num_limit"
-            android:fontFamily="@font/google_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/choose_number_limit"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_margin="4dp" />
-
-        <TextView
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:id="@+id/num_limit"
-            android:fontFamily="@font/google_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/num_limit_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_margin="4dp" />
-
-
-    </LinearLayout>
-
-
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/seek_max_num"
-        android:max="50"
-        android:layout_margin="12dp" />
-
-    <LinearLayout
-        android:layout_margin="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:id="@+id/choose_q_limit"
-            android:fontFamily="@font/google_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/choose_number_of_questions"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_margin="4dp" />
-
-        <TextView
-            android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:id="@+id/q_limit"
-            android:fontFamily="@font/google_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/q_limit_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_margin="4dp" />
-
-
-    </LinearLayout>
-
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/seek_max_questions"
-        android:max="20"
-        android:layout_margin="12dp" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
@@ -166,7 +187,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save_defaults_label"
-            android:layout_above="@id/take_test_button"
             android:background="@drawable/rounded_button4" />
 
         <Button
@@ -179,8 +199,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/take_test_label"
-            android:layout_alignParentBottom="true"
             android:background="@drawable/rounded_button" />
-    </RelativeLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

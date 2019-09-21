@@ -99,4 +99,8 @@
     <string name="test_score">Test Score:</string>
     <string name="title_activity_test_score_list">TestScoreList</string>
     <string name="title_activity_time_score_list">TimeScoreList</string>
+    <string name="test_scores">Test Scores</string>
+    <string name="time_scores">Time Scores</string>
+    <string name="speed_scores">Speed Scores</string>
+    <string name="infinity_scores">Infinity Scores</string>
 </resources>

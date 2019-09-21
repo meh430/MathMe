@@ -17,7 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mathme.R;
-import com.example.mathme.lists.TimeScoreList;
+import com.example.mathme.lists.Scores;
 import com.example.mathme.scores.databases.test.TestViewModel;
 import com.example.mathme.scores.databases.time.TimeViewModel;
 import com.example.mathme.settings.DeathModeSettings;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             //TODO:add picker for result lists
             case R.id.action_scores:
-                Intent launchScores = new Intent(MainActivity.this, TimeScoreList.class);
+                Intent launchScores = new Intent(MainActivity.this, Scores.class);
                 startActivity(launchScores);
                 return true;
             case R.id.action_contact:

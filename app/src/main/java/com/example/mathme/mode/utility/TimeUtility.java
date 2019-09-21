@@ -164,6 +164,11 @@ public class TimeUtility extends ModeUtility {
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
         intNum2 = (int) (Math.random() * intNumLimit) + 1;
 
+        while (intNum1 < intNum2) {
+            intNum1 = (int) (Math.random() * intNumLimit) + 1;
+            intNum2 = (int) (Math.random() * intNumLimit) + 1;
+        }
+
         this.intActualAnswer = intNum1 - intNum2;
 
         this.strQuestion = (intNum1) + " - " + (intNum2);
@@ -177,6 +182,7 @@ public class TimeUtility extends ModeUtility {
     private void multiply() {
         intNum1 = (int) (Math.random() * intNumLimit) + 1;
         intNum2 = (int) (Math.random() * intNumLimit) + 1;
+
 
         this.intActualAnswer = intNum1 * intNum2;
 

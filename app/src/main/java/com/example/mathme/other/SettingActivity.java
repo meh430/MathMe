@@ -165,6 +165,8 @@ public class SettingActivity extends AppCompatActivity {
                 SharedPreferences.Editor preferencesEditor = mPreferences.edit();
                 preferencesEditor.clear();
                 preferencesEditor.apply();
+                MainActivity.mTimeViewModel.deleteAll();
+                MainActivity.mTestViewModel.deleteAll();
 
                 Toast.makeText(SettingActivity.this, "Reset preferences", Toast.LENGTH_SHORT).show();
             }

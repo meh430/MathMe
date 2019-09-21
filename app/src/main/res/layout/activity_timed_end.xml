@@ -6,79 +6,98 @@
     android:padding="16dp"
     tools:context=".ends.TimedEndActivity">
 
-    <TextView
-        android:id="@+id/time_score_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/google_regular"
-        android:text="@string/score"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/textColor"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/time_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/time_score_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/google_regular"
-        android:text="@string/placeholder_score"
-        android:textColor="@color/textColor"
-        android:textSize="80sp" />
-
-    <TextView
-        android:id="@+id/accuracy_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/time_score"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/google_regular"
-        android:text="@string/accuracy"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/textColor"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/accuracy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/accuracy_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/google_regular"
-        android:text="@string/test_percent"
-        android:textColor="@color/textColor"
-        android:textSize="80sp" />
-
-    <Button
-        android:foreground="@drawable/ripple"
-        tools:ignore="UnusedAttribute"
-        android:id="@+id/result_button"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/country_roads"
-        android:background="@drawable/rounded_button2"
-        android:onClick="onViewResults"
-        android:text="@string/view_results"
-        android:visibility="invisible" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonBar">
 
-    <Button
-        android:foreground="@drawable/ripple"
-        tools:ignore="UnusedAttribute"
-        android:id="@+id/country_roads"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/time_score_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/score"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/textColor"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/time_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/time_score_header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/placeholder_score"
+                android:textColor="@color/textColor"
+                android:textSize="80sp" />
+
+            <TextView
+                android:id="@+id/accuracy_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/time_score"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/accuracy"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/textColor"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/accuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/accuracy_header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/test_percent"
+                android:textColor="@color/textColor"
+                android:textSize="80sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="onTakeMeHome"
-        android:text="@string/take_me_home"
-        android:visibility="invisible" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/result_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button2"
+            android:foreground="@drawable/ripple"
+            android:onClick="onViewResults"
+            android:text="@string/view_results"
+            android:visibility="invisible"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/country_roads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_button"
+            android:foreground="@drawable/ripple"
+            android:onClick="onTakeMeHome"
+            android:text="@string/take_me_home"
+            android:visibility="invisible"
+            tools:ignore="UnusedAttribute" />
+    </LinearLayout>
 
 
 </RelativeLayout>

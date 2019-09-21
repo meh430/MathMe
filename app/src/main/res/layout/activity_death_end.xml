@@ -6,42 +6,61 @@
     android:padding="16dp"
     tools:context=".ends.DeathEndActivity">
 
-    <TextView
-        android:id="@+id/death_score_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/google_regular"
-        android:text="@string/score"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="@color/textColor"
-        android:textSize="24sp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonBar">
 
-    <TextView
-        android:id="@+id/death_Score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/death_score_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/google_regular"
-        android:text="@string/placeholder_score"
-        android:textColor="@color/textColor"
-        android:textSize="80sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/death_score_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/score"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/textColor"
+                android:textSize="24sp" />
 
-    <Button
-        android:foreground="@drawable/ripple"
-        tools:ignore="UnusedAttribute"
-        android:id="@+id/country_roads"
+            <TextView
+                android:id="@+id/death_Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/death_score_header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/google_regular"
+                android:text="@string/placeholder_score"
+                android:textColor="@color/textColor"
+                android:textSize="80sp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/rounded_button"
-        android:onClick="onTakeMeHome"
-        android:text="@string/take_me_home" />
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
 
+        <Button
+            android:id="@+id/country_roads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_button"
+            android:foreground="@drawable/ripple"
+            android:onClick="onTakeMeHome"
+            android:text="@string/take_me_home"
+            tools:ignore="UnusedAttribute" />
+    </LinearLayout>
 </RelativeLayout>
