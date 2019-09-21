@@ -103,4 +103,5 @@
     <string name="time_scores">Time Scores</string>
     <string name="speed_scores">Speed Scores</string>
     <string name="infinity_scores">Infinity Scores</string>
+    <string name="view_scores">View Scores</string>
 </resources>

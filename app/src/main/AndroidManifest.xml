@@ -19,7 +19,7 @@
         <activity
             android:name=".lists.Scores"
             android:parentActivityName=".other.MainActivity"
-            android:label="View Scores"
+            android:label="@string/view_scores"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
