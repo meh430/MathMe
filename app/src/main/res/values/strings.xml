@@ -104,4 +104,7 @@
     <string name="speed_scores">Speed Scores</string>
     <string name="infinity_scores">Infinity Scores</string>
     <string name="view_scores">View Scores</string>
+    <string name="sort_asc">Sort ASC</string>
+    <string name="sort_desc">Sort DESC</string>
+    <string name="date">Date</string>
 </resources>

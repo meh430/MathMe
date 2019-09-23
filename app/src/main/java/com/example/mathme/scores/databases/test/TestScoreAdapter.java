@@ -54,7 +54,7 @@ public class TestScoreAdapter extends RecyclerView.Adapter<TestScoreAdapter.Test
     }
 
     class TestViewHolder extends RecyclerView.ViewHolder {
-        private TextView operatorTv, numLimTv, numQTv, testScoreTv;
+        private TextView operatorTv, numLimTv, numQTv, testScoreTv, dateTv;
 
         TestViewHolder(View itemView) {
             super(itemView);
@@ -63,9 +63,11 @@ public class TestScoreAdapter extends RecyclerView.Adapter<TestScoreAdapter.Test
             numLimTv = itemView.findViewById(R.id.num_lim);
             numQTv = itemView.findViewById(R.id.num_questions);
             testScoreTv = itemView.findViewById(R.id.test_score);
+            dateTv = itemView.findViewById(R.id.test_date);
         }
 
         void bindTo(TestScore testScore) {
+            String date = testScore.getDate();
             String operators = "Operators: " + testScore.getStrOperators();
             String numQ = "Number of Questions: " + testScore.getIntNumOfQ();
             String numLim = "Number Limit: " + testScore.getIntNumLim();
@@ -75,6 +77,7 @@ public class TestScoreAdapter extends RecyclerView.Adapter<TestScoreAdapter.Test
             numQTv.setText(numQ);
             numLimTv.setText(numLim);
             testScoreTv.setText(score);
+            dateTv.setText(date);
         }
     }
 }

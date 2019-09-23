@@ -23,6 +23,10 @@ public class TestRepository {
         return mAllTestScores;
     }
 
+    LiveData<List<TestScore>> getTestScoreD() {
+        return mTestDao.getTestScoreD();
+    }
+
     void insert(TestScore tScore) {
         new insertAsyncTask(mTestDao).execute(tScore);
     }

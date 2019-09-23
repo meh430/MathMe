@@ -24,6 +24,10 @@ public class TestViewModel extends AndroidViewModel {
         return mAllTestScores;
     }
 
+    public LiveData<List<TestScore>> getTestScoreD() {
+        return mRepository.getTestScoreD();
+    }
+
     public void deleteAll() {
         mRepository.deleteAll();
     }

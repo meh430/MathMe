@@ -19,8 +19,11 @@ public interface TestDao {
     @Query("DELETE FROM test_table")
     void deleteAll();
 
-    @Query("SELECT * from test_table ORDER BY test_num_limit ASC")
+    @Query("SELECT * from test_table ORDER BY test_Score ASC")
     LiveData<List<TestScore>> getAllTestScores();
+
+    @Query("SELECT * from test_table ORDER BY test_Score DESC")
+    LiveData<List<TestScore>> getTestScoreD();
 
     @Query("SELECT * from test_table LIMIT 1")
     TestScore[] getAnyTestScore();

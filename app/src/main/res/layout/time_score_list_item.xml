@@ -65,6 +65,19 @@
             android:textSize="24sp"
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <TextView
+            android:id="@+id/time_date"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/google_regular"
+            android:padding="10dp"
+            android:text="@string/date"
+            android:textColor="@color/textColor"
+            android:textSize="24sp"
+            android:layout_gravity="end"
+            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

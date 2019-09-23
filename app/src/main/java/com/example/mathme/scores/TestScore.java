@@ -7,6 +7,16 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "test_table")
 public class TestScore {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @ColumnInfo(name = "test_date")
+    private String date;
     public int getIntNumLim() {
         return intNumLim;
     }
@@ -62,11 +72,12 @@ public class TestScore {
     @PrimaryKey(autoGenerate = true)
     private int testId;
 
-    public TestScore(int intNumLim, int intNumOfQ, double dblTestScore, String strOperators, int testId) {
+    public TestScore(int intNumLim, int intNumOfQ, double dblTestScore, String strOperators, int testId, String date) {
         this.intNumLim = intNumLim;
         this.intNumOfQ = intNumOfQ;
         this.dblTestScore = dblTestScore;
         this.strOperators = strOperators;
         this.testId = testId;
+        this.date = date;
     }
 }

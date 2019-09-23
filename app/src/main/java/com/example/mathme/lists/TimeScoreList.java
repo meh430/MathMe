@@ -1,6 +1,8 @@
 package com.example.mathme.lists;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class TimeScoreList extends AppCompatActivity {
+    TimeScoreAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,8 @@ public class TimeScoreList extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.timeScoreRecycler);
-        final TimeScoreAdapter adapter = new TimeScoreAdapter(this);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new TimeScoreAdapter(this);
+        recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ItemTouchHelper helper = new ItemTouchHelper(
@@ -49,7 +52,7 @@ public class TimeScoreList extends AppCompatActivity {
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
-                        TimeScore tScore = adapter.getTimeScoreAtPosition(position);
+                        TimeScore tScore = mAdapter.getTimeScoreAtPosition(position);
                         // Delete the word
                         MainActivity.mTimeViewModel.deleteTimeScore(tScore);
                     }
@@ -60,7 +63,7 @@ public class TimeScoreList extends AppCompatActivity {
         MainActivity.mTimeViewModel.getAllTimeScores().observe(this, new Observer<List<TimeScore>>() {
             @Override
             public void onChanged(@Nullable final List<TimeScore> tScores) {
-                adapter.setTimeScores(tScores);
+                mAdapter.setTimeScores(tScores);
             }
         });
 
@@ -71,6 +74,44 @@ public class TimeScoreList extends AppCompatActivity {
                 MainActivity.mTestViewModel.deleteAll();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sort_test, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml-v25.
+        int id = item.getItemId();
+
+        switch (id) {
+            //launch settings
+            case R.id.action_sort_asc:
+                MainActivity.mTimeViewModel.getAllTimeScores().observe(this, new Observer<List<TimeScore>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<TimeScore> tScores) {
+                        // Update the cached copy of the words in the adapter.
+                        mAdapter.setTimeScores(tScores);
+                    }
+                });
+                return true;
+            case R.id.action_sort_desc:
+                MainActivity.mTimeViewModel.getTimeScoresD().observe(this, new Observer<List<TimeScore>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<TimeScore> tScores) {
+                        // Update the cached copy of the words in the adapter.
+                        mAdapter.setTimeScores(tScores);
+                    }
+                });
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

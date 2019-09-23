@@ -1,6 +1,8 @@
 package com.example.mathme.lists;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class TestScoreList extends AppCompatActivity {
+    private TestScoreAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,8 @@ public class TestScoreList extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.testScoreRecycler);
-        final TestScoreAdapter adapter = new TestScoreAdapter(this);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new TestScoreAdapter(this);
+        recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ItemTouchHelper helper = new ItemTouchHelper(
@@ -49,7 +52,7 @@ public class TestScoreList extends AppCompatActivity {
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
-                        TestScore tScore = adapter.getTestScoreAtPosition(position);
+                        TestScore tScore = mAdapter.getTestScoreAtPosition(position);
                         // Delete the word
                         MainActivity.mTestViewModel.deleteTestScore(tScore);
                     }
@@ -61,7 +64,7 @@ public class TestScoreList extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<TestScore> tScores) {
                 // Update the cached copy of the words in the adapter.
-                adapter.setTestScores(tScores);
+                mAdapter.setTestScores(tScores);
             }
         });
 
@@ -72,6 +75,45 @@ public class TestScoreList extends AppCompatActivity {
                 MainActivity.mTestViewModel.deleteAll();
             }
         });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sort_test, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml-v25.
+        int id = item.getItemId();
+
+        switch (id) {
+            //launch settings
+            case R.id.action_sort_asc:
+                MainActivity.mTestViewModel.getAllTestScores().observe(this, new Observer<List<TestScore>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<TestScore> tScores) {
+                        // Update the cached copy of the words in the adapter.
+                        mAdapter.setTestScores(tScores);
+                    }
+                });
+                return true;
+            case R.id.action_sort_desc:
+                MainActivity.mTestViewModel.getTestScoreD().observe(this, new Observer<List<TestScore>>() {
+                    @Override
+                    public void onChanged(@Nullable final List<TestScore> tScores) {
+                        // Update the cached copy of the words in the adapter.
+                        mAdapter.setTestScores(tScores);
+                    }
+                });
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

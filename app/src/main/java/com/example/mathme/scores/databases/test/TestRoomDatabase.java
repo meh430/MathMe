@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.mathme.scores.TestScore;
 
-@Database(entities = {TestScore.class}, version = 3, exportSchema = false)
+@Database(entities = {TestScore.class}, version = 5, exportSchema = false)
 public abstract class TestRoomDatabase extends RoomDatabase {
     public abstract TestDao testDao();
 

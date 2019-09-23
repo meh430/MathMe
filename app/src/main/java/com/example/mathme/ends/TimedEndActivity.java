@@ -18,7 +18,10 @@ import com.example.mathme.result.TestResults;
 import com.example.mathme.scores.TimeScore;
 import com.example.mathme.settings.TimeModeSettings;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class TimedEndActivity extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
@@ -103,7 +106,8 @@ public class TimedEndActivity extends AppCompatActivity {
         preferenceEditor.putInt(MainActivity.HIGH_TIME, MainActivity.getHighScoreTime());
         preferenceEditor.apply();
         MainActivity.mTimeViewModel.insert(new TimeScore(intNumLim, score, intTime, new EndUtility().chosenOperators(mStrOperators),
-                (int) (Math.random() * 10000) + 1));
+                (int) (Math.random() * 10000) + 1,
+                new SimpleDateFormat("MM-dd-yyyy 'at' hh:mm:ss", Locale.CANADA).format(new Date())));
     }
 
     public void onViewResults(View view) {

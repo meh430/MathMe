@@ -17,11 +17,15 @@ public class TimeViewModel extends AndroidViewModel {
     public TimeViewModel(@NonNull Application application) {
         super(application);
         mRepository = new TimeRepositiory(application.getApplicationContext());
-        mAllTimeScores = mRepository.getmAllTimeScores();
+        mAllTimeScores = mRepository.getAllTimeScores();
     }
 
     public LiveData<List<TimeScore>> getAllTimeScores() {
         return mAllTimeScores;
+    }
+
+    public LiveData<List<TimeScore>> getTimeScoresD() {
+        return mRepository.getTimeScoresD();
     }
 
     public void deleteAll() {

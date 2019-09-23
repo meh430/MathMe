@@ -6,6 +6,17 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "time_table")
 public class TimeScore {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @ColumnInfo(name = "time_date")
+    private String date;
+
     public int getIntNumLim() {
         return intNumLim;
     }
@@ -61,11 +72,12 @@ public class TimeScore {
     @PrimaryKey(autoGenerate = true)
     private int testId;
 
-    public TimeScore(int intNumLim, int intScore, int intTime, String strOperators, int testId) {
+    public TimeScore(int intNumLim, int intScore, int intTime, String strOperators, int testId, String date) {
         this.intNumLim = intNumLim;
         this.intScore = intScore;
         this.intTime = intTime;
         this.strOperators = strOperators;
         this.testId = testId;
+        this.date = date;
     }
 }

@@ -15,11 +15,13 @@ import com.example.mathme.mode.TestMode;
 import com.example.mathme.other.MainActivity;
 import com.example.mathme.result.TestResults;
 import com.example.mathme.scores.TestScore;
-import com.example.mathme.scores.databases.test.TestRepository;
 import com.example.mathme.settings.TestModeSettings;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 @SuppressWarnings({"ConstantConditions", "unchecked"})
@@ -61,7 +63,6 @@ public class TestEndActivity extends AppCompatActivity {
     }
 
     private void checkAnswers() {
-        TestRepository testRep = new TestRepository(getApplication());
         String resultInfo;
         int intNumCorrect = 1;
         //iterate through the maps and store wrong answers in arrayList
@@ -82,7 +83,8 @@ public class TestEndActivity extends AppCompatActivity {
         String resultPercent = (dblPercent * 100) + "%";
 
         MainActivity.mTestViewModel.insert(new TestScore(intNumLim, intNumOfQ, (dblPercent * 100),
-                new EndUtility().chosenOperators(mStrOperators), (int) (Math.random() * 10000) + 1));
+                new EndUtility().chosenOperators(mStrOperators), (int) (Math.random() * 10000) + 1,
+                new SimpleDateFormat("MM-dd-yyyy 'at' hh:mm:ss", Locale.CANADA).format(new Date())));
 
         SharedPreferences.Editor preferencesEditor = mSharedPref.edit();
         preferencesEditor.putString(MainActivity.LAST_MARK, resultPercent);

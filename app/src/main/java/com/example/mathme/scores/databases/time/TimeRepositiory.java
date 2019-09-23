@@ -9,18 +9,22 @@ import com.example.mathme.scores.TimeScore;
 
 import java.util.List;
 
-public class TimeRepositiory {
+class TimeRepositiory {
     private TimeDao mTimeDao;
     private LiveData<List<TimeScore>> mAllTimeScores;
 
-    public TimeRepositiory(Context application) {
+    TimeRepositiory(Context application) {
         TimeRoomDatabase db = TimeRoomDatabase.getDatabase(application);
         mTimeDao = db.timeDao();
         mAllTimeScores = mTimeDao.getAllTimeScores();
     }
 
-    LiveData<List<TimeScore>> getmAllTimeScores() {
+    LiveData<List<TimeScore>> getAllTimeScores() {
         return mAllTimeScores;
+    }
+
+    LiveData<List<TimeScore>> getTimeScoresD() {
+        return mTimeDao.getTimeScoresD();
     }
 
     void insert(TimeScore tScore) {

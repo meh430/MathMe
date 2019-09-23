@@ -19,8 +19,11 @@ public interface TimeDao {
     @Query("DELETE FROM time_table")
     void deleteAll();
 
-    @Query("SELECT * from time_table ORDER BY time_num_lim ASC")
+    @Query("SELECT * from time_table ORDER BY time_score ASC")
     LiveData<List<TimeScore>> getAllTimeScores();
+
+    @Query("SELECT * from time_table ORDER BY time_score DESC")
+    LiveData<List<TimeScore>> getTimeScoresD();
 
     @Query("SELECT * from time_table LIMIT 1")
     TimeScore[] getAnyTimeScore();
