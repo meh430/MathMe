@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mathme.R;
 import com.example.mathme.lists.Scores;
+import com.example.mathme.scores.databases.death.DeathViewModel;
 import com.example.mathme.scores.databases.test.TestViewModel;
 import com.example.mathme.scores.databases.time.TimeViewModel;
 import com.example.mathme.settings.DeathModeSettings;
@@ -29,6 +30,7 @@ import com.example.mathme.web.Relax;
 public class MainActivity extends AppCompatActivity {
     public static TestViewModel mTestViewModel;
     public static TimeViewModel mTimeViewModel;
+    public static DeathViewModel mDeathViewModel;
     public static final String SharedPrefFile = "com.example.mathme";
     //constant values for sharedPref keys
     public static final String DARK = "isDark", NOTIF = "notificationSet", NOTIF_TIME = "notificationTime", HOUR = "hour",

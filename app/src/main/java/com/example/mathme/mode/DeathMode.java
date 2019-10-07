@@ -25,12 +25,15 @@ import com.example.mathme.settings.DeathModeSettings;
 public class DeathMode extends AppCompatActivity {
     public static final String SCORE = "Score";
     private ModeUtility deathUtility;
-
+    private String strChosenOperators;
+    private int numLim;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_death_mode);
         Intent deathSettings = getIntent();
+        strChosenOperators = deathSettings.getStringExtra(DeathModeSettings.OPERATIONS_DEATH);
+        numLim = deathSettings.getIntExtra(DeathModeSettings.MAX_NUM_DEATH, 0);
         deathUtility = new DeathUtility((TextView) findViewById(R.id.current_score), (TextView) findViewById(R.id.question_window),
                 (EditText) findViewById(R.id.answer_edit_text), deathSettings.getIntExtra(DeathModeSettings.MAX_NUM_DEATH, 10),
                 deathSettings.getStringExtra(DeathModeSettings.OPERATIONS_DEATH));
@@ -67,6 +70,8 @@ public class DeathMode extends AppCompatActivity {
                 //launch end activity
                 Intent launchDeathEnd = new Intent(this, DeathEndActivity.class);
                 launchDeathEnd.putExtra(SCORE, deathUtility.intScore);
+                launchDeathEnd.putExtra(DeathModeSettings.OPERATIONS_DEATH, strChosenOperators);
+                launchDeathEnd.putExtra(DeathModeSettings.MAX_NUM_DEATH, numLim);
                 startActivity(launchDeathEnd);
                 finish();
             }
