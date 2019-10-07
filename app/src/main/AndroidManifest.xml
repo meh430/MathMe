@@ -17,24 +17,28 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
+            android:name=".lists.DeathScoreList"
+            android:label="@string/title_activity_death_score_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".lists.Scores"
-            android:parentActivityName=".other.MainActivity"
-            android:label="@string/view_scores"
             android:configChanges="orientation|keyboardHidden"
+            android:label="@string/view_scores"
+            android:parentActivityName=".other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".lists.TimeScoreList"
-            android:parentActivityName=".lists.Scores"
             android:configChanges="orientation|keyboardHidden"
             android:label="Time Scores"
+            android:parentActivityName=".lists.Scores"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:parentActivityName=".lists.Scores"
             android:name=".lists.TestScoreList"
             android:configChanges="orientation|keyboardHidden"
             android:label="Test Scores"
+            android:parentActivityName=".lists.Scores"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

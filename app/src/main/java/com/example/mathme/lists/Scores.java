@@ -25,4 +25,9 @@ public class Scores extends AppCompatActivity {
         Intent timeScores = new Intent(this, TimeScoreList.class);
         startActivity(timeScores);
     }
+
+    public void deathScores(View view) {
+        Intent deathScores = new Intent(this, DeathScoreList.class);
+        startActivity(deathScores);
+    }
 }

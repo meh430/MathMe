@@ -60,6 +60,7 @@
             android:fontFamily="@font/google_regular"
             android:foreground="@drawable/ripple"
             android:text="@string/infinity_scores"
+            android:onClick="deathScores"
             android:textSize="30sp"
             tools:ignore="UnusedAttribute" />
 

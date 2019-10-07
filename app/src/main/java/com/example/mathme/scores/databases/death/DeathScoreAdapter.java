@@ -37,7 +37,7 @@ public class DeathScoreAdapter extends RecyclerView.Adapter<DeathScoreAdapter.De
         }
     }
 
-    public void setTimeScores(List<DeathScores> dScores) {
+    public void setDeathScores(List<DeathScores> dScores) {
         mDeathScores = dScores;
         notifyDataSetChanged();
     }
