@@ -53,7 +53,6 @@ public class TestScoreList extends AppCompatActivity {
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
                         TestScore tScore = mAdapter.getTestScoreAtPosition(position);
-                        // Delete the word
                         MainActivity.mTestViewModel.deleteTestScore(tScore);
                     }
                 });
@@ -80,16 +79,12 @@ public class TestScoreList extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.sort_test, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml-v25.
         int id = item.getItemId();
 
         switch (id) {

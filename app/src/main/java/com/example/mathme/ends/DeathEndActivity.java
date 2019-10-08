@@ -20,8 +20,6 @@ import java.util.Locale;
 
 public class DeathEndActivity extends AppCompatActivity {
     SharedPreferences mSharedPreferences;
-    private String mStrOperators;
-    private int intNumLim;
 
 
     @Override
@@ -32,8 +30,8 @@ public class DeathEndActivity extends AppCompatActivity {
 
         Intent deathMode = getIntent();
         int intScore = deathMode.getIntExtra(DeathMode.SCORE, 0);
-        intNumLim = deathMode.getIntExtra(DeathModeSettings.MAX_NUM_DEATH, 0);
-        mStrOperators = deathMode.getStringExtra(DeathModeSettings.OPERATIONS_DEATH);
+        int intNumLim = deathMode.getIntExtra(DeathModeSettings.MAX_NUM_DEATH, 0);
+        String mStrOperators = deathMode.getStringExtra(DeathModeSettings.OPERATIONS_DEATH);
         TextView scoreResultTv = findViewById(R.id.death_Score);
         TextView scoreHeaderTv = findViewById(R.id.death_score_header);
 

@@ -53,27 +53,32 @@ public class DeathMode extends AppCompatActivity {
         if (temp.equalsIgnoreCase("")) {
             Toast.makeText(this, "No harm in guessing!", Toast.LENGTH_SHORT).show();
         } else {
-            int intUserAnswer = Integer.parseInt(temp);
-            if (intUserAnswer == deathUtility.intActualAnswer) {
-                deathUtility.increaseScore();
-                deathUtility.showQuestion();
-            } else {
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    assert v != null;
-                    v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            try {
+                int intUserAnswer = Integer.parseInt(temp);
+                if (intUserAnswer == deathUtility.intActualAnswer) {
+                    deathUtility.increaseScore();
+                    deathUtility.showQuestion();
                 } else {
-                    //deprecated in API 26
-                    assert v != null;
-                    v.vibrate(1000);
+                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        assert v != null;
+                        v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        //deprecated in API 26
+                        assert v != null;
+                        v.vibrate(1000);
+                    }
+                    //launch end activity
+                    Intent launchDeathEnd = new Intent(this, DeathEndActivity.class);
+                    launchDeathEnd.putExtra(SCORE, deathUtility.intScore);
+                    launchDeathEnd.putExtra(DeathModeSettings.OPERATIONS_DEATH, strChosenOperators);
+                    launchDeathEnd.putExtra(DeathModeSettings.MAX_NUM_DEATH, numLim);
+                    startActivity(launchDeathEnd);
+                    finish();
                 }
-                //launch end activity
-                Intent launchDeathEnd = new Intent(this, DeathEndActivity.class);
-                launchDeathEnd.putExtra(SCORE, deathUtility.intScore);
-                launchDeathEnd.putExtra(DeathModeSettings.OPERATIONS_DEATH, strChosenOperators);
-                launchDeathEnd.putExtra(DeathModeSettings.MAX_NUM_DEATH, numLim);
-                startActivity(launchDeathEnd);
-                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Bruh", Toast.LENGTH_SHORT).show();
             }
         }
 

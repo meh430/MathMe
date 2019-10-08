@@ -9,6 +9,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -110,29 +111,34 @@ public class TimedMode extends AppCompatActivity {
             ((TimeUtility) timeUtility).sbAnswer = new StringBuilder("0");
         }
 
-        if (timeUtility.intActualAnswer == Integer.parseInt(((TimeUtility) timeUtility).sbAnswer.toString())) {
-            timeUtility.increaseScore();
-            ((TimeUtility) timeUtility).increaseQuestionsAns();
-        } else {
-            ((TimeUtility) timeUtility).increaseQuestionsAns();
-            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                assert v != null;
-                v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        try {
+            if (timeUtility.intActualAnswer == Integer.parseInt(((TimeUtility) timeUtility).sbAnswer.toString())) {
+                timeUtility.increaseScore();
+                ((TimeUtility) timeUtility).increaseQuestionsAns();
             } else {
-                //deprecated in API 26
-                assert v != null;
-                v.vibrate(100);
+                ((TimeUtility) timeUtility).increaseQuestionsAns();
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    assert v != null;
+                    v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    //deprecated in API 26
+                    assert v != null;
+                    v.vibrate(100);
+                }
             }
+            String strScore = "Score: " + ((TimeUtility) timeUtility).intScore;
+            ((TimeUtility) timeUtility).scoreTv.setText(strScore);
+
+            timeUtility.mUserAnswerList.add(Integer.parseInt(((TimeUtility) timeUtility).sbAnswer.toString()));
+
+            ((TimeUtility) timeUtility).answerTv.setText("");
+            ((TimeUtility) timeUtility).sbAnswer = new StringBuilder();
+            timeUtility.showQuestion();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Bruh", Toast.LENGTH_SHORT).show();
         }
-        String strScore = "Score: " + ((TimeUtility) timeUtility).intScore;
-        ((TimeUtility) timeUtility).scoreTv.setText(strScore);
-
-        timeUtility.mUserAnswerList.add(Integer.parseInt(((TimeUtility) timeUtility).sbAnswer.toString()));
-
-        ((TimeUtility) timeUtility).answerTv.setText("");
-        ((TimeUtility) timeUtility).sbAnswer = new StringBuilder();
-        timeUtility.showQuestion();
     }
 
     public void onZero(View view) {

@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".other.SettingActivity">
 
-    <ScrollView
+    <Switch
+        android:id="@+id/dark_theme_switch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/google_regular"
+        android:switchPadding="10dp"
+        android:text="@string/toggle_dark_theme"
+        android:textColor="@color/textColor"
+        android:textSize="18sp" />
 
-        <include layout="@layout/content_settings" />
-    </ScrollView>
+    <Switch
+        android:id="@+id/notification_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dark_theme_switch"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/google_regular"
+        android:switchPadding="10dp"
+        android:text="@string/turn_on_notification_reminder"
+        android:textColor="@color/textColor"
+        android:textSize="18sp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- will be visible when user chooses a time -->
+    <TextView
+        android:id="@+id/notification_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notification_switch"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/google_regular"
+        android:text="@string/notification_set_for"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/google_regular"
+        android:foreground="@drawable/ripple"
+        android:onClick="onReset"
+        android:text="@string/reset_data"
+        android:textSize="18sp"
+        tools:ignore="UnusedAttribute" />
+
+</RelativeLayout>

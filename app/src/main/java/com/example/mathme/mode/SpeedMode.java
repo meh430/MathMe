@@ -88,30 +88,35 @@ public class SpeedMode extends AppCompatActivity {
         if (temp.equalsIgnoreCase("")) {
             Toast.makeText(this, "No harm in guessing!", Toast.LENGTH_SHORT).show();
         } else {
-            int intUserAnswer = Integer.parseInt(temp);
-            speedUtility.mUserAnswerList.add(intUserAnswer);
-            speedUtility.nextQuestionNum();
+            try {
+                int intUserAnswer = Integer.parseInt(temp);
+                speedUtility.mUserAnswerList.add(intUserAnswer);
+                speedUtility.nextQuestionNum();
 
-            if (speedUtility.intCurrentQuestion > speedUtility.intMaxQuestion) {
-                //launch end
-                speedUtility.timer.cancel();
-                Intent launchSpeedEnd = new Intent(this, SpeedEndActivity.class);
-                launchSpeedEnd.putExtra(SpeedModeSettings.NUM_Q_SPEED, speedUtility.intMaxQuestion);
-                launchSpeedEnd.putExtra(CORRECT_ANSWERS, speedUtility.intScore);
-                launchSpeedEnd.putExtra(Q_LIST, speedUtility.mQuestionList);
-                launchSpeedEnd.putExtra(A_LIST, speedUtility.mAnswerList);
-                launchSpeedEnd.putExtra(UA_LIST, speedUtility.mUserAnswerList);
-                launchSpeedEnd.putExtra(BT, ((SpeedUtility) speedUtility).intStopWatch);
+                if (speedUtility.intCurrentQuestion > speedUtility.intMaxQuestion) {
+                    //launch end
+                    speedUtility.timer.cancel();
+                    Intent launchSpeedEnd = new Intent(this, SpeedEndActivity.class);
+                    launchSpeedEnd.putExtra(SpeedModeSettings.NUM_Q_SPEED, speedUtility.intMaxQuestion);
+                    launchSpeedEnd.putExtra(CORRECT_ANSWERS, speedUtility.intScore);
+                    launchSpeedEnd.putExtra(Q_LIST, speedUtility.mQuestionList);
+                    launchSpeedEnd.putExtra(A_LIST, speedUtility.mAnswerList);
+                    launchSpeedEnd.putExtra(UA_LIST, speedUtility.mUserAnswerList);
+                    launchSpeedEnd.putExtra(BT, ((SpeedUtility) speedUtility).intStopWatch);
 
-                startActivity(launchSpeedEnd);
-                finish();
-            } else {
-                if (intUserAnswer == speedUtility.intActualAnswer) {
-                    speedUtility.increaseScore();
-                    speedUtility.showQuestion();
+                    startActivity(launchSpeedEnd);
+                    finish();
                 } else {
-                    speedUtility.showQuestion();
+                    if (intUserAnswer == speedUtility.intActualAnswer) {
+                        speedUtility.increaseScore();
+                        speedUtility.showQuestion();
+                    } else {
+                        speedUtility.showQuestion();
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Bruh", Toast.LENGTH_SHORT).show();
             }
         }
 

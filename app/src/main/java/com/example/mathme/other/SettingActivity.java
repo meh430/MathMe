@@ -78,7 +78,7 @@ public class SettingActivity extends AppCompatActivity {
             notificationStatus.setText(strNotifTime);
         } else {
             notifSwitch.setChecked(false);
-            notificationStatus.setVisibility(View.INVISIBLE);
+            notificationStatus.setVisibility(View.GONE);
             //cancels any notifications and alarms
             if (alarmManager != null) {
                 alarmManager.cancel(notifyPendingIntent);

@@ -63,9 +63,14 @@ public class TestMode extends AppCompatActivity {
         if (temp.equalsIgnoreCase("")) {
             Toast.makeText(this, "Nothing to save here", Toast.LENGTH_SHORT).show();
         } else {
-            testUtility.intUserAnswer = Integer.parseInt(temp);
-            ((TestUtility) testUtility).mUserAnswerMap.put(((TestUtility) testUtility).intCurrentQuestion, testUtility.intUserAnswer);
-            Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
+            try {
+                testUtility.intUserAnswer = Integer.parseInt(temp);
+                ((TestUtility) testUtility).mUserAnswerMap.put(((TestUtility) testUtility).intCurrentQuestion, testUtility.intUserAnswer);
+                Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Bruh", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
