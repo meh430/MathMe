@@ -113,15 +113,15 @@ public class SpeedMode extends AppCompatActivity {
                     } else {
                         speedUtility.showQuestion();
                     }
+
+                    ((SpeedUtility) speedUtility).strCurrentQuestionNum = "Question Number " + speedUtility.intCurrentQuestion;
+                    speedUtility.mQuestionNumTv.setText(((SpeedUtility) speedUtility).strCurrentQuestionNum);
+                    speedUtility.mUserAnswerEdit.setText("");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Bruh", Toast.LENGTH_SHORT).show();
             }
         }
-
-        ((SpeedUtility) speedUtility).strCurrentQuestionNum = "Question Number " + speedUtility.intCurrentQuestion;
-        speedUtility.mQuestionNumTv.setText(((SpeedUtility) speedUtility).strCurrentQuestionNum);
-        speedUtility.mUserAnswerEdit.setText("");
     }
 }

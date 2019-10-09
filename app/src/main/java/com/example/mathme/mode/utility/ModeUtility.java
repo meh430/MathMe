@@ -20,6 +20,7 @@ public class ModeUtility {
     public ArrayList<Integer> mUserAnswerList;
     public Timer timer;
 
+    //superclass needs default base constructor
     ModeUtility() {
     }
 

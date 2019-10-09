@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
                         "https://www.youtube.com/watch?v=-yvMqox7c6A",
                         "https://www.youtube.com/watch?v=caM2hEV69ac",
                         "https://www.youtube.com/watch?v=jsRchR-jrf4"};
-                int randomUrl = (int) (Math.random() * urlArray.length);
-                Uri contact = Uri.parse(urlArray[randomUrl]);
+                //int randomUrl = (int) (Math.random() * urlArray.length);
+                Uri contact = Uri.parse(urlArray[0]);
                 Intent launchContact = new Intent(Intent.ACTION_VIEW, contact);
 
                 if (launchContact.resolveActivity(getPackageManager()) != null) {
