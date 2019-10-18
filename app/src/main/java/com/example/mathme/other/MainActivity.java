@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTestViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
         mTimeViewModel = ViewModelProviders.of(this).get(TimeViewModel.class);
+        mDeathViewModel = ViewModelProviders.of(this).get(DeathViewModel.class);
 
         //get any variables from previous sessions
         SharedPreferences mPreferences = getSharedPreferences(SharedPrefFile, MODE_PRIVATE);
