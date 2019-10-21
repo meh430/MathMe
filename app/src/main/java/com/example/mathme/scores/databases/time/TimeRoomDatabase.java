@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.example.mathme.scores.TimeScore;
 import com.example.mathme.scores.databases.test.TestRoomDatabase;
 
-@Database(entities = {TimeScore.class}, version = 2, exportSchema = false)
+@Database(entities = {TimeScore.class}, version = 3, exportSchema = false)
 public abstract class TimeRoomDatabase extends RoomDatabase {
     public abstract TimeDao timeDao();
 

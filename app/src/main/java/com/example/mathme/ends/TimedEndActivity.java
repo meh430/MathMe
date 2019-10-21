@@ -107,7 +107,7 @@ public class TimedEndActivity extends AppCompatActivity {
         preferenceEditor.apply();
         MainActivity.mTimeViewModel.insert(new TimeScore(intNumLim, score, intTime, new EndUtility().chosenOperators(mStrOperators),
                 (int) (Math.random() * 10000) + 1,
-                new SimpleDateFormat("MM-dd-yyyy 'at' hh:mm:ss", Locale.CANADA).format(new Date())));
+                new SimpleDateFormat("MM-dd-yyyy 'at' hh:mm:ss", Locale.CANADA).format(new Date()), resultPercent));
     }
 
     public void onViewResults(View view) {

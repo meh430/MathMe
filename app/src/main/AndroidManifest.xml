@@ -18,8 +18,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".lists.DeathScoreList"
-            android:label="@string/title_activity_death_score_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/sudden_death_mode"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".lists.Scores"
             android:configChanges="orientation|keyboardHidden"

@@ -54,7 +54,7 @@ public class TimeScoreAdapter extends RecyclerView.Adapter<TimeScoreAdapter.Time
     }
 
     class TimeViewHolder extends RecyclerView.ViewHolder {
-        private TextView operatorTv, timeTv, numLimTv, timeScoreTv, dateTv;
+        private TextView operatorTv, timeTv, numLimTv, timeScoreTv, dateTv, accuracyTv;
 
         TimeViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +64,7 @@ public class TimeScoreAdapter extends RecyclerView.Adapter<TimeScoreAdapter.Time
             timeTv = itemView.findViewById(R.id.time);
             timeScoreTv = itemView.findViewById(R.id.time_score);
             dateTv = itemView.findViewById(R.id.time_date);
+            accuracyTv = itemView.findViewById(R.id.time_accuracy);
         }
 
         void bindTo(TimeScore timeScore) {
@@ -72,12 +73,14 @@ public class TimeScoreAdapter extends RecyclerView.Adapter<TimeScoreAdapter.Time
             String time = "Time: " + timeScore.getIntTime();
             String numLim = "Number Limit: " + timeScore.getIntNumLim();
             String score = "Time Score: " + timeScore.getIntScore();
+            String accuracy = "Accuracy: " + timeScore.getStrAccuracy();
 
             operatorTv.setText(operators);
             timeTv.setText(time);
             numLimTv.setText(numLim);
             timeScoreTv.setText(score);
             dateTv.setText(date);
+            accuracyTv.setText(accuracy);
         }
     }
 }

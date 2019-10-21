@@ -69,15 +69,27 @@ public class TimeScore {
         this.testId = testId;
     }
 
+    @ColumnInfo(name = "time_accuracy")
+    private String strAccuracy;
+
     @PrimaryKey(autoGenerate = true)
     private int testId;
 
-    public TimeScore(int intNumLim, int intScore, int intTime, String strOperators, int testId, String date) {
+    public TimeScore(int intNumLim, int intScore, int intTime, String strOperators, int testId, String date, String strAccuracy) {
         this.intNumLim = intNumLim;
         this.intScore = intScore;
         this.intTime = intTime;
         this.strOperators = strOperators;
         this.testId = testId;
         this.date = date;
+        this.strAccuracy = strAccuracy;
+    }
+
+    public String getStrAccuracy() {
+        return strAccuracy;
+    }
+
+    public void setStrAccuracy(String strAccuracy) {
+        this.strAccuracy = strAccuracy;
     }
 }
