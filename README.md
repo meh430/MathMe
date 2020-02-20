@@ -5,7 +5,7 @@ This app is a personal project to practice android development and improve my sk
 
 Math Me! is built using Android Studio and is written in Java and XML.
 
-App Features
+## App Features
 
 - Different modes like test, timed, and infinite to help practice mental arithmetic skills
 - Different settings within each mode like choosing operations, setting a number limit, and so on
@@ -14,3 +14,12 @@ App Features
 - Notification reminder to practice math(WIP)
 - Follows material design guidelines
 - Has dark mode!
+
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/main_dark.png "Screen")
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/main_light.png "Screen")
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/settings_dark.png "Screen")
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/settings_light.png "Screen")
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/time_dark.png "Screen")
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/time_light.png "Screen")
+![Alt text](https://github.com/meh430/MathMe/blob/master/screens/score_dark.png "Screen")
+
